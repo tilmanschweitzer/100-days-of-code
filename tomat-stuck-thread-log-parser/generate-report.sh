@@ -80,6 +80,7 @@ function reportForCommand() {
 full_dataset_repeat=3
 subset_repeat=3
 
+# fgrep as baseline
 fgrep_title="Use \`fgrep\`"
 fgrep_desc="Baseline with \`fgrep\`."
 reportForCommand "$fgrep_title" "$fgrep_desc" "fgrep -c notifyStuckThreadDetected $folder/*" $full_dataset_repeat "fgrep -c notifyStuckThreadDetected $folder/$subset_prefix*" $subset_repeat
@@ -112,3 +113,9 @@ node_parallel_title="Node.js \`fsPromises.readFile\` (parallel)"
 node_parallel_desc="Run parallel but ensure sequential output."
 node_parallel_script="task-1-parallel.mjs"
 reportForCommand "$node_parallel_title" "$node_parallel_desc" "node $node_parallel_script $folder/" $full_dataset_repeat "node $node_parallel_script $folder/ $subset_prefix" $subset_repeat
+
+# Go (sync)
+go_sync_title="Go(sync)"
+go_sync_desc="Run sequentially with a very basic go program"
+go_sync_script="task-1-sync.mjs"
+reportForCommand "$go_sync_title" "$go_sync_desc" "go run . $folder/" $full_dataset_repeat "go run . $folder/ $subset_prefix" $subset_repeat

@@ -32,34 +32,34 @@ Baseline with `fgrep`.
 
 Command: `fgrep -c notifyStuckThreadDetected tomcat-logs/*` (repeat 3 times)
 
-    real 1m15.774s
-    user 1m14.881s
-    sys 0m0.794s
+    real 1m14.340s
+    user 1m13.491s
+    sys 0m0.735s
 
-    real 1m15.375s
-    user 1m14.391s
-    sys 0m0.809s
+    real 1m13.923s
+    user 1m13.080s
+    sys 0m0.722s
 
-    real 1m14.548s
-    user 1m13.620s
-    sys 0m0.778s
+    real 1m14.663s
+    user 1m13.789s
+    sys 0m0.743s
 
 
 ### Results for subset
 
 Command: `fgrep -c notifyStuckThreadDetected tomcat-logs/catalina.2022-01*` (repeat 3 times)
 
-    real 0m8.898s
-    user 0m8.770s
-    sys 0m0.100s
+    real 0m9.040s
+    user 0m8.945s
+    sys 0m0.087s
 
-    real 0m8.903s
-    user 0m8.806s
-    sys 0m0.088s
+    real 0m9.222s
+    user 0m9.116s
+    sys 0m0.095s
 
-    real 0m8.964s
-    user 0m8.854s
-    sys 0m0.096s
+    real 0m9.264s
+    user 0m9.160s
+    sys 0m0.092s
 
 
 ## Use `rg` (ripgrep)
@@ -70,34 +70,34 @@ Benchmark with `rg --sort-files`.
 
 Command: `rg -c --sort-files notifyStuckThreadDetected tomcat-logs/*` (repeat 3 times)
 
-    real 0m1.088s
-    user 0m0.356s
-    sys 0m0.644s
+    real 0m1.091s
+    user 0m0.363s
+    sys 0m0.676s
 
-    real 0m0.868s
-    user 0m0.305s
-    sys 0m0.560s
+    real 0m1.024s
+    user 0m0.363s
+    sys 0m0.659s
 
-    real 0m0.864s
-    user 0m0.304s
-    sys 0m0.558s
+    real 0m1.021s
+    user 0m0.363s
+    sys 0m0.655s
 
 
 ### Results for subset
 
 Command: `rg -c --sort-files notifyStuckThreadDetected tomcat-logs/catalina.2022-01*` (repeat 3 times)
 
-    real 0m0.111s
-    user 0m0.041s
-    sys 0m0.068s
+    real 0m0.129s
+    user 0m0.049s
+    sys 0m0.078s
 
-    real 0m0.110s
-    user 0m0.040s
-    sys 0m0.068s
+    real 0m0.129s
+    user 0m0.048s
+    sys 0m0.079s
 
-    real 0m0.110s
-    user 0m0.041s
-    sys 0m0.068s
+    real 0m0.117s
+    user 0m0.044s
+    sys 0m0.072s
 
 
 ## Node.js `fs.readFileSync` (sync)
@@ -108,34 +108,34 @@ Run sequentially using `fs.readFileSync`.
 
 Command: `node task-1-sync.mjs tomcat-logs/` (repeat 3 times)
 
-    real 0m14.550s
-    user 0m12.236s
-    sys 0m3.239s
+    real 0m14.463s
+    user 0m12.319s
+    sys 0m3.286s
 
-    real 0m14.288s
-    user 0m12.189s
-    sys 0m3.163s
+    real 0m14.450s
+    user 0m12.286s
+    sys 0m3.249s
 
-    real 0m14.373s
-    user 0m12.344s
-    sys 0m3.168s
+    real 0m14.686s
+    user 0m12.565s
+    sys 0m3.226s
 
 
 ### Results for subset
 
 Command: `node task-1-sync.mjs tomcat-logs/ catalina.2022-01` (repeat 3 times)
 
-    real 0m1.694s
-    user 0m1.376s
-    sys 0m0.409s
+    real 0m1.784s
+    user 0m1.416s
+    sys 0m0.426s
 
-    real 0m1.705s
-    user 0m1.382s
-    sys 0m0.416s
+    real 0m1.717s
+    user 0m1.391s
+    sys 0m0.417s
 
-    real 0m1.694s
-    user 0m1.381s
-    sys 0m0.398s
+    real 0m1.719s
+    user 0m1.396s
+    sys 0m0.425s
 
 
 ## Node.js `fsPromises.readFile` (parallel with `Promise.all`)
@@ -146,34 +146,34 @@ Run parallel, but wait for all results with `Promise.all`.
 
 Command: `node task-1-promise-all.mjs tomcat-logs/` (repeat 3 times)
 
-    real 0m13.576s
-    user 0m12.470s
-    sys 0m5.748s
+    real 0m13.840s
+    user 0m12.629s
+    sys 0m6.146s
 
-    real 0m13.624s
-    user 0m12.452s
-    sys 0m5.700s
+    real 0m13.839s
+    user 0m12.677s
+    sys 0m5.908s
 
-    real 0m13.744s
-    user 0m12.458s
-    sys 0m5.712s
+    real 0m13.921s
+    user 0m12.703s
+    sys 0m5.952s
 
 
 ### Results for subset
 
 Command: `node task-1-promise-all.mjs tomcat-logs/ catalina.2022-01` (repeat 3 times)
 
-    real 0m1.595s
-    user 0m1.375s
-    sys 0m0.651s
+    real 0m1.567s
+    user 0m1.424s
+    sys 0m0.686s
 
-    real 0m1.566s
-    user 0m1.391s
-    sys 0m0.635s
+    real 0m1.606s
+    user 0m1.423s
+    sys 0m0.670s
 
-    real 0m1.569s
-    user 0m1.390s
-    sys 0m0.628s
+    real 0m1.601s
+    user 0m1.411s
+    sys 0m0.674s
 
 
 ## Node.js `fsPromises.readFile` (async/await)
@@ -184,33 +184,33 @@ Run in sequential order with async/await.
 
 Command: `node task-1-async-await.mjs tomcat-logs/` (repeat 3 times)
 
-    real 0m14.926s
-    user 0m12.960s
-    sys 0m3.409s
+    real 0m15.312s
+    user 0m13.225s
+    sys 0m3.560s
 
-    real 0m14.769s
-    user 0m12.818s
-    sys 0m3.398s
+    real 0m15.225s
+    user 0m13.192s
+    sys 0m3.533s
 
-    real 0m14.824s
-    user 0m12.865s
-    sys 0m3.396s
+    real 0m15.179s
+    user 0m13.146s
+    sys 0m3.513s
 
 
 ### Results for subset
 
 Command: `node task-1-async-await.mjs tomcat-logs/ catalina.2022-01` (repeat 3 times)
 
-    real 0m1.780s
-    user 0m1.513s
-    sys 0m0.423s
+    real 0m1.831s
+    user 0m1.554s
+    sys 0m0.441s
 
-    real 0m1.785s
-    user 0m1.510s
-    sys 0m0.435s
+    real 0m1.819s
+    user 0m1.538s
+    sys 0m0.445s
 
-    real 0m1.778s
-    user 0m1.508s
+    real 0m1.802s
+    user 0m1.534s
     sys 0m0.425s
 
 
@@ -222,33 +222,71 @@ Run parallel but ensure sequential output.
 
 Command: `node task-1-parallel.mjs tomcat-logs/` (repeat 3 times)
 
-    real 0m13.644s
-    user 0m12.468s
-    sys 0m5.820s
+    real 0m13.889s
+    user 0m12.676s
+    sys 0m5.874s
 
-    real 0m13.598s
-    user 0m12.396s
-    sys 0m5.719s
+    real 0m13.958s
+    user 0m12.733s
+    sys 0m5.938s
 
-    real 0m13.798s
-    user 0m12.440s
-    sys 0m5.846s
+    real 0m13.885s
+    user 0m12.521s
+    sys 0m5.963s
 
 
 ### Results for subset
 
 Command: `node task-1-parallel.mjs tomcat-logs/ catalina.2022-01` (repeat 3 times)
 
-    real 0m1.609s
-    user 0m1.410s
-    sys 0m0.639s
+    real 0m1.634s
+    user 0m1.428s
+    sys 0m0.660s
 
-    real 0m1.599s
-    user 0m1.391s
-    sys 0m0.638s
+    real 0m1.645s
+    user 0m1.434s
+    sys 0m0.661s
 
-    real 0m1.562s
-    user 0m1.405s
-    sys 0m0.670s
+    real 0m1.617s
+    user 0m1.437s
+    sys 0m0.694s
+
+
+## Go(sync)
+
+Run sequentially with a very basic go program
+
+### Results for full dataset
+
+Command: `go run . tomcat-logs/` (repeat 3 times)
+
+    real 0m6.138s
+    user 0m5.080s
+    sys 0m1.857s
+
+    real 0m6.038s
+    user 0m5.109s
+    sys 0m1.895s
+
+    real 0m6.030s
+    user 0m5.108s
+    sys 0m1.891s
+
+
+### Results for subset
+
+Command: `go run . tomcat-logs/ catalina.2022-01` (repeat 3 times)
+
+    real 0m0.938s
+    user 0m0.770s
+    sys 0m0.512s
+
+    real 0m0.920s
+    user 0m0.750s
+    sys 0m0.476s
+
+    real 0m0.909s
+    user 0m0.758s
+    sys 0m0.498s
 
 
