@@ -31,3 +31,18 @@ Insights
 * Some aspects like appending strings to arrays are more different as I expected
 * Executing time is 2-3 times faster than with Node.js
 * Possible next step: learn to write more idiomatic Go code or parallelize the execution.
+
+
+## Day 3
+
+First draft to implement a concurrent Go version.
+
+Insights
+
+* Ran into issues with too many open file handles
+* Ran into errors with semacquire when processing to many files parallel
+* Output is still unordered
+
+## Day 4
+
+Rework the concurrent Go implementation.

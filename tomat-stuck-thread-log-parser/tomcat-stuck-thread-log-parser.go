@@ -6,14 +6,32 @@ import (
     "log"
     "os"
     "strings"
+    "sync"
 )
+
+
+type Result struct {
+    filename string
+    stuckThreads int
+}
 
 func main() {
     filenames := filenamesFromArgs()
 
+    ch := make(chan Result, len(filenames))
+    wg := sync.WaitGroup{}
+
     for _, filename := range filenames {
-        countedStuckThread := countStuckThreadsInFile(filename);
-        fmt.Printf("%s:%d\n", filename, countedStuckThread)
+        wg.Add(1)
+
+        go countStuckThreadsInFileAsync(filename, ch, &wg)
+    }
+
+    wg.Wait()
+    close(ch)
+
+    for result := range ch {
+       fmt.Printf("%s:%d\n", result.filename, result.stuckThreads)
     }
 }
 
@@ -38,7 +56,17 @@ func countStuckThreadsInFile(filename string) (int) {
         log.Fatal(err)
     }
 
+    file.Close()
     return counter
+}
+
+func countStuckThreadsInFileAsync(filename string, ch chan Result, wg *sync.WaitGroup) {
+    countedStuckThreads := countStuckThreadsInFile(filename)  // Send a signal; value does not matter.
+
+    ch <- Result{filename, countedStuckThreads}
+
+    // let the wait group know we finished
+    wg.Done()
 }
 
 func filenamesFromArgs() ([]string) {
