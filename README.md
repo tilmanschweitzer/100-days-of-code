@@ -43,12 +43,16 @@ Insights
 * Ran into errors with semacquire when processing to many files parallel
 * Output is still unordered
 
-## Day 4
+## Day 4 (Part 1)
 
 Rework the concurrent Go implementation to create an ordered output and fix the other issues.
 
 * The approach to order the output does not feel elaborate -> TODO: Read more Go code to find better approaches
 * TODO: Refactor the code
+
+## Day 4 (Part 2)
+
+Add synchronous python implementation as preparation for an async version tomorrow.
 
 ### Day 5
 
