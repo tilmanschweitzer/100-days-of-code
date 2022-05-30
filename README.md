@@ -45,4 +45,11 @@ Insights
 
 ## Day 4
 
-Rework the concurrent Go implementation.
+Rework the concurrent Go implementation to create an ordered output and fix the other issues.
+
+* The approach to order the output does not feel elaborate -> TODO: Read more Go code to find better approaches
+* TODO: Refactor the code
+
+### Day 5
+
+TODO: Add tests for Node.js (and check out test libs for Go)
