@@ -114,6 +114,12 @@ node_parallel_desc="Run parallel but ensure sequential output."
 node_parallel_script="tstlp-js-parallel.mjs"
 reportForCommand "$node_parallel_title" "$node_parallel_desc" "node $node_parallel_script $folder/" $full_dataset_repeat "node $node_parallel_script $folder/ $subset_prefix" $subset_repeat
 
+# Node.js (worker threads)
+node_workers_title="Node.js with worker threads"
+node_workers_desc="Run parallel and split up workload to worker threads"
+node_workers_script="tstlp-js-worker-threads.mjs"
+reportForCommand "$node_workers_title" "$node_workers_desc" "node $node_workers_script $folder/" $full_dataset_repeat "node $node_workers_script $folder/ $subset_prefix" $subset_repeat
+
 # Go (sync)
 go_sync_title="Go(sync)"
 go_sync_desc="Run sequentially with a very basic go program"

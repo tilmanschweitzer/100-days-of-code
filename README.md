@@ -43,17 +43,32 @@ Insights
 * Ran into errors with semacquire when processing to many files parallel
 * Output is still unordered
 
-## Day 4 (Part 1)
+## Day 4 
+
+### Part 1
 
 Rework the concurrent Go implementation to create an ordered output and fix the other issues.
 
 * The approach to order the output does not feel elaborate -> TODO: Read more Go code to find better approaches
 * TODO: Refactor the code
 
-## Day 4 (Part 2)
+### Part 2
 
 Add synchronous python implementation as preparation for an async version tomorrow.
 
+
 ### Day 5
 
-TODO: Add tests for Node.js (and check out test libs for Go)
+Add Node.js implementation using worker threads to speed up parsing each file.
+
+Insights
+
+* Reworked implementation with worker threads is not so far away from the Go speed
+* Good example to understand the difference between I/Ointensive and CPU-intensive workload
+* Helpful to compare different parallelization concepts between Go, Python and Node.js
+
+## Idea Backlog
+
+* Add tests for Node.js (and check out test libs for Go)
+* Implementation in Java?
+* Add statistics on the stack traces of the stuck threads to find similarities quickly
