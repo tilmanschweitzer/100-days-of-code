@@ -1,6 +1,7 @@
 import fs from "fs";
-import { countStuckThreadsInFile } from "./functions/count-stuck-threads-in-file.mjs";
+import { countStringPerLine } from "./functions/count-string-per-line.mjs";
 import { fileNamesFromArgs } from "./functions/file-names-from-args.mjs";
+import { STUCK_THREADS_DETECTED_LOG_MESSAGE } from "./functions/stuck-threads.mjs";
 import { WorkerThreadPool } from "./functions/worker-thread-pool.mjs";
 import { isMainThread } from "worker_threads";
 import { cpus } from "os";
@@ -31,7 +32,7 @@ if (isMainThread) {
         return fsPromises.readFile(message.filename, 'utf-8').then(content => {
             done({
                 filename: message.filename,
-                stuckThreads: countStuckThreadsInFile(content)
+                stuckThreads: countStringPerLine(content, STUCK_THREADS_DETECTED_LOG_MESSAGE)
             });
         });
     });
