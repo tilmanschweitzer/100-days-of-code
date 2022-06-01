@@ -57,7 +57,7 @@ Rework the concurrent Go implementation to create an ordered output and fix the 
 Add synchronous python implementation as preparation for an async version tomorrow.
 
 
-### Day 5
+## Day 5
 
 Add Node.js implementation using worker threads to speed up parsing each file.
 
@@ -66,6 +66,10 @@ Insights
 * Reworked implementation with worker threads is not so far away from the Go speed
 * Good example to understand the difference between I/Ointensive and CPU-intensive workload
 * Helpful to compare different parallelization concepts between Go, Python and Node.js
+
+## Day 6
+
+Reorganize files as preparation befor adding tests.
 
 ## Idea Backlog
 

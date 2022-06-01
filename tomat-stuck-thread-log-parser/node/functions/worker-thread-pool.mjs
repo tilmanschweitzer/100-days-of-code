@@ -46,7 +46,7 @@ class WorkerThreadPool {
     onMessageOrderer(callback) {
         this.workers.forEach(worker => {
             worker.onMessage((internalResultMessage) => {
-                const { result, messageIndex} = internalResultMessage;
+                const { result, messageIndex } = internalResultMessage;
 
                 this.messageResults[messageIndex] = result;
 
