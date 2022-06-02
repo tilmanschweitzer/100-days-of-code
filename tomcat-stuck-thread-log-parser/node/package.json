@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/tilmanschweitzer/100-days-of-code#readme",
   "devDependencies": {
-    "jasmine": "^4.1.0"
+    "jasmine": "^4.1.0",
+    "nyc": "^15.1.0"
   }
 }
