@@ -76,6 +76,16 @@ Insights
 * Currently, only jasmine seems to work with ES modules out-of-the-box.
 * I should use TDD for further features
 
+## Day 7
+
+Add sync implementation in Java.
+
+Insights
+
+* Execution time is much better than I expected and comparable to Node.js and Python
+* Implementing the basic version felt much smoother than I expected
+* Parallelizing the sync implementation with Streams.parallel() much simpler than all previous parallel implementations (still unordered in the first attempt)
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)
