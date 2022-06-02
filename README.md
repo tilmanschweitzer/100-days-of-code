@@ -69,7 +69,12 @@ Insights
 
 ## Day 6
 
-Reorganize files as preparation befor adding tests.
+Reorganize files and add basic JS tests.
+
+Insights
+
+* Currently, only jasmine seems to work with ES modules out-of-the-box.
+* I should use TDD for further features
 
 ## Idea Backlog
 
