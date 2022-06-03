@@ -89,6 +89,8 @@ Insights
 ## Day 8
 
 Add async and ordered implementation in Java.
+Activate the async implementation with the parameter `--async`.
+Split up the implementation into separate clases with a common interface and abstract class.
 
 Insights
 
