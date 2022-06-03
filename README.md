@@ -86,6 +86,15 @@ Insights
 * Implementing the basic version felt much smoother than I expected
 * Parallelizing the sync implementation with Streams.parallel() much simpler than all previous parallel implementations (still unordered in the first attempt)
 
+## Day 8
+
+Add async and ordered implementation in Java.
+
+Insights
+
+* Executors are very easy to handle and creating an ordered output from a multi-core parallelization feels much easy than in Node.js or Go
+
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)
