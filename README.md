@@ -96,6 +96,10 @@ Insights
 
 * Executors are very easy to handle and creating an ordered output from a multi-core parallelization feels much easy than in Node.js or Go
 
+## Day 9
+
+Add basic JUnit 5 test setup for Java
+
 
 ## Idea Backlog
 
