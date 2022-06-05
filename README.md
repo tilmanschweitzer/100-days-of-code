@@ -100,6 +100,9 @@ Insights
 
 Add basic JUnit 5 test setup for Java
 
+## Day 10
+
+First attempt to parse stack traces to be able to generate statistical reports.
 
 ## Idea Backlog
 
