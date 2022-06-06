@@ -104,6 +104,15 @@ Add basic JUnit 5 test setup for Java
 
 First attempt to parse stack traces to be able to generate statistical reports.
 
+## Day 11
+
+Add test case with multiple stuck threads and try to extract meaningful information from the stack traces.
+
+Insights
+
+* Currently, the direction of the features is not clear, and I feel a little stuck with the next steps
+* It should be possible add parameters to ignore the new statistic feature to be able to still compare the speed between implementations
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)
