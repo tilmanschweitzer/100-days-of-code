@@ -113,6 +113,19 @@ Insights
 * Currently, the direction of the features is not clear, and I feel a little stuck with the next steps
 * It should be possible add parameters to ignore the new statistic feature to be able to still compare the speed between implementations
 
+## Day 12
+
+Refactoring of the whole java implementation.
+Allow to enable different handlers via commandline parameter to ignore costly but unnecessary calculations.
+Split up the parser and the stuck thread handlers to meet to open-closed principle.
+
+Insights
+
+* The open-closed principle really helped to reason about the relationship between the parser and the handler
+* The existing test cases helped a lot to find defects
+* Tests should cover more lines
+
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)
