@@ -125,6 +125,16 @@ Insights
 * The existing test cases helped a lot to find defects
 * Tests should cover more lines
 
+## Day 13
+
+Use one StuckThreadHandler per file to avoid concurrency issues.
+The new approach with the separation of the parser lead to a shared state in the handler instances.
+This caused race conditions and ConcurrentModificationExceptions when started with the --async parameter.
+
+Insights
+
+* It not necessary to make everything immutable, but Suppliers can help to provide new instances for every potentially concurrent operations.
+
 
 ## Idea Backlog
 
