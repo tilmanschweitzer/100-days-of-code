@@ -135,6 +135,12 @@ Insights
 
 * It not necessary to make everything immutable, but Suppliers can help to provide new instances for every potentially concurrent operations.
 
+## Day 14
+
+Remove coupling to static Files functions allow tests without mocking static functions.
+The implementation relied on the methods Files.readLines and Files.walk.
+With this dependency to the global state of the file system it is hard to tests parts of the functionality.
+Therefore, I added interfaces to remove the direct dependency to these static functions
 
 ## Idea Backlog
 
