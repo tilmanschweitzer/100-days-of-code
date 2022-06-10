@@ -142,6 +142,10 @@ The implementation relied on the methods Files.readLines and Files.walk.
 With this dependency to the global state of the file system it is hard to tests parts of the functionality.
 Therefore, I added interfaces to remove the direct dependency to these static functions
 
+## Day 15
+
+Add tests to check how the parsers walk through the files.
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)
