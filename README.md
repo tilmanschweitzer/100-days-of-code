@@ -146,6 +146,12 @@ Therefore, I added interfaces to remove the direct dependency to these static fu
 
 Add tests to check how the parsers walk through the files.
 
+## Day 16
+
+Add heuristic to weight the code lines depending on the line.
+Usually, code lines higher in the stack trace contain more meaningful information than the later framework or filter code.
+Therefore, a weight based on the average line number of the code line can help to get more useful reports.
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)
