@@ -152,6 +152,10 @@ Add heuristic to weight the code lines depending on the line.
 Usually, code lines higher in the stack trace contain more meaningful information than the later framework or filter code.
 Therefore, a weight based on the average line number of the code line can help to get more useful reports.
 
+## Day 17
+
+Add tests for StuckThread and refactor related code parts.
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)
