@@ -156,6 +156,11 @@ Therefore, a weight based on the average line number of the code line can help t
 
 Add tests for StuckThread and refactor related code parts.
 
+## Day 18
+
+Extract core classes into separate maven module to create a stricter barrier between the parser, and the commandline interface.
+
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)
