@@ -160,6 +160,10 @@ Add tests for StuckThread and refactor related code parts.
 
 Extract core classes into separate maven module to create a stricter barrier between the parser, and the commandline interface.
 
+## Day 19
+
+Move print function to commandline app to separate interface.
+
 
 ## Idea Backlog
 
