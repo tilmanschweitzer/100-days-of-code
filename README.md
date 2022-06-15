@@ -163,7 +163,7 @@ Extract core classes into separate maven module to create a stricter barrier bet
 ## Day 19
 
 Move print function to commandline app to separate interface.
-
+Replace LogFileParserResult interface with a generic type to make the parser completely independent of the String output (`getPrintableResult`).
 
 ## Idea Backlog
 
