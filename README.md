@@ -165,6 +165,10 @@ Extract core classes into separate maven module to create a stricter barrier bet
 Move print function to commandline app to separate interface.
 Replace LogFileParserResult interface with a generic type to make the parser completely independent of the String output (`getPrintableResult`).
 
+## Day 20
+
+Add test setup with bats-core to verify commandline output of different implementations
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)
