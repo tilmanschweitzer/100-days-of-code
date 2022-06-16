@@ -169,6 +169,13 @@ Replace LogFileParserResult interface with a generic type to make the parser com
 
 Add test setup with bats-core to verify commandline output of different implementations
 
+## Day 21
+
+Start with *sudoku-solver* as new challenge.
+Implement first draft of a java application to parse sudoku data.
+Use dataset under public domain with 9 million sudokus: https://www.kaggle.com/datasets/rohanrao/sudoku
+
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)
