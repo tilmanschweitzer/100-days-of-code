@@ -184,6 +184,10 @@ Add validation methods to check the correctness of sudoku solutions as preparati
 Add SudokuSolver interface and a backtracking implementation.
 Implement an ExecutionTimer class to be able to measure the execution time and to quantify improvements.
 
+## Day 24
+
+Add first implementation DeductiveSudokuSolver which needs to be supported by a fallback solver for some sudokus, but it already speeds up the execution time.
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)
