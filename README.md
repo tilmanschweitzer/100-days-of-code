@@ -182,7 +182,7 @@ Add validation methods to check the correctness of sudoku solutions as preparati
 ## Day 23
 
 Add SudokuSolver interface and a backtracking implementation.
-
+Implement an ExecutionTimer class to be able to measure the execution time and to quantify improvements.
 
 ## Idea Backlog
 
