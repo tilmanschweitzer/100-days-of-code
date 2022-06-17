@@ -179,6 +179,10 @@ Use dataset under public domain with 9 million sudokus: https://www.kaggle.com/d
 
 Add validation methods to check the correctness of sudoku solutions as preparation for the backtracking implementation of the solver.
 
+## Day 23
+
+Add SudokuSolver interface and a backtracking implementation.
+
 
 ## Idea Backlog
 
