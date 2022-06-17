@@ -133,7 +133,7 @@ This caused race conditions and ConcurrentModificationExceptions when started wi
 
 Insights
 
-* It not necessary to make everything immutable, but Suppliers can help to provide new instances for every potentially concurrent operations.
+* It's not necessary to make everything immutable, but Suppliers can help to provide new instances for every potentially concurrent operations.
 
 ## Day 14
 
@@ -174,6 +174,10 @@ Add test setup with bats-core to verify commandline output of different implemen
 Start with *sudoku-solver* as new challenge.
 Implement first draft of a java application to parse sudoku data.
 Use dataset under public domain with 9 million sudokus: https://www.kaggle.com/datasets/rohanrao/sudoku
+
+## Day 22
+
+Add validation methods to check the correctness of sudoku solutions as preparation for the backtracking implementation of the solver.
 
 
 ## Idea Backlog
