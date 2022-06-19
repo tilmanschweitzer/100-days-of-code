@@ -192,6 +192,7 @@ Add first implementation DeductiveSudokuSolver which needs to be supported by a 
 
 Extend DeductiveSudokuSolver to be able to solve more sudokus by ruling out possible values indirectly.
 Still some sudokus need more complicated deductive methods and need the BacktrackingSolver as fallback.
+Split classes up into multiple packages.
 
 ## Idea Backlog
 
