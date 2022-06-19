@@ -194,6 +194,7 @@ Extend DeductiveSudokuSolver to be able to solve more sudokus by ruling out poss
 Still, some sudokus need more complicated deductive methods and need the BacktrackingSolver as fallback.
 Split classes up into multiple packages.
 Clean up several code parts and separate deduction levels as speed optimization.
+Add toString method to analyze the internal model of the deductive solver.
 
 ## Idea Backlog
 
