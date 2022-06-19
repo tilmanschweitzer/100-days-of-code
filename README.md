@@ -191,8 +191,9 @@ Add first implementation DeductiveSudokuSolver which needs to be supported by a 
 ## Day 25
 
 Extend DeductiveSudokuSolver to be able to solve more sudokus by ruling out possible values indirectly.
-Still some sudokus need more complicated deductive methods and need the BacktrackingSolver as fallback.
+Still, some sudokus need more complicated deductive methods and need the BacktrackingSolver as fallback.
 Split classes up into multiple packages.
+Clean up several code parts and separate deduction levels as speed optimization.
 
 ## Idea Backlog
 
