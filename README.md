@@ -188,6 +188,11 @@ Implement an ExecutionTimer class to be able to measure the execution time and t
 
 Add first implementation DeductiveSudokuSolver which needs to be supported by a fallback solver for some sudokus, but it already speeds up the execution time.
 
+## Day 25
+
+Extend DeductiveSudokuSolver to be able to solve more sudokus by ruling out possible values indirectly.
+Still some sudokus need more complicated deductive methods and need the BacktrackingSolver as fallback.
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)
