@@ -192,9 +192,14 @@ Add first implementation DeductiveSudokuSolver which needs to be supported by a 
 
 Extend DeductiveSudokuSolver to be able to solve more sudokus by ruling out possible values indirectly.
 Still, some sudokus need more complicated deductive methods and need the BacktrackingSolver as fallback.
+
 Split classes up into multiple packages.
 Clean up several code parts and separate deduction levels as speed optimization.
 Add toString method to analyze the internal model of the deductive solver.
+
+# Day 26
+
+Extend DeductiveSudokuSolver with a method to solve conjugate pairs.
 
 ## Idea Backlog
 
