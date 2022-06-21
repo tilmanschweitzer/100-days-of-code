@@ -197,9 +197,14 @@ Split classes up into multiple packages.
 Clean up several code parts and separate deduction levels as speed optimization.
 Add toString method to analyze the internal model of the deductive solver.
 
-# Day 26
+## Day 26
 
 Extend DeductiveSudokuSolver with a method to solve conjugate pairs.
+
+## Day 27
+
+Extend DeductiveSudokuSolver with a method to find and rule out XY wings.
+
 
 ## Idea Backlog
 
