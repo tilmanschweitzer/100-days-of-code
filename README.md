@@ -205,6 +205,9 @@ Extend DeductiveSudokuSolver with a method to solve conjugate pairs.
 
 Extend DeductiveSudokuSolver with a method to find and rule out XY wings.
 
+## Day 28
+
+Use advent of code 2020 day 1 as TDD practice.
 
 ## Idea Backlog
 
