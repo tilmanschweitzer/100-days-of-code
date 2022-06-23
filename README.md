@@ -209,6 +209,10 @@ Extend DeductiveSudokuSolver with a method to find and rule out XY wings.
 
 Use advent of code 2020 day 1 as TDD practice.
 
+## Day 28
+
+Use advent of code 2020 day 2 as TDD practice.
+
 ## Idea Backlog
 
 * Add tests for Node.js (and check out test libs for Go)

@@ -14,7 +14,7 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
-public class Day1 {
+public class Day01 {
 
     public static void run() {
         final InputStream systemResourceAsStream = getSystemResourceAsStream("day01-input.txt");

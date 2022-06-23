@@ -4,6 +4,7 @@ public class AdventOfCode {
 
 
     public static void main(String[] args) {
-        Day1.run();
+        Day01.run();
+        Day02.run();
     }
 }
