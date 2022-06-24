@@ -2,10 +2,8 @@ package de.tilmanschweitzer.adventofcode.aoc2020.app;
 
 import com.google.common.base.Preconditions;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -13,33 +11,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
-import static java.util.stream.Collectors.toUnmodifiableList;
 
-public class Day02 {
+public class Day02 extends AdventOfCodeDay<Day02.PasswordPolicyAndPassword> {
 
-    private static final String LINE_SEPARATOR = "\n";
-
-    public static void run() {
-        final InputStream systemResourceAsStream = getSystemResourceAsStream("day02-input.txt");
-
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(systemResourceAsStream)))) {
-            final List<PasswordPolicyAndPassword> passwordsAndPolicies = reader.lines().map(Day02::parseSinglePasswordAndPolicy).collect(toUnmodifiableList());
-
-            final long validPasswordMethodA = passwordsAndPolicies.stream().filter(passwordAndPolicy -> passwordAndPolicy.policy.validateMethodA(passwordAndPolicy.password)).count();
-            System.out.println("validPasswords (Method A): " + validPasswordMethodA);
-
-            final long validPasswordMethodB = passwordsAndPolicies.stream().filter(passwordAndPolicy -> passwordAndPolicy.policy.validateMethodB(passwordAndPolicy.password)).count();
-            System.out.println("validPasswords (Method B): " + validPasswordMethodB);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    protected void runFirstPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {
+        final long validPasswordMethodA = passwordsAndPolicies.stream().filter(passwordAndPolicy -> passwordAndPolicy.policy.validateMethodA(passwordAndPolicy.password)).count();
+        System.out.println("validPasswords (Method A): " + validPasswordMethodA);
     }
 
-    public static List<PasswordPolicyAndPassword> parsePasswordAndPolicy(String testInput) {
-        return Arrays.stream(testInput.split(LINE_SEPARATOR)).map(Day02::parseSinglePasswordAndPolicy).collect(toUnmodifiableList());
+    @Override
+    protected void runSecondPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {
+        final long validPasswordMethodB = passwordsAndPolicies.stream().filter(passwordAndPolicy -> passwordAndPolicy.policy.validateMethodB(passwordAndPolicy.password)).count();
+        System.out.println("validPasswords (Method B): " + validPasswordMethodB);
     }
 
-    public static PasswordPolicyAndPassword parseSinglePasswordAndPolicy(String line) {
+    @Override
+    protected PasswordPolicyAndPassword parseLine(String line) {
         final Pattern pattern = Pattern.compile("^(\\d+)-(\\d+) (\\w): (\\w+)$");
         final Matcher matcher = pattern.matcher(line);
 
@@ -51,6 +39,13 @@ public class Day02 {
         final int policyMax = Integer.parseInt(matcher.group(2));
         return new PasswordPolicyAndPassword(password, new PasswordPolicy(policyChar, policyMin, policyMax));
     }
+
+    @Override
+    protected InputStream getInputAsStream() {
+        return getSystemResourceAsStream("day02-input.txt");
+    }
+
+    private static final String LINE_SEPARATOR = "\n";
 
     public static class PasswordPolicyAndPassword {
         final String password;

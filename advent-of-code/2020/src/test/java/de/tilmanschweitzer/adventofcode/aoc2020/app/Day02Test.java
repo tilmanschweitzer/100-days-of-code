@@ -2,19 +2,22 @@ package de.tilmanschweitzer.adventofcode.aoc2020.app;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class Day02Test {
 
+
     @Test
-    public void parsePasswordAndPolicy_parsesTestInputAsExpected() {
+    public void parseLine_parsesTestInputAsExpected() {
         final String testInput =  "1-3 a: abcde\n" +
                 "1-3 b: cdefg\n" +
                 "2-9 c: ccccccccc";
 
-        final List<Day02.PasswordPolicyAndPassword> result = Day02.parsePasswordAndPolicy(testInput);
+        final List<Day02.PasswordPolicyAndPassword> result = Arrays.stream(testInput.split("\n")).map(new Day02()::parseLine).collect(Collectors.toList());
 
 
         assertEquals(3, result.size());
@@ -50,6 +53,5 @@ class Day02Test {
         assertFalse(passwordPolicy.validateMethodB("aaa"));
         assertFalse(passwordPolicy.validateMethodB("ccc"));
     }
-
 
 }

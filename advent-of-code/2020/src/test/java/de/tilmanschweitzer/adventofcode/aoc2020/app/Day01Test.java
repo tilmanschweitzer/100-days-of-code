@@ -10,20 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day01Test {
 
     @Test
-    public void parseInputTo_returns() {
-        final String testInput =  "1721\n" +
-                "979\n" +
-                "366\n" +
-                "299\n" +
-                "675\n" +
-                "1456";
-
-        final List<Integer> result = Day01.parseInputTo(testInput, Integer::parseInt);
-
-        assertEquals(List.of(1721, 979, 366, 299, 675, 1456), result);
-    }
-
-    @Test
     public void findMatchingNumberPair_returns1721and299forTestInput() {
         final List<Integer> testInput = List.of(1721, 979, 366, 299, 675, 1456);
 

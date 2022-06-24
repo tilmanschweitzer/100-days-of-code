@@ -1,41 +1,42 @@
 package de.tilmanschweitzer.adventofcode.aoc2020.app;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Function;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toUnmodifiableList;
 
-public class Day01 {
+public class Day01 extends AdventOfCodeDay<Integer> {
 
-    public static void run() {
-        final InputStream systemResourceAsStream = getSystemResourceAsStream("day01-input.txt");
+    @Override
+    public void runFirstPuzzle(final List<Integer> inputNumbers) {
+        final Optional<Pair<Integer>> matchingNumberPair = findMatchingNumberPair(inputNumbers, 2020);
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(systemResourceAsStream)))) {
-            final List<Integer> inputNumbers = reader.lines().map(Integer::parseInt).collect(toUnmodifiableList());
+        matchingNumberPair.ifPresent((pair) -> {
+            System.out.println(pair.leftValue * pair.rightValue);
+        });
+    }
 
-            final Optional<Pair<Integer>> matchingNumberPair = findMatchingNumberPair(inputNumbers, 2020);
+    @Override
+    public void runSecondPuzzle(final List<Integer> inputNumbers) {
+        final Optional<Triplet<Integer>> matchingNumberTriplet = findMatchingNumberTriplet(inputNumbers, 2020);
 
-            matchingNumberPair.ifPresent((pair) -> {
-                System.out.println(pair.leftValue * pair.rightValue);
-            });
+        matchingNumberTriplet.ifPresent((triplet) -> {
+            System.out.println(triplet.firstValue * triplet.secondValue * triplet.thirdValue);
+        });
+    }
 
-            final Optional<Triplet<Integer>> matchingNumberTriplet = findMatchingNumberTriplet(inputNumbers, 2020);
 
-            matchingNumberTriplet.ifPresent((triplet) -> {
-                System.out.println(triplet.firstValue * triplet.secondValue * triplet.thirdValue);
-            });
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    public Integer parseLine(String line) {
+        return Integer.parseInt(line);
+    }
+
+    @Override
+    protected InputStream getInputAsStream() {
+        return getSystemResourceAsStream("day01-input.txt");
     }
 
     private static final String LINE_SEPARATOR = "\n";
@@ -77,10 +78,6 @@ public class Day01 {
         }
 
         return Optional.empty();
-    }
-
-    public static <T> List<T> parseInputTo(String testInput, Function<String, T> parseLine) {
-        return Arrays.stream(testInput.split(LINE_SEPARATOR)).map(parseLine).collect(toUnmodifiableList());
     }
 
     public static class Pair<T> {
