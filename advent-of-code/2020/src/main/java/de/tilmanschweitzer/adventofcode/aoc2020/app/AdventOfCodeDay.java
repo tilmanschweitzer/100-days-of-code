@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Objects;
 
-import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
 public abstract class AdventOfCodeDay<T> {
@@ -15,16 +14,18 @@ public abstract class AdventOfCodeDay<T> {
     private List<T> parsedInput;
 
     public void runFirstPuzzle() {
-        runFirstPuzzle(getParsedInput());
+        System.out.println("Result of " + this.getClass().getSimpleName() + " and first puzzle:");
+        System.out.println(getResultOfFirstPuzzle(getParsedInput()));
     }
 
     public void runSecondPuzzle() {
-        runSecondPuzzle(getParsedInput());
+        System.out.println("Result of " + this.getClass().getSimpleName() + " and second puzzle:");
+        System.out.println(getResultOfSecondPuzzle(getParsedInput()));
     }
 
-    protected abstract void runFirstPuzzle(List<T> input);
+    protected abstract long getResultOfFirstPuzzle(List<T> input);
 
-    protected abstract void runSecondPuzzle(List<T> input);
+    protected abstract long getResultOfSecondPuzzle(List<T> input);
 
     protected abstract T parseLine(String line);
 
@@ -44,5 +45,4 @@ public abstract class AdventOfCodeDay<T> {
             throw new RuntimeException(e);
         }
     }
-
 }

@@ -15,15 +15,13 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 public class Day02 extends AdventOfCodeDay<Day02.PasswordPolicyAndPassword> {
 
     @Override
-    protected void runFirstPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {
-        final long validPasswordMethodA = passwordsAndPolicies.stream().filter(passwordAndPolicy -> passwordAndPolicy.policy.validateMethodA(passwordAndPolicy.password)).count();
-        System.out.println("validPasswords (Method A): " + validPasswordMethodA);
+    protected long getResultOfFirstPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {
+        return passwordsAndPolicies.stream().filter(passwordAndPolicy -> passwordAndPolicy.policy.validateMethodA(passwordAndPolicy.password)).count();
     }
 
     @Override
-    protected void runSecondPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {
-        final long validPasswordMethodB = passwordsAndPolicies.stream().filter(passwordAndPolicy -> passwordAndPolicy.policy.validateMethodB(passwordAndPolicy.password)).count();
-        System.out.println("validPasswords (Method B): " + validPasswordMethodB);
+    protected long getResultOfSecondPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {
+        return passwordsAndPolicies.stream().filter(passwordAndPolicy -> passwordAndPolicy.policy.validateMethodB(passwordAndPolicy.password)).count();
     }
 
     @Override

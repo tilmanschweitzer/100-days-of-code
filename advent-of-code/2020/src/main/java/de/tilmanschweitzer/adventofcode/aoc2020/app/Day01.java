@@ -11,21 +11,25 @@ import static java.util.stream.Collectors.toList;
 public class Day01 extends AdventOfCodeDay<Integer> {
 
     @Override
-    public void runFirstPuzzle(final List<Integer> inputNumbers) {
+    public long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
         final Optional<Pair<Integer>> matchingNumberPair = findMatchingNumberPair(inputNumbers, 2020);
 
-        matchingNumberPair.ifPresent((pair) -> {
-            System.out.println(pair.leftValue * pair.rightValue);
-        });
+        if (matchingNumberPair.isEmpty()) {
+            throw new RuntimeException("No matching pair found");
+        }
+        final Pair<Integer> pair = matchingNumberPair.get();
+        return pair.leftValue * pair.rightValue;
     }
 
     @Override
-    public void runSecondPuzzle(final List<Integer> inputNumbers) {
+    public long getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
         final Optional<Triplet<Integer>> matchingNumberTriplet = findMatchingNumberTriplet(inputNumbers, 2020);
 
-        matchingNumberTriplet.ifPresent((triplet) -> {
-            System.out.println(triplet.firstValue * triplet.secondValue * triplet.thirdValue);
-        });
+        if (matchingNumberTriplet.isEmpty()) {
+            throw new RuntimeException("No matching triplet found");
+        }
+        final Triplet<Integer> triplet = matchingNumberTriplet.get();
+        return triplet.firstValue * triplet.secondValue * triplet.thirdValue;
     }
 
 

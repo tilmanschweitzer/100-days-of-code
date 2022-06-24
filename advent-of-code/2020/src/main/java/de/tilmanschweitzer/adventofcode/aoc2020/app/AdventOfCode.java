@@ -15,7 +15,8 @@ public class AdventOfCode {
 
         final List<AdventOfCodeDay<?>> listOfDays = List.of(
                 new Day01(),
-                new Day02()
+                new Day02(),
+                new Day03()
         );
 
         if (listOfDays.size() < day) {
