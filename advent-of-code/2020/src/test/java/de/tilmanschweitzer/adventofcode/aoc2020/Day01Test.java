@@ -1,5 +1,6 @@
-package de.tilmanschweitzer.adventofcode.aoc2020.app;
+package de.tilmanschweitzer.adventofcode.aoc2020;
 
+import de.tilmanschweitzer.adventofcode.aoc2020.Day01;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

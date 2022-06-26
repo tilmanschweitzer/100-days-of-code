@@ -1,7 +1,8 @@
-package de.tilmanschweitzer.adventofcode.aoc2020.app;
+package de.tilmanschweitzer.adventofcode.aoc2020;
 
-import de.tilmanschweitzer.adventofcode.aoc2020.app.Day04.Passport;
-import de.tilmanschweitzer.adventofcode.aoc2020.app.Day04.PassportField;
+import de.tilmanschweitzer.adventofcode.aoc2020.Day04;
+import de.tilmanschweitzer.adventofcode.aoc2020.Day04.Passport;
+import de.tilmanschweitzer.adventofcode.aoc2020.Day04.PassportField;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

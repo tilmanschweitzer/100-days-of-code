@@ -1,15 +1,9 @@
-package de.tilmanschweitzer.adventofcode.aoc2020.app;
+package de.tilmanschweitzer.adventofcode.aoc2020;
 
-import com.google.common.base.Preconditions;
+import de.tilmanschweitzer.adventofcode.app.AdventOfCodeDay;
 
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 

@@ -32,7 +32,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>de.tilmanschweitzer.adventofcode.aoc2020.app.AdventOfCode</mainClass>
+                            <mainClass>de.tilmanschweitzer.adventofcode.app.AdventOfCode</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

@@ -1,6 +1,7 @@
-package de.tilmanschweitzer.adventofcode.aoc2020.app;
+package de.tilmanschweitzer.adventofcode.aoc2020;
 
 import com.google.common.base.Preconditions;
+import de.tilmanschweitzer.adventofcode.app.AdventOfCodeDay;
 
 
 import java.io.InputStream;

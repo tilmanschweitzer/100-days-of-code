@@ -1,4 +1,6 @@
-package de.tilmanschweitzer.adventofcode.aoc2020.app;
+package de.tilmanschweitzer.adventofcode.aoc2020;
+
+import de.tilmanschweitzer.adventofcode.app.AdventOfCodeDay;
 
 import java.io.InputStream;
 import java.util.List;

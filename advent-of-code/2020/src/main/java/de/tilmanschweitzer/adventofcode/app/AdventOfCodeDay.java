@@ -1,4 +1,4 @@
-package de.tilmanschweitzer.adventofcode.aoc2020.app;
+package de.tilmanschweitzer.adventofcode.app;
 
 import java.io.BufferedReader;
 import java.io.IOException;
