@@ -1,10 +1,11 @@
 package de.tilmanschweitzer.adventofcode.aoc2020;
 
 import de.tilmanschweitzer.adventofcode.app.AdventOfCodeDay;
+import de.tilmanschweitzer.adventofcode.common.Pair;
+import de.tilmanschweitzer.adventofcode.common.Triplet;
 
 import java.io.InputStream;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
@@ -20,7 +21,7 @@ public class Day01 extends AdventOfCodeDay<Integer> {
             throw new RuntimeException("No matching pair found");
         }
         final Pair<Integer> pair = matchingNumberPair.get();
-        return pair.leftValue * pair.rightValue;
+        return pair.getLeftValue() * pair.getRightValue();
     }
 
     @Override
@@ -31,9 +32,8 @@ public class Day01 extends AdventOfCodeDay<Integer> {
             throw new RuntimeException("No matching triplet found");
         }
         final Triplet<Integer> triplet = matchingNumberTriplet.get();
-        return triplet.firstValue * triplet.secondValue * triplet.thirdValue;
+        return triplet.getFirstValue() * triplet.getSecondValue() * triplet.getThirdValue();
     }
-
 
     @Override
     public Integer parseLine(String line) {
@@ -86,64 +86,4 @@ public class Day01 extends AdventOfCodeDay<Integer> {
         return Optional.empty();
     }
 
-    public static class Pair<T> {
-        final T leftValue;
-        final T rightValue;
-
-        public Pair(T leftValue, T rightValue) {
-            this.leftValue = leftValue;
-            this.rightValue = rightValue;
-        }
-
-
-        @Override
-        public String toString() {
-            return "Pair(" + leftValue + ", " + rightValue + ")";
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Pair<?> pair = (Pair<?>) o;
-            return Objects.equals(leftValue, pair.leftValue) && Objects.equals(rightValue, pair.rightValue);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(leftValue, rightValue);
-        }
-    }
-
-    public static class Triplet<T> {
-        final T firstValue;
-        final T secondValue;
-
-        final T thirdValue;
-
-        public Triplet(T firstValue, T secondValue, T thirdValue) {
-            this.firstValue = firstValue;
-            this.secondValue = secondValue;
-            this.thirdValue = thirdValue;
-        }
-
-
-        @Override
-        public String toString() {
-            return "Triplet(" + firstValue + ", " + secondValue + ", " + thirdValue + ")";
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Triplet<?> pair = (Triplet<?>) o;
-            return Objects.equals(firstValue, pair.firstValue) && Objects.equals(secondValue, pair.secondValue) && Objects.equals(thirdValue, pair.thirdValue);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(firstValue, secondValue, thirdValue);
-        }
-    }
 }
