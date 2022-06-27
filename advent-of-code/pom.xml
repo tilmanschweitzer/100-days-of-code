@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.tilmanschweitzer.adventofcode</groupId>
-    <artifactId>aoc2020</artifactId>
+    <artifactId>adventofcode</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Advent of Code 2020 </name>
+    <name>Advent of Code</name>
     <url>https://github.com/tilmanschweitzer/100-days-of-code/</url>
 
     <properties>
