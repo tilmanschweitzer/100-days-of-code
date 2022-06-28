@@ -56,7 +56,8 @@ public class AdventOfCode {
         if (year == 2019) {
             return List.of(
                     new de.tilmanschweitzer.adventofcode.aoc2019.Day01(),
-                    new de.tilmanschweitzer.adventofcode.aoc2019.Day02()
+                    new de.tilmanschweitzer.adventofcode.aoc2019.Day02(),
+                    new de.tilmanschweitzer.adventofcode.aoc2019.Day03()
             );
         }
         return Collections.emptyList();

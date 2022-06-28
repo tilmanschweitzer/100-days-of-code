@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Day03Test {
-    
+
     @Test
     public void intersectionOfPaths_example1() {
         final List<Vector> firstPath = Vector.fromPathList("R8,U5,L5,D3");
@@ -47,7 +47,6 @@ class Day03Test {
         final int expectedDistance = 135;
         assertEquals(expectedDistance, firstPoint.getManhattanDistance());
     }
-
 
     @Test
     public void pointFromPath_withOneVector() {

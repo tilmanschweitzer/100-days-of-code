@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day03 extends AdventOfCodeDay<Integer> {
+public class Day03 extends AdventOfCodeDay<List<Day03.Vector>> {
 
     public static Set<Point> findIntersectionOfPaths(List<Vector> firstPath, List<Vector> secondPath) {
         final Set<Point> firstPoints = Point.fromPath(firstPath).stream().collect(Collectors.toUnmodifiableSet());
@@ -19,24 +19,32 @@ public class Day03 extends AdventOfCodeDay<Integer> {
     }
 
     @Override
-    public long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
-        return 0;
+    public long getResultOfFirstPuzzle(final List<List<Day03.Vector>> paths) {
+        if (paths.size() != 2) {
+            throw new RuntimeException("Unexpected number of paths");
+        }
+        final List<Vector> firstPath = paths.get(0);
+        final List<Vector> secondPath = paths.get(1);
+
+        final Set<Point> intersectionOfPaths = findIntersectionOfPaths(firstPath, secondPath);
+
+        return intersectionOfPaths.stream().sorted().findFirst().get().getManhattanDistance();
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
+    public long getResultOfSecondPuzzle(final List<List<Day03.Vector>> inputNumbers) {
         return 0;
     }
 
 
     @Override
-    public Integer parseLine(String line) {
-        return Integer.parseInt(line);
+    public List<Day03.Vector> parseLine(String line) {
+        return Vector.fromPathList(line);
     }
 
     @Override
     protected InputStream getInputAsStream() {
-        return getSystemResourceAsStream("year/filename.txt");
+        return getSystemResourceAsStream("2019/day03-input.txt");
     }
 
     public static class Point extends Coordinate implements Comparable<Point> {
