@@ -24,26 +24,130 @@ class Day03Test {
     }
 
     @Test
-    public void intersectionOfPaths_example2() {
+    public void getPrintableVersion_forOnePath() {
+        final List<Vector> firstPath = Vector.fromPathList("R8,U5,L5,D3");
+
+        final String result = Day03.getPrintableVersion(firstPath);
+
+        final String expectedResult = "...........\n" +
+                "....+----+.\n" +
+                "....|....|.\n" +
+                "....|....|.\n" +
+                "....|....|.\n" +
+                ".........|.\n" +
+                ".o-------+.\n" +
+                "...........";
+
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void getPrintableVersion_forHorizontalPath() {
+        final List<Vector> firstPath = Vector.fromPathList("R8");
+
+        final String result = Day03.getPrintableVersion(firstPath);
+
+        final String expectedResult = "...........\n" +
+                ".o--------.\n" +
+                "...........";
+
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void getPrintableVersion_forNegativeHorizontalPath() {
+        final List<Vector> firstPath = Vector.fromPathList("L8");
+
+        final String result = Day03.getPrintableVersion(firstPath);
+
+        final String expectedResult = "...........\n" +
+                ".--------o.\n" +
+                "...........";
+
+
+        assertEquals(expectedResult, result);
+    }
+
+
+    @Test
+    public void getPrintableVersion_forVerticalPath() {
+        final List<Vector> firstPath = Vector.fromPathList("U5");
+
+        final String result = Day03.getPrintableVersion(firstPath);
+
+        final String expectedResult = "...\n" +
+                ".|.\n" +
+                ".|.\n" +
+                ".|.\n" +
+                ".|.\n" +
+                ".|.\n" +
+                ".o.\n" +
+                "...";
+
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void getPrintableVersion_forNegativeVerticalPath() {
+        final List<Vector> firstPath = Vector.fromPathList("D5");
+
+        final String result = Day03.getPrintableVersion(firstPath);
+
+        final String expectedResult = "...\n" +
+                ".o.\n" +
+                ".|.\n" +
+                ".|.\n" +
+                ".|.\n" +
+                ".|.\n" +
+                ".|.\n" +
+                "...";
+
+
+        assertEquals(expectedResult, result);
+    }
+
+
+    @Test
+    public void getPrintableVersion_forTwoPathsWithIntersections() {
+        final List<Vector> firstPath = Vector.fromPathList("R8,U5,L5,D3");
+        final List<Vector> secondPath = Vector.fromPathList("U7,R6,D4,L4");
+
+        final String result = Day03.getPrintableVersion(firstPath, secondPath);
+
+        final String expectedResult = "...........\n" +
+                ".+-----+...\n" +
+                ".|.....|...\n" +
+                ".|..+--X-+.\n" +
+                ".|..|..|.|.\n" +
+                ".|.-X--+.|.\n" +
+                ".|..|....|.\n" +
+                ".|.......|.\n" +
+                ".o-------+.\n" +
+                "...........";
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void findClosestIntersectionToCentralPort_example1() {
         final List<Vector> firstPath = Vector.fromPathList("R75,D30,R83,U83,L12,D49,R71,U7,L72");
         final List<Vector> secondPath = Vector.fromPathList("U62,R66,U55,R34,D71,R55,D58,R83");
 
-        final Set<Point> result = Day03.findIntersectionOfPaths(firstPath, secondPath);
-
-        final Point firstPoint = result.stream().sorted().findFirst().get();
+        final Point firstPoint = Day03.findClosestIntersectionToCentralPort(firstPath, secondPath);
         final int expectedDistance = 159;
 
         assertEquals(expectedDistance, firstPoint.getManhattanDistance());
     }
 
     @Test
-    public void intersectionOfPaths_example3() {
+    public void findClosestIntersectionToCentralPort_example2() {
         final List<Vector> firstPath = Vector.fromPathList("R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51");
         final List<Vector> secondPath = Vector.fromPathList("U98,R91,D20,R16,D67,R40,U7,R15,U6,R7");
 
-        final Set<Point> result = Day03.findIntersectionOfPaths(firstPath, secondPath);
-
-        final Point firstPoint = result.stream().sorted().findFirst().get();
+        final Point firstPoint = Day03.findClosestIntersectionToCentralPort(firstPath, secondPath);
         final int expectedDistance = 135;
         assertEquals(expectedDistance, firstPoint.getManhattanDistance());
     }
