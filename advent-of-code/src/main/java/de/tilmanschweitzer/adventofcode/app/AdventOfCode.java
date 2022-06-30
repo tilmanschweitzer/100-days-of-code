@@ -60,6 +60,11 @@ public class AdventOfCode {
                     new de.tilmanschweitzer.adventofcode.aoc2019.Day03()
             );
         }
+        if (year == 2018) {
+            return List.of(
+                    new de.tilmanschweitzer.adventofcode.aoc2018.Day01()
+            );
+        }
         return Collections.emptyList();
     }
 }
