@@ -1,13 +1,13 @@
 package de.tilmanschweitzer.adventofcode.aoc2020;
 
-import de.tilmanschweitzer.adventofcode.app.AdventOfCodeDay;
+import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 
 import java.io.InputStream;
 import java.util.List;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day03 extends AbstractDay2020<String> {
+public class Day03 extends MultiLineAdventOfCodeDay<String> {
 
     private static final char TREE = '#';
 

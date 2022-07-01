@@ -1,7 +1,7 @@
 package de.tilmanschweitzer.adventofcode.aoc2020;
 
 import com.google.common.base.Preconditions;
-import de.tilmanschweitzer.adventofcode.app.AdventOfCodeDay;
+import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 
 
 import java.io.InputStream;
@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day02 extends AbstractDay2020<Day02.PasswordPolicyAndPassword> {
+public class Day02 extends MultiLineAdventOfCodeDay<Day02.PasswordPolicyAndPassword> {
 
     @Override
     protected long getResultOfFirstPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {

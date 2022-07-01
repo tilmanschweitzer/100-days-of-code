@@ -1,7 +1,7 @@
 package de.tilmanschweitzer.adventofcode.aoc2019;
 
-import de.tilmanschweitzer.adventofcode.app.AdventOfCodeDay;
 import de.tilmanschweitzer.adventofcode.common.Pair;
+import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day02 extends AbstractDay2019<List<Integer>> {
+public class Day02 extends MultiLineAdventOfCodeDay<List<Integer>> {
 
     private enum OpCode {
         ADD(1),

@@ -1,5 +1,7 @@
 package de.tilmanschweitzer.adventofcode.app;
 
+import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,16 +9,16 @@ import java.util.Map;
 
 public class AdventOfCodeRegistry {
 
-    private final Map<Integer, List<AdventOfCodeDay<?>>> adventOfCodeDaysByYear = new HashMap<>();
+    private final Map<Integer, List<MultiLineAdventOfCodeDay<?>>> adventOfCodeDaysByYear = new HashMap<>();
 
-    public void addDay(final AdventOfCodeDay<?> adventOfCodeDay) {
-        getOrCreateInternalListForYear(adventOfCodeDay.getYear()).add(adventOfCodeDay);
+    public void addDay(int year, final MultiLineAdventOfCodeDay<?> adventOfCodeDay) {
+        getOrCreateInternalListForYear(year).add(adventOfCodeDay);
     }
 
-    public List<AdventOfCodeDay<?>> getDaysForYear(int year) {
+    public List<MultiLineAdventOfCodeDay<?>> getDaysForYear(int year) {
         return getOrCreateInternalListForYear(year);
     }
-    private List<AdventOfCodeDay<?>> getOrCreateInternalListForYear(int year) {
+    private List<MultiLineAdventOfCodeDay<?>> getOrCreateInternalListForYear(int year) {
         if (!adventOfCodeDaysByYear.containsKey(year)) {
             adventOfCodeDaysByYear.put(year, new ArrayList<>());
         }

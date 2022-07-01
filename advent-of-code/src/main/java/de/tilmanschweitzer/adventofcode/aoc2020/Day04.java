@@ -1,6 +1,6 @@
 package de.tilmanschweitzer.adventofcode.aoc2020;
 
-import de.tilmanschweitzer.adventofcode.app.AdventOfCodeDay;
+import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 
 import java.io.InputStream;
 import java.util.*;
@@ -20,7 +20,7 @@ ecl (Eye Color)
 pid (Passport ID)
 cid (Country ID)
  */
-public class Day04 extends AbstractDay2020<List<Day04.PassportField>> {
+public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>> {
 
     private static final char TREE = '#';
 

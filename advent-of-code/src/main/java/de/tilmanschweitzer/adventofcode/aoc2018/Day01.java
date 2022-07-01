@@ -1,6 +1,6 @@
 package de.tilmanschweitzer.adventofcode.aoc2018;
 
-import de.tilmanschweitzer.adventofcode.app.AdventOfCodeDay;
+import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 
 import java.io.InputStream;
 import java.util.HashSet;
@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day01 extends AbstractDay2018<Integer> {
+public class Day01 extends MultiLineAdventOfCodeDay<Integer> {
 
     public static int firstFirstDuplicateFrequency(List<Integer> inputNumbers) {
         int currentFrequency = 0;
@@ -34,7 +34,6 @@ public class Day01 extends AbstractDay2018<Integer> {
     public long getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
         return firstFirstDuplicateFrequency(inputNumbers);
     }
-
 
     @Override
     public Integer parseLine(String line) {

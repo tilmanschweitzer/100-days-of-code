@@ -1,16 +1,13 @@
 package de.tilmanschweitzer.adventofcode.app;
 
+import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
+
 import java.io.InputStream;
 import java.util.List;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class EmptyDay extends AdventOfCodeDay<Integer> {
-
-    @Override
-    public int getYear() {
-        return 0;
-    }
+public class EmptyDay extends MultiLineAdventOfCodeDay<Integer> {
 
     @Override
     public long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {

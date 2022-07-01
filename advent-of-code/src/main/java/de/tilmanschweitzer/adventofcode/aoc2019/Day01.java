@@ -1,15 +1,14 @@
 package de.tilmanschweitzer.adventofcode.aoc2019;
 
-import de.tilmanschweitzer.adventofcode.app.AdventOfCodeDay;
+import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 
 import java.io.InputStream;
 import java.util.List;
 
 
-import static java.lang.ClassLoader.getPlatformClassLoader;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day01 extends AbstractDay2019<Integer> {
+public class Day01 extends MultiLineAdventOfCodeDay<Integer> {
 
     @Override
     public long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
