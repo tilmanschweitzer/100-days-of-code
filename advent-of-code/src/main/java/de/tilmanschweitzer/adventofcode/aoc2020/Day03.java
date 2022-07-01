@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day03 extends AdventOfCodeDay<String> {
+public class Day03 extends AbstractDay2020<String> {
 
     private static final char TREE = '#';
 

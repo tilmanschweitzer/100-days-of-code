@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day02 extends AdventOfCodeDay<List<Integer>> {
+public class Day02 extends AbstractDay2019<List<Integer>> {
 
     private enum OpCode {
         ADD(1),

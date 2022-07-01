@@ -9,7 +9,7 @@ import java.util.List;
 import static java.lang.ClassLoader.getPlatformClassLoader;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day01 extends AdventOfCodeDay<Integer> {
+public class Day01 extends AbstractDay2019<Integer> {
 
     @Override
     public long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {

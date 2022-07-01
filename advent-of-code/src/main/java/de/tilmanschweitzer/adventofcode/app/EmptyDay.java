@@ -8,6 +8,11 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 public class EmptyDay extends AdventOfCodeDay<Integer> {
 
     @Override
+    public int getYear() {
+        return 0;
+    }
+
+    @Override
     public long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
         return 0;
     }

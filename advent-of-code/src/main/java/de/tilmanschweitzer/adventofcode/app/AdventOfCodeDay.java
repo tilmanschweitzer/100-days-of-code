@@ -13,6 +13,8 @@ public abstract class AdventOfCodeDay<T> {
 
     private List<T> parsedInput;
 
+    public abstract int getYear();
+
     public void runFirstPuzzle() {
         System.out.println("Result of " + this.getClass().getSimpleName() + " and first puzzle:");
         System.out.println(getResultOfFirstPuzzle(getParsedInput()));

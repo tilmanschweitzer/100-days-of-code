@@ -19,7 +19,10 @@ public class AdventOfCode {
         final int day = Integer.parseInt(args[1]);
         final int puzzle = Integer.parseInt(args[2]);
 
-        final List<AdventOfCodeDay<?>> listOfDays = getDaysByYear(year);
+        final AdventOfCodeRegistry registry = createRegistryWithExistingDays();
+
+
+        final List<AdventOfCodeDay<?>> listOfDays = registry.getDaysForYear(year);
 
         if (listOfDays.isEmpty()) {
             System.err.println("Year " + year + " not available");
@@ -44,27 +47,23 @@ public class AdventOfCode {
         }
     }
 
-    public static List<AdventOfCodeDay<?>> getDaysByYear(int year) {
-        if (year == 2020) {
-            return List.of(
-                    new de.tilmanschweitzer.adventofcode.aoc2020.Day01(),
-                    new de.tilmanschweitzer.adventofcode.aoc2020.Day02(),
-                    new de.tilmanschweitzer.adventofcode.aoc2020.Day03(),
-                    new de.tilmanschweitzer.adventofcode.aoc2020.Day04()
-            );
-        }
-        if (year == 2019) {
-            return List.of(
-                    new de.tilmanschweitzer.adventofcode.aoc2019.Day01(),
-                    new de.tilmanschweitzer.adventofcode.aoc2019.Day02(),
-                    new de.tilmanschweitzer.adventofcode.aoc2019.Day03()
-            );
-        }
-        if (year == 2018) {
-            return List.of(
-                    new de.tilmanschweitzer.adventofcode.aoc2018.Day01()
-            );
-        }
-        return Collections.emptyList();
+    private static AdventOfCodeRegistry createRegistryWithExistingDays() {
+        final AdventOfCodeRegistry registry = new AdventOfCodeRegistry();
+
+        // 2020
+        registry.addDay(new de.tilmanschweitzer.adventofcode.aoc2020.Day01());
+        registry.addDay(new de.tilmanschweitzer.adventofcode.aoc2020.Day02());
+        registry.addDay(new de.tilmanschweitzer.adventofcode.aoc2020.Day03());
+        registry.addDay(new de.tilmanschweitzer.adventofcode.aoc2020.Day04());
+
+        // 2019
+        registry.addDay(new de.tilmanschweitzer.adventofcode.aoc2019.Day01());
+        registry.addDay(new de.tilmanschweitzer.adventofcode.aoc2019.Day02());
+        registry.addDay(new de.tilmanschweitzer.adventofcode.aoc2019.Day03());
+
+        // 2018
+        registry.addDay(new de.tilmanschweitzer.adventofcode.aoc2018.Day01());
+
+        return registry;
     }
 }

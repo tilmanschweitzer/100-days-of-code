@@ -14,7 +14,7 @@ import static de.tilmanschweitzer.adventofcode.aoc2019.Day03.Point.CENTRAL_PORT;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.stream.Collectors.*;
 
-public class Day03 extends AdventOfCodeDay<List<Day03.Vector>> {
+public class Day03 extends AbstractDay2019<List<Day03.Vector>> {
 
     public static Set<Point> findIntersectionOfPaths(List<Vector> firstPath, List<Vector> secondPath) {
         final List<Point> firstPoints = Point.fromPath(firstPath);

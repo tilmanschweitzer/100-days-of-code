@@ -20,7 +20,7 @@ ecl (Eye Color)
 pid (Passport ID)
 cid (Country ID)
  */
-public class Day04 extends AdventOfCodeDay<List<Day04.PassportField>> {
+public class Day04 extends AbstractDay2020<List<Day04.PassportField>> {
 
     private static final char TREE = '#';
 

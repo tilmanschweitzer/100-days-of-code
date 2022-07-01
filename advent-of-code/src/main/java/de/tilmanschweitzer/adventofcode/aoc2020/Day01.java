@@ -11,7 +11,7 @@ import java.util.Optional;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.stream.Collectors.toList;
 
-public class Day01 extends AdventOfCodeDay<Integer> {
+public class Day01 extends AbstractDay2020<Integer> {
 
     @Override
     public long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {

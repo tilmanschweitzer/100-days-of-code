@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day01 extends AdventOfCodeDay<Integer> {
+public class Day01 extends AbstractDay2018<Integer> {
 
     public static int firstFirstDuplicateFrequency(List<Integer> inputNumbers) {
         int currentFrequency = 0;

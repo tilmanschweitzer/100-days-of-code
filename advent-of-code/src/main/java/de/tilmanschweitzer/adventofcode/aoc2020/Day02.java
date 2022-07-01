@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day02 extends AdventOfCodeDay<Day02.PasswordPolicyAndPassword> {
+public class Day02 extends AbstractDay2020<Day02.PasswordPolicyAndPassword> {
 
     @Override
     protected long getResultOfFirstPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {
