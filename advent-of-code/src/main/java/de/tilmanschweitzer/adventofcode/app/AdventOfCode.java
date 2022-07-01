@@ -1,5 +1,6 @@
 package de.tilmanschweitzer.adventofcode.app;
 
+import de.tilmanschweitzer.adventofcode.day.AdventOfCodeDay;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class AdventOfCode {
 
         final AdventOfCodeRegistry registry = createRegistryWithExistingDays();
 
-        final List<MultiLineAdventOfCodeDay<?>> listOfDays = registry.getDaysForYear(year);
+        final List<AdventOfCodeDay<?>> listOfDays = registry.getDaysForYear(year);
 
         if (listOfDays.isEmpty()) {
             System.err.println("Year " + year + " not available");
@@ -31,7 +32,7 @@ public class AdventOfCode {
         }
 
         final int dayIndex = day - 1;
-        final MultiLineAdventOfCodeDay<?> selectedDay = listOfDays.get(dayIndex);
+        final AdventOfCodeDay<?> selectedDay = listOfDays.get(dayIndex);
 
         if (puzzle == 1) {
             selectedDay.runFirstPuzzle();
@@ -59,6 +60,9 @@ public class AdventOfCode {
 
         // 2018
         registry.addDay(2018, new de.tilmanschweitzer.adventofcode.aoc2018.Day01());
+
+        // 2015
+        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day01());
 
         return registry;
     }
