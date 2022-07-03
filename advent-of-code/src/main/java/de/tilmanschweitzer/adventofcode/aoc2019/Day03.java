@@ -2,6 +2,7 @@ package de.tilmanschweitzer.adventofcode.aoc2019;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
+import de.tilmanschweitzer.adventofcode.common.Coordinate;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 
 import java.io.InputStream;
@@ -201,49 +202,6 @@ public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>> {
                 super("Unknown vector direction: " + direction);
             }
         }
-    }
-    public static abstract class Coordinate {
-        final int x;
-        final int y;
-
-        public Coordinate(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
-        }
-
-        public int getManhattanDistance() {
-            return Math.abs(x) + Math.abs(y);
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Coordinate coordinate = (Coordinate) o;
-            return x == coordinate.x && y == coordinate.y;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(x, y);
-        }
-
-        @Override
-        public String toString() {
-            return "Coordinate{" +
-                    "x=" + x +
-                    ", y=" + y +
-                    '}';
-        }
-
     }
 
     public static class Grid {
