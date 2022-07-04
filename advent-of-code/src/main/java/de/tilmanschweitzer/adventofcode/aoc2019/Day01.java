@@ -8,15 +8,15 @@ import java.util.List;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day01 extends MultiLineAdventOfCodeDay<Integer, Long> {
+public class Day01 extends MultiLineAdventOfCodeDay<Integer> {
 
     @Override
-    public Long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
+    public long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
         return inputNumbers.stream().map(Day01::getFuelForMass).reduce(Long::sum).orElse(0L);
     }
 
     @Override
-    public Long getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
+    public long getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
         return inputNumbers.stream().map(Day01::getTotalFuelForMass).reduce(Long::sum).orElse(0L);
     }
 

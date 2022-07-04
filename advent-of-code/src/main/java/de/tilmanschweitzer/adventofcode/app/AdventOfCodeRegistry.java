@@ -9,16 +9,16 @@ import java.util.Map;
 
 public class AdventOfCodeRegistry {
 
-    private final Map<Integer, List<AdventOfCodeDay<?, ?>>> adventOfCodeDaysByYear = new HashMap<>();
+    private final Map<Integer, List<AdventOfCodeDay<?>>> adventOfCodeDaysByYear = new HashMap<>();
 
-    public void addDay(int year, final AdventOfCodeDay<?, ?> adventOfCodeDay) {
+    public void addDay(int year, final AdventOfCodeDay<?> adventOfCodeDay) {
         getOrCreateInternalListForYear(year).add(adventOfCodeDay);
     }
 
-    public List<AdventOfCodeDay<?, ?>> getDaysForYear(int year) {
+    public List<AdventOfCodeDay<?>> getDaysForYear(int year) {
         return getOrCreateInternalListForYear(year);
     }
-    private List<AdventOfCodeDay<?, ?>> getOrCreateInternalListForYear(int year) {
+    private List<AdventOfCodeDay<?>> getOrCreateInternalListForYear(int year) {
         if (!adventOfCodeDaysByYear.containsKey(year)) {
             adventOfCodeDaysByYear.put(year, new ArrayList<>());
         }

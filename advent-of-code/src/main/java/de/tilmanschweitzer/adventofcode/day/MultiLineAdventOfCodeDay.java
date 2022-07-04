@@ -9,15 +9,15 @@ import java.util.Objects;
 
 import static java.util.stream.Collectors.toUnmodifiableList;
 
-public abstract class MultiLineAdventOfCodeDay<I, A> extends AdventOfCodeDay<List<I>, A> {
+public abstract class MultiLineAdventOfCodeDay<T> extends AdventOfCodeDay<List<T>> {
 
-    protected abstract I parseLine(String line);
+    protected abstract T parseLine(String line);
 
-    protected List<I> getParsedInput() {
+    protected List<T> getParsedInput() {
         return parseInputFromStream(getInputAsStream());
     }
 
-    private List<I> parseInputFromStream(InputStream inputStream) {
+    private List<T> parseInputFromStream(InputStream inputStream) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
             return reader.lines().map(this::parseLine).collect(toUnmodifiableList());
         } catch (IOException e) {

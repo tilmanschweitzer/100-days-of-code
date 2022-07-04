@@ -4,17 +4,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Objects;
 
-public abstract class SingleLineAdventOfCodeDay<I, A> extends AdventOfCodeDay<I, A> {
+import static java.util.stream.Collectors.toUnmodifiableList;
 
-    protected abstract I parseLine(String line);
+public abstract class SingleLineAdventOfCodeDay<T> extends AdventOfCodeDay<T> {
 
-    protected I getParsedInput() {
+    protected abstract T parseLine(String line);
+
+    protected T getParsedInput() {
         return parseInputFromStream(getInputAsStream());
     }
 
-    private I parseInputFromStream(InputStream inputStream) {
+    private T parseInputFromStream(InputStream inputStream) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
             return reader.lines().findFirst().map(this::parseLine).get();
         } catch (IOException e) {

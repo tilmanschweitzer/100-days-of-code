@@ -13,15 +13,15 @@ import java.util.regex.Pattern;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day02 extends MultiLineAdventOfCodeDay<Day02.PasswordPolicyAndPassword, Long> {
+public class Day02 extends MultiLineAdventOfCodeDay<Day02.PasswordPolicyAndPassword> {
 
     @Override
-    protected Long getResultOfFirstPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {
+    protected long getResultOfFirstPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {
         return passwordsAndPolicies.stream().filter(passwordAndPolicy -> passwordAndPolicy.policy.validateMethodA(passwordAndPolicy.password)).count();
     }
 
     @Override
-    protected Long getResultOfSecondPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {
+    protected long getResultOfSecondPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {
         return passwordsAndPolicies.stream().filter(passwordAndPolicy -> passwordAndPolicy.policy.validateMethodB(passwordAndPolicy.password)).count();
     }
 
