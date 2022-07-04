@@ -19,7 +19,7 @@ public class AdventOfCode {
 
         final AdventOfCodeRegistry registry = createRegistryWithExistingDays();
 
-        final List<AdventOfCodeDay<?>> listOfDays = registry.getDaysForYear(year);
+        final List<AdventOfCodeDay<?, ?>> listOfDays = registry.getDaysForYear(year);
 
         if (listOfDays.isEmpty()) {
             System.err.println("Year " + year + " not available");
@@ -32,7 +32,7 @@ public class AdventOfCode {
         }
 
         final int dayIndex = day - 1;
-        final AdventOfCodeDay<?> selectedDay = listOfDays.get(dayIndex);
+        final AdventOfCodeDay<?, ?> selectedDay = listOfDays.get(dayIndex);
 
         if (puzzle == 1) {
             selectedDay.runFirstPuzzle();

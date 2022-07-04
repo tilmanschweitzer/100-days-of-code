@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day03 extends SingleLineAdventOfCodeDay<List<Day03.Move>> {
+public class Day03 extends SingleLineAdventOfCodeDay<List<Day03.Move>, Integer> {
 
     public static int numberOfHousesFromMoves(final List<Move> moves) {
         return housesFromMoves(moves).size();
@@ -52,12 +52,12 @@ public class Day03 extends SingleLineAdventOfCodeDay<List<Day03.Move>> {
     }
 
     @Override
-    public long getResultOfFirstPuzzle(final List<Move> moves) {
+    public Integer getResultOfFirstPuzzle(final List<Move> moves) {
         return numberOfHousesFromMoves(moves);
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<Move> moves) {
+    public Integer getResultOfSecondPuzzle(final List<Move> moves) {
         return numberOfHousesFromMovesFromSantaAndRoboSanta(moves);
     }
 

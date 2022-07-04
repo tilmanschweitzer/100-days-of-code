@@ -15,7 +15,7 @@ import static de.tilmanschweitzer.adventofcode.aoc2019.Day03.Point.CENTRAL_PORT;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.stream.Collectors.*;
 
-public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>> {
+public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>, Integer> {
 
     public static Set<Point> findIntersectionOfPaths(List<Vector> firstPath, List<Vector> secondPath) {
         final List<Point> firstPoints = Point.fromPath(firstPath);
@@ -61,7 +61,7 @@ public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>> {
     }
 
     @Override
-    public long getResultOfFirstPuzzle(final List<List<Day03.Vector>> paths) {
+    public Integer getResultOfFirstPuzzle(final List<List<Day03.Vector>> paths) {
         if (paths.size() != 2) {
             throw new RuntimeException("Unexpected number of paths");
         }
@@ -72,7 +72,7 @@ public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>> {
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<List<Day03.Vector>> inputNumbers) {
+    public Integer getResultOfSecondPuzzle(final List<List<Day03.Vector>> inputNumbers) {
         return 0;
     }
 

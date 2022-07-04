@@ -2,7 +2,7 @@ package de.tilmanschweitzer.adventofcode.day;
 
 import java.io.InputStream;
 
-public abstract class AdventOfCodeDay<T> {
+public abstract class AdventOfCodeDay<I, A> {
 
     public void runFirstPuzzle() {
         System.out.println("Result of " + this.getClass().getSimpleName() + " and first puzzle:");
@@ -14,12 +14,12 @@ public abstract class AdventOfCodeDay<T> {
         System.out.println(getResultOfSecondPuzzle(getParsedInput()));
     }
 
-    protected abstract long getResultOfFirstPuzzle(T input);
+    protected abstract A getResultOfFirstPuzzle(I input);
 
-    protected abstract long getResultOfSecondPuzzle(T input);
+    protected abstract A getResultOfSecondPuzzle(I input);
 
     protected abstract InputStream getInputAsStream();
 
-    protected abstract T getParsedInput();
+    protected abstract I getParsedInput();
 
 }

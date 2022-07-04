@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day01 extends MultiLineAdventOfCodeDay<Integer> {
+public class Day01 extends MultiLineAdventOfCodeDay<Integer, Integer> {
 
     public static int firstFirstDuplicateFrequency(List<Integer> inputNumbers) {
         int currentFrequency = 0;
@@ -26,12 +26,12 @@ public class Day01 extends MultiLineAdventOfCodeDay<Integer> {
     }
 
     @Override
-    public long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
+    public Integer getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
         return inputNumbers.stream().reduce(Integer::sum).orElse(0);
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
+    public Integer getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
         return firstFirstDuplicateFrequency(inputNumbers);
     }
 

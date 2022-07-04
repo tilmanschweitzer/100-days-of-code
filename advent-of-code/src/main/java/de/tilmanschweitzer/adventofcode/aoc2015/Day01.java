@@ -9,15 +9,15 @@ import java.util.stream.Collectors;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day01 extends SingleLineAdventOfCodeDay<List<Character>> {
+public class Day01 extends SingleLineAdventOfCodeDay<List<Character>, Integer> {
 
     @Override
-    public long getResultOfFirstPuzzle(final List<Character> inputNumbers) {
+    public Integer getResultOfFirstPuzzle(final List<Character> inputNumbers) {
         return getFloorForInput(inputNumbers);
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<Character> inputNumbers) {
+    public Integer getResultOfSecondPuzzle(final List<Character> inputNumbers) {
         return getFirstPositionForFloor(inputNumbers, -1);
     }
 

@@ -20,7 +20,7 @@ ecl (Eye Color)
 pid (Passport ID)
 cid (Country ID)
  */
-public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>> {
+public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>, Long> {
 
     private static final char TREE = '#';
 
@@ -46,13 +46,13 @@ public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>> {
     }
 
     @Override
-    protected long getResultOfFirstPuzzle(final List<List<PassportField>> lines) {
+    protected Long getResultOfFirstPuzzle(final List<List<PassportField>> lines) {
         final List<Passport> passports = passportsFromFieldsList(lines);
         return passports.stream().filter(Passport::hasNecessaryFields).count();
     }
 
     @Override
-    protected long getResultOfSecondPuzzle(List<List<PassportField>> lines) {
+    protected Long getResultOfSecondPuzzle(List<List<PassportField>> lines) {
         final List<Passport> passports = passportsFromFieldsList(lines);
         return passports.stream().filter(Passport::isValid).count();
     }

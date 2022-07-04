@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day02 extends MultiLineAdventOfCodeDay<List<Integer>> {
+public class Day02 extends MultiLineAdventOfCodeDay<List<Integer>, Integer> {
 
     private enum OpCode {
         ADD(1),
@@ -75,7 +75,7 @@ public class Day02 extends MultiLineAdventOfCodeDay<List<Integer>> {
 
     // 3562624
     @Override
-    public long getResultOfFirstPuzzle(final List<List<Integer>> inputLines) {
+    public Integer getResultOfFirstPuzzle(final List<List<Integer>> inputLines) {
         if (inputLines.size() != 1) {
             throw new UnexpectedNumberOfInputLinesException(inputLines.size());
         }
@@ -89,7 +89,7 @@ public class Day02 extends MultiLineAdventOfCodeDay<List<Integer>> {
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<List<Integer>> inputLines) {
+    public Integer getResultOfSecondPuzzle(final List<List<Integer>> inputLines) {
         if (inputLines.size() != 1) {
             throw new UnexpectedNumberOfInputLinesException(inputLines.size());
         }

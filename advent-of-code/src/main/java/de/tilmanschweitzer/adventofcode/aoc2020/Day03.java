@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day03 extends MultiLineAdventOfCodeDay<String> {
+public class Day03 extends MultiLineAdventOfCodeDay<String, Long> {
 
     private static final char TREE = '#';
 
@@ -33,12 +33,12 @@ public class Day03 extends MultiLineAdventOfCodeDay<String> {
     }
 
     @Override
-    protected long getResultOfFirstPuzzle(List<String> lines) {
+    protected Long getResultOfFirstPuzzle(List<String> lines) {
         return getEncounteredTreesForSlope(lines, 3, 1);
     }
 
     @Override
-    protected long getResultOfSecondPuzzle(List<String> lines) {
+    protected Long getResultOfSecondPuzzle(List<String> lines) {
         return getEncounteredTreesForSlope(lines, 1, 1) *
                 getEncounteredTreesForSlope(lines, 3, 1) *
                 getEncounteredTreesForSlope(lines, 5, 1) *

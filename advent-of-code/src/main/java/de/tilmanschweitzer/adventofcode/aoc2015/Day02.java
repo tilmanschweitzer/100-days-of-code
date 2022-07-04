@@ -10,15 +10,15 @@ import java.util.stream.Stream;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day02 extends MultiLineAdventOfCodeDay<Day02.Dimensions> {
+public class Day02 extends MultiLineAdventOfCodeDay<Day02.Dimensions, Integer> {
 
     @Override
-    public long getResultOfFirstPuzzle(final List<Dimensions> inputDimensions) {
+    public Integer getResultOfFirstPuzzle(final List<Dimensions> inputDimensions) {
         return inputDimensions.stream().map(Dimensions::getSurfaceWithSlack).reduce(Integer::sum).orElse(0);
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<Dimensions> inputDimensions) {
+    public Integer getResultOfSecondPuzzle(final List<Dimensions> inputDimensions) {
         return inputDimensions.stream().map(Dimensions::getTotalRibbon).reduce(Integer::sum).orElse(0);
     }
 
