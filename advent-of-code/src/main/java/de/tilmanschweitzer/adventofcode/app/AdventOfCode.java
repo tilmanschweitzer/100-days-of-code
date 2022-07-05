@@ -66,6 +66,7 @@ public class AdventOfCode {
         registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day02());
         registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day03());
         registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day04());
+        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day05());
 
         return registry;
     }
