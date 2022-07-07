@@ -24,7 +24,9 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
 
     @Override
     public long getResultOfSecondPuzzle(final List<LightInstruction> input) {
-        return 0;
+        final LightGrid lightGrid = new BrightnessLightGrid(1000);
+        input.forEach(lightGrid::applyLightInstruction);
+        return lightGrid.count();
     }
 
     @Override
@@ -223,6 +225,44 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
         @Override
         public long count() {
             return lightGrid.values().stream().filter(Boolean::booleanValue).count();
+        }
+    }
+
+
+    public static class BrightnessLightGrid extends LightGrid<Integer> {
+        public BrightnessLightGrid(int gridSize) {
+            super(gridSize);
+        }
+
+        @Override
+        protected Integer initialValue() {
+            return 0;
+        }
+
+        @Override
+        protected void toggle(LightCoordinate currentLight) {
+            lightGrid.put(currentLight, lightGrid.get(currentLight) + 2);
+        }
+
+        @Override
+        protected void turnOff(LightCoordinate currentLight) {
+            lightGrid.put(currentLight, Math.max(lightGrid.get(currentLight) - 1, 0));
+        }
+
+        @Override
+        protected void turnOn(LightCoordinate currentLight) {
+            lightGrid.put(currentLight, lightGrid.get(currentLight) + 1);
+        }
+
+        @Override
+        protected String getDisplayStringForCoordinate(LightCoordinate lightCoordinate) {
+            final int value = lightGrid.get(lightCoordinate);
+            return value == 0 ? " " : value + "";
+        }
+
+        @Override
+        public long count() {
+            return lightGrid.values().stream().reduce(Integer::sum).orElse(0);
         }
     }
 }
