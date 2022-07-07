@@ -17,9 +17,9 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
 
     @Override
     public long getResultOfFirstPuzzle(final List<LightInstruction> input) {
-        final LightGrid lightGrid = new LightGrid(1000);
+        final LightGrid lightGrid = new BasicLightGrid(1000);
         input.forEach(lightGrid::applyLightInstruction);
-        return lightGrid.countLights();
+        return lightGrid.count();
     }
 
     @Override
@@ -120,8 +120,8 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
         }
     }
 
-    public static class LightGrid {
-        final Map<LightCoordinate, Boolean> lightGrid;
+    public static abstract class LightGrid<T> {
+        final Map<LightCoordinate, T> lightGrid;
         final int gridSize;
 
         public LightGrid(int gridSize) {
@@ -129,10 +129,13 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
             this.lightGrid = new Hashtable<>();
             IntStream.range(0, gridSize * gridSize).forEach((index) -> {
                 final LightCoordinate currentCoordinate = new LightCoordinate(index / gridSize, index % gridSize);
-                lightGrid.put(currentCoordinate, false);
+                lightGrid.put(currentCoordinate, initialValue());
                 Preconditions.checkArgument(lightGrid.containsKey(new LightCoordinate(index / gridSize, index % gridSize)));
             });
         }
+
+        protected abstract T initialValue();
+
 
         public void applyLightInstruction(LightInstruction lightInstruction) {
             for (int x = lightInstruction.startLight.getX(); x <= lightInstruction.endLight.getX(); x++) {
@@ -142,11 +145,11 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
                         throw new RuntimeException(currentLight + " is not part of the grid (size: " + gridSize + ")");
                     }
                     if (lightInstruction.instruction == TURN_ON) {
-                        lightGrid.put(currentLight, true);
+                        turnOn(currentLight);
                     } else if (lightInstruction.instruction == TURN_OFF) {
-                        lightGrid.put(currentLight, false);
+                        turnOff(currentLight);
                     } else if (lightInstruction.instruction == TOGGLE){
-                        lightGrid.put(currentLight, !lightGrid.get(currentLight));
+                        toggle(currentLight);
                     } else {
                         throw new RuntimeException("Unknown light instruction: " + lightInstruction);
                     }
@@ -154,14 +157,22 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
             }
         }
 
+        protected abstract void toggle(LightCoordinate currentLight);
+
+        protected abstract void turnOff(LightCoordinate currentLight);
+
+        protected abstract void turnOn(LightCoordinate currentLight);
+
         @Override
         public String toString() {
             return IntStream.range(0, gridSize).boxed()
                     .map(row-> IntStream.range(0, gridSize).boxed()
-                            .map(col-> lightGrid.get(new LightCoordinate(row, col)) ? "*" : " ")
+                            .map(col-> getDisplayStringForCoordinate(new LightCoordinate(row, col)))
                             .collect(Collectors.joining()))
                     .collect(Collectors.joining("\n"));
         }
+
+        protected abstract String getDisplayStringForCoordinate(LightCoordinate lightCoordinate);
 
         @Override
         public boolean equals(Object o) {
@@ -176,7 +187,41 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
             return Objects.hash(lightGrid, gridSize);
         }
 
-        public long countLights() {
+        public abstract long count();
+    }
+
+    public static class BasicLightGrid extends LightGrid<Boolean> {
+        public BasicLightGrid(int gridSize) {
+            super(gridSize);
+        }
+
+        @Override
+        protected Boolean initialValue() {
+            return false;
+        }
+
+        @Override
+        protected void toggle(LightCoordinate currentLight) {
+            lightGrid.put(currentLight, !lightGrid.get(currentLight));
+        }
+
+        @Override
+        protected void turnOff(LightCoordinate currentLight) {
+            lightGrid.put(currentLight, false);
+        }
+
+        @Override
+        protected void turnOn(LightCoordinate currentLight) {
+            lightGrid.put(currentLight, true);
+        }
+
+        @Override
+        protected String getDisplayStringForCoordinate(LightCoordinate lightCoordinate) {
+            return lightGrid.get(lightCoordinate) ? "*" : " ";
+        }
+
+        @Override
+        public long count() {
             return lightGrid.values().stream().filter(Boolean::booleanValue).count();
         }
     }

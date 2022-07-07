@@ -1,5 +1,6 @@
 package de.tilmanschweitzer.adventofcode.aoc2015;
 
+import de.tilmanschweitzer.adventofcode.aoc2015.Day06.BasicLightGrid;
 import de.tilmanschweitzer.adventofcode.aoc2015.Day06.LightCoordinate;
 import de.tilmanschweitzer.adventofcode.aoc2015.Day06.LightGrid;
 import de.tilmanschweitzer.adventofcode.aoc2015.Day06.LightInstruction;
@@ -19,8 +20,8 @@ class Day06Test {
     }
 
     @Test
-    public void emptyLightGrid_toString() {
-        final LightGrid lightGrid = new LightGrid(3);
+    public void testBasicLightGrid_toString() {
+        final LightGrid lightGrid = new BasicLightGrid(3);
         final String expectedOutput = "   \n" +
                 "   \n" +
                 "   ";
@@ -28,8 +29,8 @@ class Day06Test {
     }
 
     @Test
-    public void emptyLightGrid_applyInstruction() {
-        final LightGrid lightGrid = new LightGrid(3);
+    public void testBasicLightGrid_applyInstruction() {
+        final LightGrid lightGrid = new BasicLightGrid(3);
 
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 0,0 through 0,1"));
 
@@ -42,8 +43,8 @@ class Day06Test {
     }
 
     @Test
-    public void emptyLightGrid_applyCrossInstructions() {
-        final LightGrid lightGrid = new LightGrid(3);
+    public void testBasicLightGrid_applyCrossInstructions() {
+        final LightGrid lightGrid = new BasicLightGrid(3);
 
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 0,1 through 2,1"));
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 1,0 through 1,2"));
@@ -56,8 +57,8 @@ class Day06Test {
     }
 
     @Test
-    public void emptyLightGrid_applyInvertedCrossInstructions() {
-        final LightGrid lightGrid = new LightGrid(3);
+    public void testBasicLightGrid_applyInvertedCrossInstructions() {
+        final LightGrid lightGrid = new BasicLightGrid(3);
 
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 0,1 through 2,1"));
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 1,0 through 1,2"));
@@ -72,16 +73,16 @@ class Day06Test {
 
 
     @Test
-    public void lightGrid_countLights() {
-        final LightGrid lightGrid = new LightGrid(3);
+    public void testBasicLightGrid_countLights() {
+        final LightGrid lightGrid = new BasicLightGrid(3);
 
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 0,1 through 2,1"));
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 1,0 through 1,2"));
 
-        assertEquals(5L, lightGrid.countLights());
+        assertEquals(5L, lightGrid.count());
 
         lightGrid.applyLightInstruction(parseLightInstruction("toggle 0,0 through 2,2"));
-        assertEquals(4L, lightGrid.countLights());
+        assertEquals(4L, lightGrid.count());
     }
 
 }
