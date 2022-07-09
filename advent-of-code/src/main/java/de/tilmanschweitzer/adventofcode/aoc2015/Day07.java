@@ -15,24 +15,21 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
     @Override
     public long getResultOfFirstPuzzle(final List<CircuitStep> circuitSteps) {
         final Circuit circuit = new Circuit();
-
-        List<CircuitStep> remainingCircuitSteps = circuitSteps;
-
-        while (!remainingCircuitSteps.isEmpty()) {
-            final List<CircuitStep> resolvableCircuitSteps = remainingCircuitSteps.stream().filter(circuitStep -> circuitStep.allInputsResolved(circuit)).collect(toUnmodifiableList());
-            if (remainingCircuitSteps.isEmpty()) {
-                throw new RuntimeException("Found no resolvable circuit steps");
-            }
-            remainingCircuitSteps = remainingCircuitSteps.stream().filter(circuitStep -> !circuitStep.allInputsResolved(circuit)).collect(toUnmodifiableList());
-            resolvableCircuitSteps.forEach(circuit::applyStep);
-        }
-
+        circuit.applySteps(circuitSteps);
         return circuit.getValueForWire("a");
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<CircuitStep> input) {
-        return 0;
+    public long getResultOfSecondPuzzle(final List<CircuitStep> inputCircuitSteps) {
+        final ArrayList<CircuitStep> circuitSteps = new ArrayList<>(inputCircuitSteps);
+        final Circuit circuit = new Circuit();
+
+        // Overwrite wire b with value from first puzzle
+        final int resultOfFirstPuzzle = (int) getResultOfFirstPuzzle(inputCircuitSteps);
+        circuitSteps.add(new ProvideValueToWire(resultOfFirstPuzzle, "b"));
+
+        circuit.applySteps(circuitSteps);
+        return circuit.getValueForWire("a");
     }
 
     @Override
@@ -551,6 +548,19 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
 
         public Integer getValueForWire(String wire) {
             return wires.get(wire);
+        }
+
+        public void applySteps(List<CircuitStep> circuitSteps) {
+            List<CircuitStep> remainingCircuitSteps = circuitSteps;
+
+            while (!remainingCircuitSteps.isEmpty()) {
+                final List<CircuitStep> resolvableCircuitSteps = remainingCircuitSteps.stream().filter(circuitStep -> circuitStep.allInputsResolved(this)).collect(toUnmodifiableList());
+                if (remainingCircuitSteps.isEmpty()) {
+                    throw new RuntimeException("Found no resolvable circuit steps");
+                }
+                remainingCircuitSteps = remainingCircuitSteps.stream().filter(circuitStep -> !circuitStep.allInputsResolved(this)).collect(toUnmodifiableList());
+                resolvableCircuitSteps.forEach(this::applyStep);
+            }
         }
     }
 }
