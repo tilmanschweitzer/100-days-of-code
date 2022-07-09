@@ -11,11 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Day07Test {
 
+
     @Test
     public void testProvideValueToWireStepParser_matches() {
         final CircuitStepParser<?> parser = new ProvideValueToWire.Parser();
         assertTrue(parser.matches("123 -> x"));
         assertTrue(parser.matches("456 -> y"));
+        assertTrue(parser.matches("lx -> a"));
+        assertTrue(parser.matches("i -> j"));
 
         assertFalse(parser.matches("x AND y -> d"));
         assertFalse(parser.matches("x OR y -> e"));
@@ -28,32 +31,15 @@ class Day07Test {
         final CircuitStepParser<?> parser = new ProvideValueToWire.Parser();
         assertEquals(new ProvideValueToWire(123, "x"), parser.parse("123 -> x"));
         assertEquals(new ProvideValueToWire(456, "y"), parser.parse("456 -> y"));
-    }
-
-    @Test
-    public void testProvideWireToWireStepParser_matches() {
-        final CircuitStepParser<?> parser = new ProvideWireToWire.Parser();
-        assertTrue(parser.matches("lx -> a"));
-        assertTrue(parser.matches("i -> j"));
-
-        assertFalse(parser.matches("456 -> y"));
-        assertFalse(parser.matches("x AND y -> d"));
-        assertFalse(parser.matches("x OR y -> e"));
-        assertFalse(parser.matches("x LSHIFT 2 -> f"));
-        assertFalse(parser.matches("NOT x -> h"));
-    }
-
-    @Test
-    public void testProvideWireToWireStepParser_parse() {
-        final CircuitStepParser<?> parser = new ProvideWireToWire.Parser();
-        assertEquals(new ProvideWireToWire("lx", "a"), parser.parse("lx -> a"));
-        assertEquals(new ProvideWireToWire("i", "j"), parser.parse("i -> j"));
+        assertEquals(new ProvideValueToWire("lx", "a"), parser.parse("lx -> a"));
+        assertEquals(new ProvideValueToWire("i", "j"), parser.parse("i -> j"));
     }
 
     @Test
     public void testAndGateParser_matches() {
         final CircuitStepParser<?> parser = new AndGate.Parser();
         assertTrue(parser.matches("x AND y -> d"));
+        assertTrue(parser.matches("1 AND 2 -> k"));
 
         assertFalse(parser.matches("123 -> x"));
         assertFalse(parser.matches("456 -> y"));
@@ -66,12 +52,14 @@ class Day07Test {
     public void testAndGateParser_parse() {
         final CircuitStepParser<?> parser = new AndGate.Parser();
         assertEquals(new AndGate("x", "y", "d"), parser.parse("x AND y -> d"));
+        assertEquals(new AndGate(1, 2, "k"), parser.parse("1 AND 2 -> k"));
     }
 
     @Test
     public void testOrGateParser_matches() {
         final CircuitStepParser<?> parser = new OrGate.Parser();
         assertTrue(parser.matches("x OR y -> e"));
+        assertTrue(parser.matches("3 OR 4 -> l"));
 
         assertFalse(parser.matches("123 -> x"));
         assertFalse(parser.matches("456 -> y"));
@@ -84,6 +72,7 @@ class Day07Test {
     public void testOrGateParser_parse() {
         final CircuitStepParser<?> parser = new OrGate.Parser();
         assertEquals(new OrGate("x", "y", "e"), parser.parse("x OR y -> e"));
+        assertEquals(new OrGate(3, 4, "l"), parser.parse("3 OR 4 -> l"));
     }
 
     @Test
@@ -102,12 +91,15 @@ class Day07Test {
     public void testShiftGateParser_parse() {
         final CircuitStepParser<?> parser = new LeftShiftGate.Parser();
         assertEquals(new LeftShiftGate("x", 2, "f"), parser.parse("x LSHIFT 2 -> f"));
+        assertEquals(new LeftShiftGate(5, 2, "m"), parser.parse("5 LSHIFT 2 -> m"));
     }
 
     @Test
     public void testRightShiftGateParser_matches() {
         final CircuitStepParser<?> parser = new RightShiftGate.Parser();
         assertTrue(parser.matches("y RSHIFT 2 -> g"));
+        assertTrue(parser.matches("10 RSHIFT 2 -> n"));
+
 
         assertFalse(parser.matches("123 -> x"));
         assertFalse(parser.matches("456 -> y"));
@@ -120,6 +112,7 @@ class Day07Test {
     public void testLeftShiftGateParser_parse() {
         final CircuitStepParser<?> parser = new RightShiftGate.Parser();
         assertEquals(new RightShiftGate("y", 2, "g"), parser.parse("y RSHIFT 2 -> g"));
+        assertEquals(new RightShiftGate(10, 2, "n"), parser.parse("10 RSHIFT 2 -> n"));
     }
 
     @Test
@@ -151,8 +144,7 @@ class Day07Test {
         circuit.applyStep(new RightShiftGate("y", 2, "g"));
         circuit.applyStep(new NotGate("x",  "h"));
         circuit.applyStep(new NotGate("y",  "i"));
-        circuit.applyStep(new ProvideWireToWire("i",  "j"));
-
+        circuit.applyStep(new ProvideValueToWire("i",  "j"));
 
         assertEquals("{d=72, e=507, f=492, g=114, h=65412, i=65079, j=65079, x=123, y=456}", circuit.getSignalsOnWire().toString());
     }
@@ -167,7 +159,11 @@ class Day07Test {
                 "y RSHIFT 2 -> g\n" +
                 "NOT x -> h\n" +
                 "NOT y -> i\n" +
-                "i -> j";
+                "i -> j\n" +
+                "1 AND 2 -> k\n" +
+                "3 OR 4 -> l\n" +
+                "5 LSHIFT 2 -> m\n" +
+                "10 RSHIFT 2 -> n";
 
         final List<CircuitStep> circuitSteps = Arrays.stream(input.split("\n")).map(new Day07()::parseLine).collect(Collectors.toUnmodifiableList());
 
@@ -180,7 +176,11 @@ class Day07Test {
                 new RightShiftGate("y", 2, "g"),
                 new NotGate("x",  "h"),
                 new NotGate("y", "i"),
-                new ProvideWireToWire("i", "j")
+                new ProvideValueToWire("i", "j"),
+                new AndGate(1, 2, "k"),
+                new OrGate(3, 4, "l"),
+                new LeftShiftGate(5, 2, "m"),
+                new RightShiftGate(10, 2, "n")
         );
 
         assertEquals(expectedCircuitSteps, circuitSteps);

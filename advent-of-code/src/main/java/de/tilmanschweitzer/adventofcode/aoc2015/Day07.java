@@ -8,13 +8,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
 
     @Override
-    public long getResultOfFirstPuzzle(final List<CircuitStep> input) {
+    public long getResultOfFirstPuzzle(final List<CircuitStep> circuitSteps) {
         final Circuit circuit = new Circuit();
-        input.forEach(circuit::applyStep);
+
+        List<CircuitStep> remainingCircuitSteps = circuitSteps;
+
+        while (!remainingCircuitSteps.isEmpty()) {
+            final List<CircuitStep> resolvableCircuitSteps = remainingCircuitSteps.stream().filter(circuitStep -> circuitStep.allInputsResolved(circuit)).collect(toUnmodifiableList());
+            if (remainingCircuitSteps.isEmpty()) {
+                throw new RuntimeException("Found no resolvable circuit steps");
+            }
+            remainingCircuitSteps = remainingCircuitSteps.stream().filter(circuitStep -> !circuitStep.allInputsResolved(circuit)).collect(toUnmodifiableList());
+            resolvableCircuitSteps.forEach(circuit::applyStep);
+        }
+
         return circuit.getValueForWire("a");
     }
 
@@ -32,7 +44,6 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
     protected CircuitStep parseLine(String line) {
         final List<CircuitStepParser<?>> parsers = List.of(
                 new ProvideValueToWire.Parser(),
-                new ProvideWireToWire.Parser(),
                 new AndGate.Parser(),
                 new OrGate.Parser(),
                 new LeftShiftGate.Parser(),
@@ -49,8 +60,105 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         throw new RuntimeException("Unknown circuit step: " + line);
     }
 
+    public interface ValueProvider {
+        boolean isResolved(Circuit circuit);
+        int value(Circuit circuit);
+    }
+
+    public static class ValueProviderParser {
+
+        public static ValueProvider parse(String input) {
+            if (input.matches("\\d+")) {
+                return new NumericValueProvider(Integer.parseInt(input));
+            }
+            if (input.matches("[a-zA-Z]+")) {
+                return new WireValueProvider(input);
+            }
+            throw new RuntimeException("Could not parse value: " + input);
+        }
+    }
+
+    public static class NumericValueProvider implements ValueProvider {
+
+        private final int value;
+
+        public NumericValueProvider(int value) {
+            this.value = value;
+        }
+
+        @Override
+        public boolean isResolved(Circuit circuit) {
+            return true;
+        }
+
+        @Override
+        public int value(Circuit circuit) {
+            return value;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            NumericValueProvider that = (NumericValueProvider) o;
+            return value == that.value;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(value);
+        }
+
+        @Override
+        public String toString() {
+            return "NumericValueProvider{" +
+                    "value=" + value +
+                    '}';
+        }
+    }
+
+    public static class WireValueProvider implements ValueProvider {
+        private final String wire;
+
+        public WireValueProvider(String wire) {
+            this.wire = wire;
+        }
+
+        @Override
+        public boolean isResolved(Circuit circuit) {
+            return circuit.hasValueOnWire(wire);
+        }
+
+        @Override
+        public int value(Circuit circuit) {
+            return circuit.getValueForWire(wire);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            WireValueProvider that = (WireValueProvider) o;
+            return Objects.equals(wire, that.wire);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(wire);
+        }
+
+        @Override
+        public String toString() {
+            return "WireValueProvider{" +
+                    "wire='" + wire + '\'' +
+                    '}';
+        }
+    }
+
     public static abstract class CircuitStep {
         public abstract void applyStepToCircuit(Circuit circuit);
+
+        public abstract boolean allInputsResolved(Circuit circuit);
     }
 
     public static abstract class CircuitStepParser<T extends CircuitStep> {
@@ -58,129 +166,145 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         public abstract T parse(String line);
     }
 
-    public static class ProvideValueToWire extends CircuitStep {
-        final String wire;
-        final int value;
+    public static abstract class SingleInputCircuitStep extends CircuitStep {
+        final ValueProvider input;
+        final String targetWire;
 
-        public ProvideValueToWire(int value, String wire) {
-            this.value = value;
-            this.wire = wire;
+        protected SingleInputCircuitStep(ValueProvider input, String targetWire) {
+            this.input = input;
+            this.targetWire = targetWire;
+        }
+
+        protected SingleInputCircuitStep(int input, String targetWire) {
+            this.input = new NumericValueProvider(input);
+            this.targetWire = targetWire;
+        }
+
+        protected SingleInputCircuitStep(String input, String targetWire) {
+            this.input = new WireValueProvider(input);
+            this.targetWire = targetWire;
         }
 
         @Override
-        public void applyStepToCircuit(Circuit circuit) {
-            circuit.setValueOnWire(wire, value);
+        public boolean allInputsResolved(Circuit circuit) {
+            return input.isResolved(circuit);
         }
 
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-            ProvideValueToWire that = (ProvideValueToWire) o;
-            return value == that.value && Objects.equals(wire, that.wire);
+            SingleInputCircuitStep that = (SingleInputCircuitStep) o;
+            return Objects.equals(input, that.input) && Objects.equals(targetWire, that.targetWire);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(wire, value);
+            return Objects.hash(input, targetWire);
+        }
+    }
+
+    public static abstract class DoubleInputCircuitStep extends CircuitStep {
+        final ValueProvider leftInput;
+        final ValueProvider rightInput;
+        final String targetWire;
+
+        protected DoubleInputCircuitStep(ValueProvider leftInput, ValueProvider rightInput, String targetWire) {
+            this.leftInput = leftInput;
+            this.rightInput = rightInput;
+            this.targetWire = targetWire;
+        }
+
+        protected DoubleInputCircuitStep(String leftInput, String rightInput, String targetWire) {
+            this(new WireValueProvider(leftInput), new WireValueProvider(rightInput), targetWire);
+        }
+
+        protected DoubleInputCircuitStep(int leftInput, int rightInput, String targetWire) {
+            this(new NumericValueProvider(leftInput), new NumericValueProvider(rightInput), targetWire);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            DoubleInputCircuitStep that = (DoubleInputCircuitStep) o;
+            return Objects.equals(leftInput, that.leftInput) && Objects.equals(rightInput, that.rightInput) && Objects.equals(targetWire, that.targetWire);
+        }
+
+        @Override
+        public boolean allInputsResolved(Circuit circuit) {
+            return leftInput.isResolved(circuit) && rightInput.isResolved(circuit);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(leftInput, rightInput, targetWire);
         }
 
         @Override
         public String toString() {
-            return "ProvideValueToWireStep{" +
-                    "wire='" + wire + '\'' +
-                    ", value=" + value +
+            return this.getClass().getSimpleName() + "{" +
+                    "leftInput=" + leftInput +
+                    ", rightInput=" + rightInput +
+                    ", targetWire='" + targetWire + '\'' +
                     '}';
+        }
+    }
+
+    public static class ProvideValueToWire extends SingleInputCircuitStep {
+        public ProvideValueToWire(ValueProvider input, String targetWire) {
+            super(input, targetWire);
+        }
+
+        public ProvideValueToWire(int input, String targetWire) {
+            super(input, targetWire);
+        }
+
+        public ProvideValueToWire(String input, String targetWire) {
+            super(input, targetWire);
+        }
+
+        @Override
+        public void applyStepToCircuit(Circuit circuit) {
+            circuit.setValueOnWire(targetWire, input);
         }
 
         public static class Parser extends CircuitStepParser<ProvideValueToWire> {
             @Override
             public boolean matches(String line) {
-                return line.matches("\\d+\\s*->\\s*\\w+");
+                return line.matches("\\w+\\s*->\\s*\\w+");
             }
 
             @Override
             public ProvideValueToWire parse(String line) {
                 final String[] split = line.split("->");
-                return new ProvideValueToWire(Integer.parseInt(split[0].trim()), split[1].trim());
+                return new ProvideValueToWire(ValueProviderParser.parse(split[0].trim()), split[1].trim());
             }
         }
     }
 
-    public static class ProvideWireToWire extends CircuitStep {
-        final String baseWire;
-        final String targetWire;
+    public static abstract class LogicGate extends DoubleInputCircuitStep {
 
-        public ProvideWireToWire(String baseWire, String targetWire) {
-            this.baseWire = baseWire;
-            this.targetWire = targetWire;
+        public LogicGate(ValueProvider leftInput, ValueProvider rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
+        }
+
+        public LogicGate(String leftInput, String rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
+        }
+
+        public LogicGate(int leftInput, int rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
         }
 
         @Override
         public void applyStepToCircuit(Circuit circuit) {
-            circuit.setValueOnWire(targetWire, circuit.getValueForWire(baseWire));
+            final Integer newValue = logicOperation(leftInput, rightInput, circuit);
+            circuit.setValueOnWire(targetWire, new NumericValueProvider(newValue));
         }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            ProvideWireToWire that = (ProvideWireToWire) o;
-            return Objects.equals(baseWire, that.baseWire) && Objects.equals(targetWire, that.targetWire);
-        }
+        public abstract Integer logicOperation(ValueProvider leftValue, ValueProvider rightValue, Circuit circuit);
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(baseWire, targetWire);
-        }
-
-        public static class Parser extends CircuitStepParser<ProvideWireToWire> {
-            @Override
-            public boolean matches(String line) {
-                return line.matches("[a-zA-Z]+\\s*->\\s*\\w+");
-            }
-
-            @Override
-            public ProvideWireToWire parse(String line) {
-                final String[] split = line.split("->");
-                return new ProvideWireToWire(split[0].trim(), split[1].trim());
-            }
-        }
-    }
-
-    public static abstract class LogicGate extends CircuitStep {
-        final String leftWire;
-        final String rightWire;
-        final String targetWire;
-
-        public LogicGate(String leftWire, String rightWire, String targetWire) {
-            this.leftWire = leftWire;
-            this.rightWire = rightWire;
-            this.targetWire = targetWire;
-        }
-
-        @Override
-        public void applyStepToCircuit(Circuit circuit) {
-            final Integer leftValue = circuit.getValueForWire(leftWire);
-            final Integer rightValue = circuit.getValueForWire(rightWire);
-            final Integer newValue = logicOperation(leftValue, rightValue);
-
-            circuit.setValueOnWire(targetWire, newValue);
-        }
-
-        public abstract Integer logicOperation(Integer leftValue, Integer rightValue);
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            LogicGate andGate = (LogicGate) o;
-            return Objects.equals(leftWire, andGate.leftWire) && Objects.equals(rightWire, andGate.rightWire) && Objects.equals(targetWire, andGate.targetWire);
-        }
-        @Override
-        public int hashCode() {
-            return Objects.hash(leftWire, rightWire, targetWire);
-        }
     }
 
     public static class AndGate extends LogicGate {
@@ -188,9 +312,17 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
             super(leftWire, rightWire, targetWire);
         }
 
+        public AndGate(ValueProvider leftInput, ValueProvider rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
+        }
+
+        public AndGate(int leftInput, int rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
+        }
+
         @Override
-        public Integer logicOperation(Integer leftValue, Integer rightValue) {
-            return leftValue & rightValue;
+        public Integer logicOperation(ValueProvider leftValue, ValueProvider rightValue, Circuit circuit) {
+            return leftValue.value(circuit) & rightValue.value(circuit);
         }
 
         public static class Parser extends CircuitStepParser<AndGate> {
@@ -206,19 +338,27 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
                 if (!matcher.find()) {
                     throw new RuntimeException("Could not parse: " + line);
                 }
-                return new AndGate(matcher.group(1), matcher.group(2), matcher.group(3));
+                return new AndGate(ValueProviderParser.parse(matcher.group(1)), ValueProviderParser.parse(matcher.group(2)), matcher.group(3));
             }
         }
     }
 
     public static class OrGate extends LogicGate {
-        public OrGate(String leftWire, String rightWire, String targetWire) {
-            super(leftWire, rightWire, targetWire);
+        public OrGate(ValueProvider leftInput, ValueProvider rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
+        }
+
+        public OrGate(String leftInput, String rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
+        }
+
+        public OrGate(int leftInput, int rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
         }
 
         @Override
-        public Integer logicOperation(Integer leftValue, Integer rightValue) {
-            return leftValue | rightValue;
+        public Integer logicOperation(ValueProvider leftValue, ValueProvider rightValue, Circuit circuit) {
+            return leftValue.value(circuit) | rightValue.value(circuit);
         }
 
         public static class Parser extends CircuitStepParser<OrGate> {
@@ -234,7 +374,7 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
                 if (!matcher.find()) {
                     throw new RuntimeException("Could not parse: " + line);
                 }
-                return new OrGate(matcher.group(1), matcher.group(2), matcher.group(3));
+                return new OrGate(ValueProviderParser.parse(matcher.group(1)), ValueProviderParser.parse(matcher.group(2)), matcher.group(3));
             }
         }
     }
@@ -243,10 +383,15 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         public NotGate(String baseWire, String targetWire) {
             super(baseWire, "", targetWire);
         }
+        @Override
+        public Integer logicOperation(ValueProvider baseValue, ValueProvider ignoredValue, Circuit circuit) {
+            return 65536 + ~baseValue.value(circuit);
+
+        }
 
         @Override
-        public Integer logicOperation(Integer baseValue, Integer ignored) {
-            return 65536 + ~baseValue;
+        public boolean allInputsResolved(Circuit circuit) {
+            return leftInput.isResolved(circuit); // ignore right input
         }
 
         public static class Parser extends CircuitStepParser<NotGate> {
@@ -267,20 +412,23 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         }
     }
 
-    public static abstract class ShiftGate extends CircuitStep {
-        final String baseWire;
-        final int shiftValue;
-        final String targetWire;
+    public static abstract class ShiftGate extends DoubleInputCircuitStep {
+        public ShiftGate(ValueProvider leftInput, ValueProvider rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
+        }
 
-        protected ShiftGate(String baseWire, int shiftValue, String targetWire) {
-            this.baseWire = baseWire;
-            this.shiftValue = shiftValue;
-            this.targetWire = targetWire;
+        public ShiftGate(String leftInput, int rightInput, String targetWire) {
+            super(new WireValueProvider(leftInput), new NumericValueProvider(rightInput), targetWire);
+        }
+
+        public ShiftGate(int leftInput, int rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
         }
 
         @Override
         public void applyStepToCircuit(Circuit circuit) {
-            final int baseValue = circuit.getValueForWire(baseWire);
+            final int baseValue = leftInput.value(circuit);
+            final int shiftValue = rightInput.value(circuit);
             final int newValue = shiftOperation(baseValue, shiftValue);
             circuit.setValueOnWire(targetWire, newValue);
         }
@@ -292,18 +440,26 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             ShiftGate shiftGate = (ShiftGate) o;
-            return Objects.equals(baseWire, shiftGate.baseWire) && Objects.equals(shiftValue, shiftGate.shiftValue) && Objects.equals(targetWire, shiftGate.targetWire);
+            return Objects.equals(leftInput, shiftGate.leftInput) && Objects.equals(rightInput, shiftGate.rightInput) && Objects.equals(targetWire, shiftGate.targetWire);
         }
         @Override
         public int hashCode() {
-            return Objects.hash(baseWire, shiftValue, targetWire);
+            return Objects.hash(leftInput, rightInput, targetWire);
         }
     }
 
     public static class LeftShiftGate extends ShiftGate {
 
-        public LeftShiftGate(String baseWire, int shiftValue, String targetWire) {
-            super(baseWire, shiftValue, targetWire);
+        public LeftShiftGate(ValueProvider leftInput, ValueProvider rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
+        }
+
+        public LeftShiftGate(String leftInput, int rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
+        }
+
+        public LeftShiftGate(int leftInput, int rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
         }
 
         @Override
@@ -312,7 +468,7 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         }
 
         public static class Parser extends CircuitStepParser<LeftShiftGate> {
-            private static final Pattern LSHIFT_PATTERN = Pattern.compile("(\\w+)\\s*LSHIFT\\s*(\\d+)\\s*->\\s*(\\w+)");
+            private static final Pattern LSHIFT_PATTERN = Pattern.compile("(\\w+)\\s*LSHIFT\\s*(\\w+)\\s*->\\s*(\\w+)");
             @Override
             public boolean matches(String line) {
                 return LSHIFT_PATTERN.matcher(line).matches();
@@ -324,7 +480,9 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
                 if (!matcher.find()) {
                     throw new RuntimeException("Could not parse: " + line);
                 }
-                return new LeftShiftGate(matcher.group(1), Integer.parseInt(matcher.group(2)), matcher.group(3));
+                final ValueProvider leftInput = ValueProviderParser.parse(matcher.group(1));
+                final ValueProvider rightInput = ValueProviderParser.parse(matcher.group(2));
+                return new LeftShiftGate(leftInput, rightInput, matcher.group(3));
             }
         }
     }
@@ -332,8 +490,16 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
 
     public static class RightShiftGate extends ShiftGate {
 
-        public RightShiftGate(String baseWire, int shiftValue, String targetWire) {
-            super(baseWire, shiftValue, targetWire);
+        public RightShiftGate(ValueProvider leftInput, ValueProvider rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
+        }
+
+        public RightShiftGate(String leftInput, int rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
+        }
+
+        public RightShiftGate(int leftInput, int rightInput, String targetWire) {
+            super(leftInput, rightInput, targetWire);
         }
 
         @Override
@@ -342,7 +508,7 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         }
 
         public static class Parser extends CircuitStepParser<RightShiftGate> {
-            private static final Pattern RSHIFT_PATTERN = Pattern.compile("(\\w+)\\s*RSHIFT\\s*(\\d+)\\s*->\\s*(\\w+)");
+            private static final Pattern RSHIFT_PATTERN = Pattern.compile("(\\w+)\\s*RSHIFT\\s*(\\w+)\\s*->\\s*(\\w+)");
             @Override
             public boolean matches(String line) {
                 return RSHIFT_PATTERN.matcher(line).matches();
@@ -354,8 +520,9 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
                 if (!matcher.find()) {
                     throw new RuntimeException("Could not parse: " + line);
                 }
-                return new RightShiftGate(matcher.group(1), Integer.parseInt(matcher.group(2)), matcher.group(3));
-            }
+                final ValueProvider leftInput = ValueProviderParser.parse(matcher.group(1));
+                final ValueProvider rightInput = ValueProviderParser.parse(matcher.group(2));
+                return new RightShiftGate(leftInput, rightInput, matcher.group(3));            }
         }
     }
     public static class Circuit {
@@ -370,14 +537,19 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
             return new TreeMap<>(wires);
         }
 
+        public void setValueOnWire(String wire, ValueProvider valueProvider) {
+            setValueOnWire(wire, valueProvider.value(this));
+        }
+
         public void setValueOnWire(String wire, int value) {
             wires.put(wire, value);
         }
 
+        public boolean hasValueOnWire(String wire) {
+            return wires.containsKey(wire);
+        }
+
         public Integer getValueForWire(String wire) {
-            if (!wires.containsKey(wire)) {
-                throw new RuntimeException("Now value for wire: " + wire);
-            }
             return wires.get(wire);
         }
     }
