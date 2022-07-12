@@ -10,6 +10,7 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day08 extends MultiLineAdventOfCodeDay<String> {
 
+
     @Override
     public long getResultOfFirstPuzzle(final List<String> input) {
         final Integer sumOfInputChars = input.stream().map(Day08::countInputChars).reduce(Integer::sum).orElse(0);
@@ -18,8 +19,10 @@ public class Day08 extends MultiLineAdventOfCodeDay<String> {
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<String> inputCircuitSteps) {
-        return 0;
+    public long getResultOfSecondPuzzle(final List<String> input) {
+        final Integer sumOfEscapedChars = input.stream().map(Day08::countEscapedChars).reduce(Integer::sum).orElse(0);
+        final Integer sumOfInputChars = input.stream().map(Day08::countInputChars).reduce(Integer::sum).orElse(0);
+        return sumOfEscapedChars - sumOfInputChars;
     }
 
     public static int countInputChars(String s) {
@@ -37,6 +40,19 @@ public class Day08 extends MultiLineAdventOfCodeDay<String> {
         inputParser.addParserStep(new UnescapeDoubleBackslash());
         inputParser.addParserStep(new UnescapeDoubleQuote());
         inputParser.addParserStep(new UnescapeUnicodeHexValue());
+        return inputParser.parse();
+    }
+
+    public static int countEscapedChars(final String input) {
+        return escapeString(input).length();
+    }
+
+    public static String escapeString(String input) {
+        final InputParser inputParser = new InputParser(input);
+        inputParser.addParserStep(new AddFirstQuote());
+        inputParser.addParserStep(new AddLastQuote());
+        inputParser.addParserStep(new EscapeBackslash());
+        inputParser.addParserStep(new EscapeDoubleQuote());
         return inputParser.parse();
     }
 
@@ -72,8 +88,8 @@ public class Day08 extends MultiLineAdventOfCodeDay<String> {
             final StringBuilder stringBuilder = new StringBuilder();
 
             int inputIndex = 0;
-            while (inputIndex < input.length()) {
-                final char currentChar = input.charAt(inputIndex);
+            while (inputIndex <= input.length()) {
+                final Character currentChar = inputIndex < input.length() ? input.charAt(inputIndex): null;
                 final String remainingInput = input.substring(inputIndex);
                 final StepParams stepParams = new StepParams(inputIndex, currentChar, remainingInput);
 
@@ -85,7 +101,9 @@ public class Day08 extends MultiLineAdventOfCodeDay<String> {
                     stringBuilder.append(result);
                     inputIndex += step.replacementLength(stepParams);
                 } else {
-                    stringBuilder.append(currentChar);
+                    if (currentChar != null) {
+                        stringBuilder.append(currentChar);
+                    }
                     inputIndex++;
                 }
             }
@@ -95,10 +113,10 @@ public class Day08 extends MultiLineAdventOfCodeDay<String> {
 
     private static class StepParams {
         final int inputIndex;
-        final char currentChar;
+        final Character currentChar;
         final String remainingInput;
 
-        private StepParams(int inputIndex, char currentChar, String remainingInput) {
+        private StepParams(int inputIndex, Character currentChar, String remainingInput) {
             this.inputIndex = inputIndex;
             this.currentChar = currentChar;
             this.remainingInput = remainingInput;
@@ -137,10 +155,29 @@ public class Day08 extends MultiLineAdventOfCodeDay<String> {
         }
     }
 
+    private static class AddFirstQuote implements InputParserStep {
+        private boolean alreadyAdded = false;
+        @Override
+        public boolean matches(StepParams stepParams) {
+            return !alreadyAdded && stepParams.inputIndex == 0;
+        }
+
+        @Override
+        public String result(StepParams stepParams) {
+            alreadyAdded = true;
+            return "\"";
+        }
+
+        @Override
+        public int replacementLength(StepParams stepParams) {
+            return 0;
+        }
+    }
+
     private static class RemoveLastQuote implements InputParserStep {
         @Override
         public boolean matches(StepParams stepParams) {
-            if (stepParams.remainingInput.length() > 1) {
+            if (stepParams.remainingInput.length() != 1) {
                 return false;
             }
             if (stepParams.currentChar != '\"') {
@@ -160,10 +197,27 @@ public class Day08 extends MultiLineAdventOfCodeDay<String> {
         }
     }
 
+    private static class AddLastQuote implements InputParserStep {
+        @Override
+        public boolean matches(StepParams stepParams) {
+            return stepParams.remainingInput.length() == 0;
+        }
+
+        @Override
+        public String result(StepParams stepParams) {
+            return "\"";
+        }
+
+        @Override
+        public int replacementLength(StepParams stepParams) {
+            return 1;
+        }
+    }
+
     private static class UnescapeDoubleBackslash implements InputParserStep {
         @Override
         public boolean matches(StepParams stepParams) {
-            return stepParams.currentChar == '\\' && stepParams.remainingInput.length() > 1 && stepParams.remainingInput.charAt(1) == '\\';
+            return stepParams.remainingInput.length() > 1 && stepParams.currentChar == '\\' && stepParams.remainingInput.charAt(1) == '\\';
         }
 
         @Override
@@ -177,10 +231,28 @@ public class Day08 extends MultiLineAdventOfCodeDay<String> {
         }
     }
 
+
+    private static class EscapeBackslash implements InputParserStep {
+        @Override
+        public boolean matches(StepParams stepParams) {
+            return stepParams.currentChar == '\\';
+        }
+
+        @Override
+        public String result(StepParams stepParams) {
+            return "\\\\";
+        }
+
+        @Override
+        public int replacementLength(StepParams stepParams) {
+            return 1;
+        }
+    }
+
     private static class UnescapeDoubleQuote implements InputParserStep {
         @Override
         public boolean matches(StepParams stepParams) {
-            return stepParams.currentChar == '\\' && stepParams.remainingInput.length() > 1 && stepParams.remainingInput.charAt(1) == '\"';
+            return stepParams.remainingInput.length() > 1 && stepParams.currentChar == '\\' && stepParams.remainingInput.charAt(1) == '\"';
         }
 
         @Override
@@ -194,10 +266,27 @@ public class Day08 extends MultiLineAdventOfCodeDay<String> {
         }
     }
 
+    private static class EscapeDoubleQuote implements InputParserStep {
+        @Override
+        public boolean matches(StepParams stepParams) {
+            return stepParams.currentChar == '\"';
+        }
+
+        @Override
+        public String result(StepParams stepParams) {
+            return "\\\"";
+        }
+
+        @Override
+        public int replacementLength(StepParams stepParams) {
+            return 1;
+        }
+    }
+
     private static class UnescapeUnicodeHexValue implements InputParserStep {
         @Override
         public boolean matches(StepParams stepParams) {
-            return stepParams.currentChar == '\\' && stepParams.remainingInput.length() >= 4 && stepParams.remainingInput.substring(0, 4).matches("\\\\x([\\da-fA-F]{2})");
+            return stepParams.remainingInput.length() >= 4 && stepParams.currentChar == '\\' && stepParams.remainingInput.substring(0, 4).matches("\\\\x([\\da-fA-F]{2})");
         }
 
         @Override

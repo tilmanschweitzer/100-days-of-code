@@ -14,7 +14,6 @@ class Day08Test {
         assertEquals(6, Day08.countInputChars("\"\\x27\""));
         assertEquals(6, Day08.countInputChars("\"x\\\\x\""));
         assertEquals(4, Day08.countInputChars("\"\\\\\""));
-
     }
 
     @Test
@@ -38,5 +37,19 @@ class Day08Test {
         assertEquals("aaa\"aaa", Day08.parseString("\"aaa\\\"aaa\""));
         assertEquals("'", Day08.parseString("\"\\x27\""));;
         assertEquals("d\\gkbqo\\fwukyxab\"u", Day08.parseString("\"d\\\\gkbqo\\\\fwukyxab\\\"u\""));
+    }
+
+    @Test
+    public void escapeString() {
+        assertEquals("\"\\\"\\\"\"", Day08.escapeString("\"\""));
+        assertEquals("\"\\\"abc\\\"\"", Day08.escapeString("\"abc\""));
+    }
+
+    @Test
+    public void countEscapedChars() {
+        assertEquals(6, Day08.countEscapedChars("\"\""));
+        assertEquals(9, Day08.countEscapedChars("\"abc\""));
+        assertEquals(16, Day08.countEscapedChars("\"aaa\\\"aaa\""));
+        assertEquals(11, Day08.countEscapedChars("\"\\x27\""));
     }
 }
