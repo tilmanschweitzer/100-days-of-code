@@ -5,7 +5,6 @@ import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.regex.Pattern;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
@@ -32,56 +31,13 @@ public class Day08 extends MultiLineAdventOfCodeDay<String> {
     }
 
     public static String parseString(String input) {
-        String remainingInput = input;
-
-        int remainingCharIndex = 0;
-        int charIndex = 0;
-
-        while (charIndex < input.length()) {
-            if (charIndex == 0) {
-                final char firstChar = remainingInput.charAt(remainingCharIndex);
-                if (firstChar == '\"') {
-                    remainingInput = remainingInput.substring( 1);
-                } else {
-                    throw new RuntimeException("Unexpected first char: " + firstChar);
-                }
-                charIndex++;
-                continue;
-            }
-            if (remainingCharIndex == remainingInput.length() - 1) {
-                final char lastChar = remainingInput.charAt(remainingCharIndex);
-                if (lastChar == '\"') {
-                    remainingInput = remainingInput.substring(0,  remainingInput.length() - 1);
-                } else {
-                    throw new RuntimeException("Unexpected last char: " + lastChar);
-                }
-                charIndex++;
-                continue;
-            }
-            if (remainingCharIndex < remainingInput.length() - 2 && remainingInput.charAt(remainingCharIndex) == '\\') {
-                final char nextChar = remainingInput.charAt(remainingCharIndex + 1);
-                final String previousChars = remainingInput.substring(0, remainingCharIndex);
-                if (nextChar == '\\') {
-                    remainingInput = previousChars + remainingInput.substring(remainingCharIndex + 1);
-                    charIndex++;
-                } else if (nextChar == '\"') {
-                    remainingInput = previousChars + remainingInput.substring(remainingCharIndex + 1);
-                    charIndex++;
-                } else if (nextChar == 'x') {
-                    final String unicodeSequence = remainingInput.substring(remainingCharIndex, remainingCharIndex + 4);
-                    System.out.println(unicodeSequence);
-                    if (unicodeSequence.matches("\\\\x([\\da-fA-F]{2})")) {
-                        remainingInput = previousChars + unicodeChar(unicodeSequence) + remainingInput.substring(remainingCharIndex + 4);
-                    }
-                    charIndex += 2;
-                }
-            }
-            remainingCharIndex++;
-            charIndex++;
-        }
-
-
-        return remainingInput;
+        final InputParser inputParser = new InputParser(input);
+        inputParser.addParserStep(new RemoveFirstQuote());
+        inputParser.addParserStep(new RemoveLastQuote());
+        inputParser.addParserStep(new UnescapeDoubleBackslash());
+        inputParser.addParserStep(new UnescapeDoubleQuote());
+        inputParser.addParserStep(new UnescapeUnicodeHexValue());
+        return inputParser.parse();
     }
 
     private static String unicodeChar(String unicodeHex) {
@@ -99,5 +55,159 @@ public class Day08 extends MultiLineAdventOfCodeDay<String> {
     @Override
     protected String parseLine(String line) {
         return line;
+    }
+
+    private static class InputParser {
+        final String input;
+        final List<InputParserStep> parserSteps = new ArrayList<>();
+        public InputParser(String input) {
+            this.input = input;
+        }
+
+        public void addParserStep(InputParserStep step) {
+            parserSteps.add(step);
+        }
+
+        public String parse() {
+            final StringBuilder stringBuilder = new StringBuilder();
+
+            int inputIndex = 0;
+            while (inputIndex < input.length()) {
+                final char currentChar = input.charAt(inputIndex);
+                final String remainingInput = input.substring(inputIndex);
+                final StepParams stepParams = new StepParams(inputIndex, currentChar, remainingInput);
+
+                final Optional<InputParserStep> stepOptional = parserSteps.stream().filter(step -> step.matches(stepParams)).findFirst();
+
+                if (stepOptional.isPresent()) {
+                    final InputParserStep step = stepOptional.get();
+                    final String result = step.result(stepParams);
+                    stringBuilder.append(result);
+                    inputIndex += step.replacementLength(stepParams);
+                } else {
+                    stringBuilder.append(currentChar);
+                    inputIndex++;
+                }
+            }
+            return stringBuilder.toString();
+        }
+    }
+
+    private static class StepParams {
+        final int inputIndex;
+        final char currentChar;
+        final String remainingInput;
+
+        private StepParams(int inputIndex, char currentChar, String remainingInput) {
+            this.inputIndex = inputIndex;
+            this.currentChar = currentChar;
+            this.remainingInput = remainingInput;
+        }
+    }
+
+    private interface InputParserStep {
+
+        boolean matches(StepParams stepParams);
+
+        String result(StepParams stepParams);
+
+        int replacementLength(StepParams stepParams);
+    }
+
+    private static class RemoveFirstQuote implements InputParserStep {
+        @Override
+        public boolean matches(StepParams stepParams) {
+            if (stepParams.inputIndex > 0) {
+                return false;
+            }
+            if (stepParams.currentChar != '\"') {
+                throw new RuntimeException("Unexpected first char: " + stepParams.currentChar);
+            }
+            return true;
+        }
+
+        @Override
+        public String result(StepParams stepParams) {
+            return "";
+        }
+
+        @Override
+        public int replacementLength(StepParams stepParams) {
+            return 1;
+        }
+    }
+
+    private static class RemoveLastQuote implements InputParserStep {
+        @Override
+        public boolean matches(StepParams stepParams) {
+            if (stepParams.remainingInput.length() > 1) {
+                return false;
+            }
+            if (stepParams.currentChar != '\"') {
+                throw new RuntimeException("Unexpected last char: " + stepParams.currentChar);
+            }
+            return true;
+        }
+
+        @Override
+        public String result(StepParams stepParams) {
+            return "";
+        }
+
+        @Override
+        public int replacementLength(StepParams stepParams) {
+            return 1;
+        }
+    }
+
+    private static class UnescapeDoubleBackslash implements InputParserStep {
+        @Override
+        public boolean matches(StepParams stepParams) {
+            return stepParams.currentChar == '\\' && stepParams.remainingInput.length() > 1 && stepParams.remainingInput.charAt(1) == '\\';
+        }
+
+        @Override
+        public String result(StepParams stepParams) {
+            return "\\";
+        }
+
+        @Override
+        public int replacementLength(StepParams stepParams) {
+            return 2;
+        }
+    }
+
+    private static class UnescapeDoubleQuote implements InputParserStep {
+        @Override
+        public boolean matches(StepParams stepParams) {
+            return stepParams.currentChar == '\\' && stepParams.remainingInput.length() > 1 && stepParams.remainingInput.charAt(1) == '\"';
+        }
+
+        @Override
+        public String result(StepParams stepParams) {
+            return "\"";
+        }
+
+        @Override
+        public int replacementLength(StepParams stepParams) {
+            return 2;
+        }
+    }
+
+    private static class UnescapeUnicodeHexValue implements InputParserStep {
+        @Override
+        public boolean matches(StepParams stepParams) {
+            return stepParams.currentChar == '\\' && stepParams.remainingInput.length() >= 4 && stepParams.remainingInput.substring(0, 4).matches("\\\\x([\\da-fA-F]{2})");
+        }
+
+        @Override
+        public String result(StepParams stepParams) {
+            return unicodeChar(stepParams.remainingInput.substring(0, 4));
+        }
+
+        @Override
+        public int replacementLength(StepParams stepParams) {
+            return 4;
+        }
     }
 }
