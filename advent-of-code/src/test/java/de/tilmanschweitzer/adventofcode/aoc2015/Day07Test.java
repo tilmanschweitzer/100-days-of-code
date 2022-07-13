@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Day07Test {
 
-
     @Test
     public void testProvideValueToWireStepParser_matches() {
         final CircuitStepParser<?> parser = new ProvideValueToWire.Parser();

@@ -1,16 +1,17 @@
 package de.tilmanschweitzer.adventofcode.aoc2015;
 
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
+import lombok.EqualsAndHashCode;
 
 import java.io.InputStream;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static de.tilmanschweitzer.adventofcode.aoc2015.Day02.*;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day02 extends MultiLineAdventOfCodeDay<Day02.Dimensions> {
+public class Day02 extends MultiLineAdventOfCodeDay<Dimensions> {
 
     @Override
     public long getResultOfFirstPuzzle(final List<Dimensions> inputDimensions) {
@@ -32,6 +33,7 @@ public class Day02 extends MultiLineAdventOfCodeDay<Day02.Dimensions> {
         return getSystemResourceAsStream("2015/day02-input.txt");
     }
 
+    @EqualsAndHashCode
     public static class Dimensions {
         private final int length;
         private final int width;
@@ -70,19 +72,6 @@ public class Day02 extends MultiLineAdventOfCodeDay<Day02.Dimensions> {
         public int getSurfaceWithSlack() {
             final Integer slack = Stream.of(getFront(), getTop(), getSide()).min(Integer::compareTo).orElse(0);
             return getSurface() + slack;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Dimensions that = (Dimensions) o;
-            return length == that.length && width == that.width && height == that.height;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(length, width, height);
         }
 
         public int getWrapRibbon() {

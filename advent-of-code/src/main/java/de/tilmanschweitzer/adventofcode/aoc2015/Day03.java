@@ -24,13 +24,13 @@ public class Day03 extends SingleLineAdventOfCodeDay<List<Day03.Move>> {
         // Santa only moves the instructions with even index
         final List<Move> santaMoves = IntStream.range(0, moves.size()).boxed()
                 .filter(index -> index % 2 == 0)
-                .map(evenIndex -> moves.get(evenIndex))
+                .map(moves::get)
                 .collect(Collectors.toUnmodifiableList());
 
         // RoboSanta only moves the instructions with odd index
         final List<Move> roboSantaMoves = IntStream.range(0, moves.size()).boxed()
                 .filter(index -> index % 2 == 1)
-                .map(evenIndex -> moves.get(evenIndex))
+                .map(moves::get)
                 .collect(Collectors.toUnmodifiableList());
 
         final Set<House> santaHouses = housesFromMoves(santaMoves);

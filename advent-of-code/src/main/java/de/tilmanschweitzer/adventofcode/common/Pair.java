@@ -1,9 +1,8 @@
 package de.tilmanschweitzer.adventofcode.common;
 
-import de.tilmanschweitzer.adventofcode.aoc2020.Day01;
+import lombok.EqualsAndHashCode;
 
-import java.util.Objects;
-
+@EqualsAndHashCode
 public class Pair<T> {
     final T leftValue;
     final T rightValue;
@@ -26,16 +25,4 @@ public class Pair<T> {
         return "Pair(" + leftValue + ", " + rightValue + ")";
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pair<?> pair = (Pair<?>) o;
-        return Objects.equals(leftValue, pair.leftValue) && Objects.equals(rightValue, pair.rightValue);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(leftValue, rightValue);
-    }
 }

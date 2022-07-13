@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import de.tilmanschweitzer.adventofcode.common.Coordinate;
 import de.tilmanschweitzer.adventofcode.common.Pair;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.InputStream;
 import java.util.*;
@@ -39,6 +41,8 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
         return LightInstruction.parseLightInstruction(line);
     }
 
+    @EqualsAndHashCode
+    @ToString
     public static class LightInstruction {
         enum Instruction {
             TURN_ON("turn on"),
@@ -78,28 +82,6 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
             final Instruction instruction = LightInstruction.Instruction.parseInstruction(line);
             return new LightInstruction(LightCoordinate.parseLightCoordinatePair(line.replace(instruction.inputText, "")), instruction);
         }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            LightInstruction that = (LightInstruction) o;
-            return startLight.equals(that.startLight) && endLight.equals(that.endLight) && instruction == that.instruction;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(startLight, endLight, instruction);
-        }
-
-        @Override
-        public String toString() {
-            return "LightInstruction{" +
-                    "startLight=" + startLight +
-                    ", endLight=" + endLight +
-                    ", instruction=" + instruction +
-                    '}';
-        }
     }
     public static class LightCoordinate extends Coordinate {
         public LightCoordinate(int x, int y) {
@@ -122,6 +104,7 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
         }
     }
 
+    @EqualsAndHashCode
     public static abstract class LightGrid<T> {
         final Map<LightCoordinate, T> lightGrid;
         final int gridSize;
@@ -175,19 +158,6 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
         }
 
         protected abstract String getDisplayStringForCoordinate(LightCoordinate lightCoordinate);
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            LightGrid lightGrid1 = (LightGrid) o;
-            return gridSize == lightGrid1.gridSize && Objects.equals(lightGrid, lightGrid1.lightGrid);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(lightGrid, gridSize);
-        }
 
         public abstract long count();
     }

@@ -32,7 +32,7 @@ public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>> {
     }
 
     public static Point findClosestIntersectionToCentralPort(List<Vector> firstPath, List<Vector> secondPath) {
-        final Set<Point> result = Day03.findIntersectionOfPaths(firstPath, secondPath);
+        final Set<Point> result = findIntersectionOfPaths(firstPath, secondPath);
         final Optional<Point> firstPointOptional = result.stream().sorted().findFirst();
         if (firstPointOptional.isEmpty()) {
             throw new RuntimeException("Found no intersection");
@@ -61,7 +61,7 @@ public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>> {
     }
 
     @Override
-    public long getResultOfFirstPuzzle(final List<List<Day03.Vector>> paths) {
+    public long getResultOfFirstPuzzle(final List<List<Vector>> paths) {
         if (paths.size() != 2) {
             throw new RuntimeException("Unexpected number of paths");
         }
@@ -72,13 +72,13 @@ public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>> {
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<List<Day03.Vector>> inputNumbers) {
+    public long getResultOfSecondPuzzle(final List<List<Vector>> inputNumbers) {
         return 0;
     }
 
 
     @Override
-    public List<Day03.Vector> parseLine(String line) {
+    public List<Vector> parseLine(String line) {
         return Vector.fromPathList(line);
     }
 

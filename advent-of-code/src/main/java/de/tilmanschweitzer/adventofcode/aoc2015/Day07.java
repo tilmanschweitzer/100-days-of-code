@@ -1,16 +1,19 @@
 package de.tilmanschweitzer.adventofcode.aoc2015;
 
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.InputStream;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static de.tilmanschweitzer.adventofcode.aoc2015.Day07.*;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
-public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
+public class Day07 extends MultiLineAdventOfCodeDay<CircuitStep> {
 
     @Override
     public long getResultOfFirstPuzzle(final List<CircuitStep> circuitSteps) {
@@ -75,6 +78,8 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         }
     }
 
+    @EqualsAndHashCode
+    @ToString
     public static class NumericValueProvider implements ValueProvider {
 
         private final int value;
@@ -92,28 +97,10 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         public int value(Circuit circuit) {
             return value;
         }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            NumericValueProvider that = (NumericValueProvider) o;
-            return value == that.value;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(value);
-        }
-
-        @Override
-        public String toString() {
-            return "NumericValueProvider{" +
-                    "value=" + value +
-                    '}';
-        }
     }
 
+    @EqualsAndHashCode
+    @ToString
     public static class WireValueProvider implements ValueProvider {
         private final String wire;
 
@@ -130,26 +117,6 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         public int value(Circuit circuit) {
             return circuit.getValueForWire(wire);
         }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            WireValueProvider that = (WireValueProvider) o;
-            return Objects.equals(wire, that.wire);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(wire);
-        }
-
-        @Override
-        public String toString() {
-            return "WireValueProvider{" +
-                    "wire='" + wire + '\'' +
-                    '}';
-        }
     }
 
     public static abstract class CircuitStep {
@@ -163,6 +130,8 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         public abstract T parse(String line);
     }
 
+    @EqualsAndHashCode
+    @ToString
     public static abstract class SingleInputCircuitStep extends CircuitStep {
         final ValueProvider input;
         final String targetWire;
@@ -186,21 +155,10 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         public boolean allInputsResolved(Circuit circuit) {
             return input.isResolved(circuit);
         }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            SingleInputCircuitStep that = (SingleInputCircuitStep) o;
-            return Objects.equals(input, that.input) && Objects.equals(targetWire, that.targetWire);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(input, targetWire);
-        }
     }
 
+    @EqualsAndHashCode
+    @ToString
     public static abstract class DoubleInputCircuitStep extends CircuitStep {
         final ValueProvider leftInput;
         final ValueProvider rightInput;
@@ -221,30 +179,8 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         }
 
         @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            DoubleInputCircuitStep that = (DoubleInputCircuitStep) o;
-            return Objects.equals(leftInput, that.leftInput) && Objects.equals(rightInput, that.rightInput) && Objects.equals(targetWire, that.targetWire);
-        }
-
-        @Override
         public boolean allInputsResolved(Circuit circuit) {
             return leftInput.isResolved(circuit) && rightInput.isResolved(circuit);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(leftInput, rightInput, targetWire);
-        }
-
-        @Override
-        public String toString() {
-            return this.getClass().getSimpleName() + "{" +
-                    "leftInput=" + leftInput +
-                    ", rightInput=" + rightInput +
-                    ", targetWire='" + targetWire + '\'' +
-                    '}';
         }
     }
 
@@ -431,18 +367,6 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.CircuitStep> {
         }
 
         public abstract int shiftOperation(int leftValue, int rightValue);
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            ShiftGate shiftGate = (ShiftGate) o;
-            return Objects.equals(leftInput, shiftGate.leftInput) && Objects.equals(rightInput, shiftGate.rightInput) && Objects.equals(targetWire, shiftGate.targetWire);
-        }
-        @Override
-        public int hashCode() {
-            return Objects.hash(leftInput, rightInput, targetWire);
-        }
     }
 
     public static class LeftShiftGate extends ShiftGate {

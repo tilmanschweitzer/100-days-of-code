@@ -1,9 +1,11 @@
 package de.tilmanschweitzer.adventofcode.common;
 
-import de.tilmanschweitzer.adventofcode.aoc2019.Day03;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import java.util.Objects;
 
+@EqualsAndHashCode
+@ToString
 public abstract class Coordinate {
     protected final int x;
     protected final int y;
@@ -24,26 +26,4 @@ public abstract class Coordinate {
     public int getManhattanDistance() {
         return Math.abs(x) + Math.abs(y);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Coordinate coordinate = (Coordinate) o;
-        return x == coordinate.x && y == coordinate.y;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
-    }
-
-    @Override
-    public String toString() {
-        return "Coordinate{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
-    }
-
 }

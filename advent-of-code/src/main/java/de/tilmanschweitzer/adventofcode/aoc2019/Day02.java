@@ -60,7 +60,6 @@ public class Day02 extends MultiLineAdventOfCodeDay<List<Integer>> {
         return runIntcode(inputNumbers);
     }
 
-
     public static Optional<Pair<Integer>> runIntCodeAndFindMatchingNounAndVerbForExpectedResult(final List<Integer> inputNumbers, int expectedResult) {
         for (int noun = 0; noun <= 99; noun++) {
             for (int verb = 0; verb <= 99; verb++) {
@@ -73,7 +72,6 @@ public class Day02 extends MultiLineAdventOfCodeDay<List<Integer>> {
         return Optional.empty();
     }
 
-    // 3562624
     @Override
     public long getResultOfFirstPuzzle(final List<List<Integer>> inputLines) {
         if (inputLines.size() != 1) {
@@ -128,7 +126,6 @@ public class Day02 extends MultiLineAdventOfCodeDay<List<Integer>> {
     private class UnexpectedNumberOfInputLinesException extends RuntimeException {
         public UnexpectedNumberOfInputLinesException(int size) {
             super("Unexpected number of input lines  " + size);
-
         }
     }
 }

@@ -1,6 +1,8 @@
 package de.tilmanschweitzer.adventofcode.aoc2020;
 
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.InputStream;
 import java.util.*;
@@ -81,6 +83,8 @@ public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>> {
 
 
 
+    @EqualsAndHashCode
+    @ToString
     public static class PassportField {
         final String fieldName;
         final String fieldValue;
@@ -141,29 +145,10 @@ public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>> {
             }
             throw new RuntimeException("Unknown field name: " + fieldName);
         }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            PassportField that = (PassportField) o;
-            return Objects.equals(fieldName, that.fieldName) && Objects.equals(fieldValue, that.fieldValue);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(fieldName, fieldValue);
-        }
-
-        @Override
-        public String toString() {
-            return "PassportField{" +
-                    "" + fieldName + '\'' +
-                    ":" + fieldValue + '\'' +
-                    '}';
-        }
     }
 
+    @EqualsAndHashCode
+    @ToString
     public static class Passport {
         final Map<String, PassportField> fields = new HashMap<>();
 
@@ -181,26 +166,6 @@ public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>> {
             for (PassportField field : fields) {
                 this.fields.put(field.fieldName, field);
             }
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Passport passport = (Passport) o;
-            return Objects.equals(fields, passport.fields);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(fields);
-        }
-
-        @Override
-        public String toString() {
-            return "Passport{" +
-                    "fields=" + fields +
-                    '}';
         }
 
         public List<String> getAvailableFieldNames() {
@@ -233,6 +198,4 @@ public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>> {
             return fields.values().stream().map(PassportField::isValid).reduce(Boolean::logicalAnd).orElse(false);
         }
     }
-
-
 }

@@ -2,12 +2,13 @@ package de.tilmanschweitzer.adventofcode.aoc2020;
 
 import com.google.common.base.Preconditions;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,6 +47,8 @@ public class Day02 extends MultiLineAdventOfCodeDay<Day02.PasswordPolicyAndPassw
 
     private static final String LINE_SEPARATOR = "\n";
 
+    @EqualsAndHashCode
+    @ToString
     public static class PasswordPolicyAndPassword {
         final String password;
         final PasswordPolicy policy;
@@ -54,29 +57,10 @@ public class Day02 extends MultiLineAdventOfCodeDay<Day02.PasswordPolicyAndPassw
             this.password = password;
             this.policy = policy;
         }
-
-        @Override
-        public String toString() {
-            return "PasswordPolicyAndPassword{" +
-                    "password='" + password + '\'' +
-                    ", policy=" + policy +
-                    '}';
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            PasswordPolicyAndPassword that = (PasswordPolicyAndPassword) o;
-            return password.equals(that.password) && policy.equals(that.policy);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(password, policy);
-        }
     }
 
+    @EqualsAndHashCode
+    @ToString
     public static class PasswordPolicy {
         final char c;
         final int valueA;
@@ -86,28 +70,6 @@ public class Day02 extends MultiLineAdventOfCodeDay<Day02.PasswordPolicyAndPassw
             this.c = c;
             this.valueA = valueA;
             this.valueB = valueB;
-        }
-
-        @Override
-        public String toString() {
-            return "PasswordPolicy{" +
-                    "c=" + c +
-                    ", valueA=" + valueA +
-                    ", valueB=" + valueB +
-                    '}';
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            PasswordPolicy that = (PasswordPolicy) o;
-            return c == that.c && valueA == that.valueA && valueB == that.valueB;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(c, valueA, valueB);
         }
 
         public boolean validateMethodA(String password) {
