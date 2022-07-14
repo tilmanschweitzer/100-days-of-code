@@ -44,7 +44,6 @@ class Day09Test {
         assertEquals(605, trip.getDistance());
     }
 
-
     @Test
     public void getShortestTripForFourCities() {
         final List<Route> allRoutes = List.of(
@@ -67,5 +66,23 @@ class Day09Test {
 
         assertEquals(expectedTrip, trip);
         assertEquals(1558, trip.getDistance());
+    }
+
+    @Test
+    public void getLongestTripForThreeCities() {
+        final List<Route> allRoutes = List.of(
+                new Route("London", "Dublin", 464),
+                new Route("London", "Belfast", 518),
+                new Route("Dublin", "Belfast", 141)
+        );
+        final Trip trip = getLongestTrip(allRoutes);
+
+        final Trip expectedTrip = new Trip(
+                new Route("Dublin", "London", 464),
+                new Route("London", "Belfast", 518)
+        );
+
+        assertEquals(expectedTrip, trip);
+        assertEquals(982, trip.getDistance());
     }
 }

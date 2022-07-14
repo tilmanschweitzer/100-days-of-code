@@ -20,7 +20,6 @@ import static java.util.stream.Collectors.*;
 
 public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route> {
 
-
     @Override
     public long getResultOfFirstPuzzle(final List<Route> input) {
         return getShortestTrip(input).getDistance();
@@ -28,7 +27,7 @@ public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route> {
 
     @Override
     public long getResultOfSecondPuzzle(final List<Route> input) {
-        return 0;
+        return getLongestTrip(input).getDistance();
     }
 
     @Override
@@ -42,78 +41,101 @@ public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route> {
     }
 
     public static Trip getShortestTrip(final List<Route> routes) {
-        final List<Route> reverseRoutes = routes.stream().map(Route::reverse).collect(toUnmodifiableList());
-        final List<Route> allRoutes = Stream.of(routes, reverseRoutes).flatMap(Collection::stream).collect(toUnmodifiableList());
-
-        final List<String> allCities = Sets.union(getAllStarts(allRoutes), getAllEnds(allRoutes)).stream().sorted().collect(toUnmodifiableList());
-
-        final int tripLength = allCities.size() - 1;
-        final TripSearchHelper tripSearchHelper = new TripSearchHelper(tripLength);
-
-        final Map<String, List<Route>> routesByStartCity = allRoutes.stream().collect(groupingBy(Route::getStart));
-
-        for (String startCity : allCities) {
-            final List<Route> startRoutes = routesByStartCity.get(startCity);
-
-            for (Route startRoute : startRoutes) {
-                final Stack<Route> currentTrip = new Stack<>();
-                currentTrip.push(startRoute);
-                searchForCandidates(tripSearchHelper, currentTrip, routesByStartCity);
-            }
-        }
-
-        return tripSearchHelper.currentShortestTrip;
+        return new ShortestTripSearchHelper(routes).search();
     }
 
-    private static void searchForCandidates(TripSearchHelper tripSearchHelper, Stack<Route> currentTrip, Map<String, List<Route>> routesByStartCity) {
-        if (currentTrip.size() == tripSearchHelper.tripLength) {
-            tripSearchHelper.tryToUpdateShortestTrip(currentTrip);
-            return;
-        }
-        final String nextStart = currentTrip.peek().getEnd();
-        final List<Route> nextAvailableRoutes = routesByStartCity.getOrDefault(nextStart, emptyList());
-        final Set<String> alreadyVisitedCities = getAllStarts(currentTrip);
-        final List<Route> nextRoutesWithourAlreadyVisitedCities = nextAvailableRoutes.stream()
-                .filter(route -> !alreadyVisitedCities.contains(route.getEnd()))
-                .collect(toUnmodifiableList());
-        for (Route nextRoute : nextRoutesWithourAlreadyVisitedCities) {
-            currentTrip.push(nextRoute);
-            searchForCandidates(tripSearchHelper, currentTrip, routesByStartCity);
-            currentTrip.pop();
-        }
+    public static Trip getLongestTrip(final List<Route> routes) {
+        return new LongestTripSearchHelper(routes).search();
     }
 
-    public static class TripSearchHelper {
+    public abstract static class TripSearchHelper {
         final int tripLength;
-        int currentShortestTripDistance = Integer.MAX_VALUE;
+        final List<Route> routes;
+        final Map<String, List<Route>> routesByStartCity;
+        final List<String> allCities;
         Trip currentShortestTrip = Trip.emptyTrip();
 
-        public TripSearchHelper(int tripLength) {
-            this.tripLength = tripLength;
+        public TripSearchHelper(List<Route> routes) {
+            this.routes = Routes.union(routes, Routes.reverse(routes));
+            this.allCities = Routes.allCities(this.routes);
+            this.tripLength = allCities.size() - 1;
+            this.routesByStartCity = this.routes.stream().collect(groupingBy(Route::getStart));
         }
 
-        public boolean tryToUpdateShortestTrip(List<Route> candidateTrip) {
-            if (candidateTrip.size() != tripLength) {
-                throw new RuntimeException("Unexpected trip length " + candidateTrip.size());
+        public Trip search() {
+            for (String startCity : allCities) {
+                final List<Route> startRoutes = routesByStartCity.get(startCity);
+                for (Route startRoute : startRoutes) {
+                    final Trip currentTrip = new Trip(startRoute);
+                    searchForCandidates(currentTrip);
+                }
             }
-            final Trip trip = new Trip(candidateTrip);
-            if (trip.getDistance() >= currentShortestTripDistance) {
+            return currentShortestTrip;
+        }
+
+        private void searchForCandidates(Trip currentTrip) {
+            if (currentTrip.length() == tripLength) {
+                tryToUpdateShortestTrip(currentTrip);
+                return;
+            }
+            final String nextStart = currentTrip.lastCity();
+            final List<Route> nextAvailableRoutes = routesByStartCity.getOrDefault(nextStart, emptyList());
+            final Set<String> alreadyVisitedCities = currentTrip.getAllStarts();
+            final List<Route> nextRoutesWithourAlreadyVisitedCities = nextAvailableRoutes.stream()
+                    .filter(route -> !alreadyVisitedCities.contains(route.getEnd()))
+                    .collect(toUnmodifiableList());
+            for (Route nextRoute : nextRoutesWithourAlreadyVisitedCities) {
+                searchForCandidates(currentTrip.appendRoute(nextRoute));
+            }
+        }
+
+        public boolean tryToUpdateShortestTrip(Trip candidateTrip) {
+            if (candidateTrip.length() != tripLength) {
+                throw new RuntimeException("Unexpected trip length " + candidateTrip.length());
+            };
+            if (!checkAndUpdateCandidateCondition(candidateTrip)) {
                 return false;
             }
-            currentShortestTripDistance = trip.getDistance();
-            currentShortestTrip = trip;
+            currentShortestTrip = candidateTrip;
             return true;
 
         }
+
+        public abstract boolean checkAndUpdateCandidateCondition(Trip candidateTrip);
     }
 
+    public static class ShortestTripSearchHelper extends TripSearchHelper {
+        int currentShortestTripDistance = Integer.MAX_VALUE;
 
-    public static Set<String> getAllStarts(List<Route> trip) {
-        return trip.stream().map(Route::getStart).collect(toUnmodifiableSet());
+        public ShortestTripSearchHelper(List<Route> routes) {
+            super(routes);
+        }
+
+        @Override
+        public boolean checkAndUpdateCandidateCondition(Trip candidateTrip) {
+            if (candidateTrip.getDistance() >= currentShortestTripDistance) {
+                return false;
+            }
+            currentShortestTripDistance = candidateTrip.getDistance();
+            return true;
+        }
     }
 
-    public static Set<String> getAllEnds(List<Route> trip) {
-        return trip.stream().map(Route::getEnd).collect(toUnmodifiableSet());
+    public static class LongestTripSearchHelper extends TripSearchHelper {
+        int currentLongestTripDistance = 0;
+
+        public LongestTripSearchHelper(List<Route> routes) {
+            super(routes);
+        }
+
+        @Override
+        public boolean checkAndUpdateCandidateCondition(Trip candidateTrip) {
+            if (candidateTrip.getDistance() <= currentLongestTripDistance) {
+                return false;
+            }
+            currentLongestTripDistance = candidateTrip.getDistance();
+            return true;
+        }
     }
 
     @Getter
@@ -144,16 +166,50 @@ public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route> {
         }
     }
 
+    public static class Routes {
+        public static List<Route> reverse(List<Route> routes) {
+            return Lists.reverse(routes).stream().map(Route::reverse).collect(toUnmodifiableList());
+        }
+
+        public static List<Route> union(List<Route>... routes) {
+            return Stream.of(routes).flatMap(Collection::stream).collect(toUnmodifiableList());
+        }
+
+        public static List<String> allCities(List<Route> routes) {
+            return Sets.union(getAllStarts(routes), getAllEnds(routes)).stream().sorted().collect(toUnmodifiableList());
+        }
+
+        public static Set<String> getAllStarts(List<Route> trip) {
+            return trip.stream().map(Route::getStart).collect(toUnmodifiableSet());
+        }
+
+        public static Set<String> getAllEnds(List<Route> trip) {
+            return trip.stream().map(Route::getEnd).collect(toUnmodifiableSet());
+        }
+    }
+
     public static class Trip {
         final List<Route> routes;
+        final int distance;
 
         public Trip(List<Route> routes) {
             checkRoutes(routes);
             this.routes = routes.stream().collect(toUnmodifiableList());
+            this.distance = getDistance(routes);
         }
 
         public Trip(Route... routes) {
             this(Arrays.stream(routes).collect(toUnmodifiableList()));
+        }
+
+        public int getDistance() {
+            return distance;
+        }
+
+        public Trip appendRoute(final Route route) {
+            final List<Route> routes = new ArrayList<>(this.routes);
+            routes.add(route);
+            return new Trip(routes);
         }
 
         @Override
@@ -161,7 +217,7 @@ public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route> {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Trip trip = (Trip) o;
-            return Objects.equals(routes, trip.routes) || Objects.equals(routes, reverse(trip.routes));
+            return Objects.equals(routes, trip.routes) || Objects.equals(routes, Routes.reverse(trip.routes));
         }
 
         @Override
@@ -169,11 +225,7 @@ public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route> {
             return Objects.hash(routes);
         }
 
-        public static List<Route> reverse(List<Route> routes) {
-            return Lists.reverse(routes).stream().map(Route::reverse).collect(toUnmodifiableList());
-        }
-
-        public int getDistance() {
+        public static int getDistance(List<Route> routes) {
             return routes.stream().map(Route::getDistance).reduce(Integer::sum).orElse(0);
         }
 
@@ -199,11 +251,24 @@ public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route> {
         }
 
         public static boolean allStartsAreUnique(final List<Route> trip) {
-            return trip.size() == getAllStarts(trip).size();
+            return trip.size() == Routes.getAllStarts(trip).size();
         }
 
         public static boolean allEndsAreUnique(final List<Route> trip) {
-            return trip.size() == getAllEnds(trip).size();
+            return trip.size() == Routes.getAllEnds(trip).size();
+        }
+
+        public int length() {
+            return routes.size();
+        }
+
+        public String lastCity() {
+            return routes.get(length() - 1).getEnd();
+        }
+
+        public Set<String> getAllStarts() {
+            return Routes.getAllStarts(routes);
         }
     }
+
 }
