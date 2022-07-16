@@ -40,14 +40,6 @@ public class Day10 extends SingleLineAdventOfCodeDay<String> {
         return output;
     }
 
-    public static long lookAndSayLength(String input, int round) {
-        /**
-         * 1 -> 21
-         * 21 -> 12, 11
-         *
-         */
-    }
-
     @Override
     public long getResultOfFirstPuzzle(final String input) {
         return lookAndSay(input, 40).length();
