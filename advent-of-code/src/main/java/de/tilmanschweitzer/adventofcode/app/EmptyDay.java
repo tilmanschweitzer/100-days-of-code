@@ -7,15 +7,15 @@ import java.util.List;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class EmptyDay extends MultiLineAdventOfCodeDay<Integer> {
+public class EmptyDay extends MultiLineAdventOfCodeDay<Integer, Integer> {
 
     @Override
-    public long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
+    public Integer getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
         return 0;
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
+    public Integer getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
         return 0;
     }
 

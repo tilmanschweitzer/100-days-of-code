@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
-public class Day05 extends MultiLineAdventOfCodeDay<String> {
+public class Day05 extends MultiLineAdventOfCodeDay<String, Long> {
 
     public static boolean isVowel(String s) {
         Preconditions.checkArgument(s.length() == 1);
@@ -49,12 +49,12 @@ public class Day05 extends MultiLineAdventOfCodeDay<String> {
     }
 
     @Override
-    public long getResultOfFirstPuzzle(final List<String> input) {
+    public Long getResultOfFirstPuzzle(final List<String> input) {
         return input.stream().filter(Day05::isNiceString).count();
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<String> input) {
+    public Long getResultOfSecondPuzzle(final List<String> input) {
         return input.stream().filter(Day05::isNiceStringVersion2).count();
     }
 

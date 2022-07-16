@@ -8,18 +8,18 @@ import java.util.*;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day08 extends MultiLineAdventOfCodeDay<String> {
+public class Day08 extends MultiLineAdventOfCodeDay<String, Integer> {
 
 
     @Override
-    public long getResultOfFirstPuzzle(final List<String> input) {
+    public Integer getResultOfFirstPuzzle(final List<String> input) {
         final Integer sumOfInputChars = input.stream().map(Day08::countInputChars).reduce(Integer::sum).orElse(0);
         final Integer sumOfParsedChars = input.stream().map(Day08::countParsedChars).reduce(Integer::sum).orElse(0);
         return sumOfInputChars - sumOfParsedChars;
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<String> input) {
+    public Integer getResultOfSecondPuzzle(final List<String> input) {
         final Integer sumOfEscapedChars = input.stream().map(Day08::countEscapedChars).reduce(Integer::sum).orElse(0);
         final Integer sumOfInputChars = input.stream().map(Day08::countInputChars).reduce(Integer::sum).orElse(0);
         return sumOfEscapedChars - sumOfInputChars;

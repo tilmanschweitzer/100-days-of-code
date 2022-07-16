@@ -18,15 +18,15 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.*;
 
-public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route> {
+public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route, Integer> {
 
     @Override
-    public long getResultOfFirstPuzzle(final List<Route> input) {
+    public Integer getResultOfFirstPuzzle(final List<Route> input) {
         return getShortestTrip(input).getDistance();
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<Route> input) {
+    public Integer getResultOfSecondPuzzle(final List<Route> input) {
         return getLongestTrip(input).getDistance();
     }
 

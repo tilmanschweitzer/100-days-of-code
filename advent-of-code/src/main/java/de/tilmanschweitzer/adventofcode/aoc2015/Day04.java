@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day04 extends SingleLineAdventOfCodeDay<String> {
+public class Day04 extends SingleLineAdventOfCodeDay<String, Long> {
 
     public static String md5(String input) {
         return Hashing.md5().hashString(input, StandardCharsets.UTF_8).toString();
@@ -39,12 +39,12 @@ public class Day04 extends SingleLineAdventOfCodeDay<String> {
     }
 
     @Override
-    public long getResultOfFirstPuzzle(final String input) {
+    public Long getResultOfFirstPuzzle(final String input) {
         return findAdventCoinForKey(input, 5);
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final String input) {
+    public Long getResultOfSecondPuzzle(final String input) {
         return findAdventCoinForKey(input, 6);
     }
 

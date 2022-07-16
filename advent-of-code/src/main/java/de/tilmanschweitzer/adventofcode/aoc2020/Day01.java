@@ -11,10 +11,10 @@ import java.util.Optional;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.stream.Collectors.toList;
 
-public class Day01 extends MultiLineAdventOfCodeDay<Integer> {
+public class Day01 extends MultiLineAdventOfCodeDay<Integer, Integer> {
 
     @Override
-    public long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
+    public Integer getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
         final Optional<Pair<Integer>> matchingNumberPair = findMatchingNumberPair(inputNumbers, 2020);
 
         if (matchingNumberPair.isEmpty()) {
@@ -25,7 +25,7 @@ public class Day01 extends MultiLineAdventOfCodeDay<Integer> {
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
+    public Integer getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
         final Optional<Triplet<Integer>> matchingNumberTriplet = findMatchingNumberTriplet(inputNumbers, 2020);
 
         if (matchingNumberTriplet.isEmpty()) {

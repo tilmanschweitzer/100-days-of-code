@@ -13,17 +13,17 @@ import static de.tilmanschweitzer.adventofcode.aoc2015.Day07.*;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
-public class Day07 extends MultiLineAdventOfCodeDay<CircuitStep> {
+public class Day07 extends MultiLineAdventOfCodeDay<CircuitStep, Integer> {
 
     @Override
-    public long getResultOfFirstPuzzle(final List<CircuitStep> circuitSteps) {
+    public Integer getResultOfFirstPuzzle(final List<CircuitStep> circuitSteps) {
         final Circuit circuit = new Circuit();
         circuit.applySteps(circuitSteps);
         return circuit.getValueForWire("a");
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<CircuitStep> inputCircuitSteps) {
+    public Integer getResultOfSecondPuzzle(final List<CircuitStep> inputCircuitSteps) {
         final ArrayList<CircuitStep> circuitSteps = new ArrayList<>(inputCircuitSteps);
         final Circuit circuit = new Circuit();
 

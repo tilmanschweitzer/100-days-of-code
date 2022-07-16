@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day10 extends SingleLineAdventOfCodeDay<String> {
+public class Day10 extends SingleLineAdventOfCodeDay<String, Integer> {
 
     public static String lookAndSay(String input) {
         final StringBuilder output = new StringBuilder();
@@ -41,12 +41,12 @@ public class Day10 extends SingleLineAdventOfCodeDay<String> {
     }
 
     @Override
-    public long getResultOfFirstPuzzle(final String input) {
+    public Integer getResultOfFirstPuzzle(final String input) {
         return lookAndSay(input, 40).length();
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final String input) {
+    public Integer getResultOfSecondPuzzle(final String input) {
         return lookAndSay(input, 60).length();
     }
 

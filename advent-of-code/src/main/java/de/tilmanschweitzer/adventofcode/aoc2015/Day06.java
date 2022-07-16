@@ -15,17 +15,17 @@ import java.util.stream.IntStream;
 import static de.tilmanschweitzer.adventofcode.aoc2015.Day06.LightInstruction.Instruction.*;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction> {
+public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction, Long> {
 
     @Override
-    public long getResultOfFirstPuzzle(final List<LightInstruction> input) {
+    public Long getResultOfFirstPuzzle(final List<LightInstruction> input) {
         final LightGrid lightGrid = new BasicLightGrid(1000);
         input.forEach(lightGrid::applyLightInstruction);
         return lightGrid.count();
     }
 
     @Override
-    public long getResultOfSecondPuzzle(final List<LightInstruction> input) {
+    public Long getResultOfSecondPuzzle(final List<LightInstruction> input) {
         final LightGrid lightGrid = new BrightnessLightGrid(1000);
         input.forEach(lightGrid::applyLightInstruction);
         return lightGrid.count();
