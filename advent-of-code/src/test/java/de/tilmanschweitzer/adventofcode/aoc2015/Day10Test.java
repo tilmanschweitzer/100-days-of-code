@@ -21,12 +21,4 @@ class Day10Test {
         assertEquals("1211", Day10.lookAndSay("1", 3));
         assertEquals("111221", Day10.lookAndSay("1", 4));
     }
-
-    @Test
-    public void lookAndSayLengthWithRounds() {
-        assertEquals(2, Day10.lookAndSay("1", 1));
-        assertEquals(2, Day10.lookAndSay("1",2));
-        assertEquals(4, Day10.lookAndSay("1", 3));
-        assertEquals(6, Day10.lookAndSay("1", 4));
-    }
 }
