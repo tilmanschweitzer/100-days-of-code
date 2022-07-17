@@ -16,6 +16,9 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day12 extends SingleLineAdventOfCodeDay<String, Long> {
 
+    public Day12() {
+        super(2015, 12);
+    }
     public static class JsonNumberExtractor {
         final Predicate<JsonNode> skipCondition;
 

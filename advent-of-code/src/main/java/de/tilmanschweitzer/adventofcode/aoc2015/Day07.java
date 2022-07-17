@@ -15,6 +15,9 @@ import static java.util.stream.Collectors.toUnmodifiableList;
 
 public class Day07 extends MultiLineAdventOfCodeDay<CircuitStep, Integer> {
 
+    public Day07() {
+        super(2015, 7);
+    }
     @Override
     public Integer getResultOfFirstPuzzle(final List<CircuitStep> circuitSteps) {
         final Circuit circuit = new Circuit();

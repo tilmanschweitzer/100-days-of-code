@@ -9,6 +9,10 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day03 extends MultiLineAdventOfCodeDay<String, Long> {
 
+    public Day03() {
+        super(2020, 3);
+    }
+
     private static final char TREE = '#';
 
     public static long getEncounteredTreesForSlope(final List<String> lines, int rightStep, int downStep) {

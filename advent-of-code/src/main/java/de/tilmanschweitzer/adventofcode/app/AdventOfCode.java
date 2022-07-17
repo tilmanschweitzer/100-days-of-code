@@ -4,6 +4,8 @@ import de.tilmanschweitzer.adventofcode.day.AdventOfCodeDay;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.ServiceLoader;
 
 public class AdventOfCode {
 
@@ -19,20 +21,14 @@ public class AdventOfCode {
 
         final AdventOfCodeRegistry registry = createRegistryWithExistingDays();
 
-        final List<AdventOfCodeDay<?, ?>> listOfDays = registry.getDaysForYear(year);
+        final Optional<AdventOfCodeDay<?, ?>> selectedDayOptional = registry.getForYearAndDay(year, day);
 
-        if (listOfDays.isEmpty()) {
-            System.err.println("Year " + year + " not available");
-            System.exit(1);
-        }
-
-        if (listOfDays.size() < day) {
+        if (selectedDayOptional.isEmpty()) {
             System.err.println("Day " + day + " not implemented for year " + year + " yet");
             System.exit(1);
         }
 
-        final int dayIndex = day - 1;
-        final AdventOfCodeDay<?, ?> selectedDay = listOfDays.get(dayIndex);
+        final AdventOfCodeDay<?, ?> selectedDay = selectedDayOptional.get();
 
         if (puzzle == 1) {
             selectedDay.runFirstPuzzle();
@@ -47,33 +43,11 @@ public class AdventOfCode {
     private static AdventOfCodeRegistry createRegistryWithExistingDays() {
         final AdventOfCodeRegistry registry = new AdventOfCodeRegistry();
 
-        // 2020
-        registry.addDay(2020, new de.tilmanschweitzer.adventofcode.aoc2020.Day01());
-        registry.addDay(2020, new de.tilmanschweitzer.adventofcode.aoc2020.Day02());
-        registry.addDay(2020, new de.tilmanschweitzer.adventofcode.aoc2020.Day03());
-        registry.addDay(2020, new de.tilmanschweitzer.adventofcode.aoc2020.Day04());
+        final ServiceLoader<AdventOfCodeDay> serviceLoader = ServiceLoader.load(AdventOfCodeDay.class);
 
-        // 2019
-        registry.addDay(2019, new de.tilmanschweitzer.adventofcode.aoc2019.Day01());
-        registry.addDay(2019, new de.tilmanschweitzer.adventofcode.aoc2019.Day02());
-        registry.addDay(2019, new de.tilmanschweitzer.adventofcode.aoc2019.Day03());
-
-        // 2018
-        registry.addDay(2018, new de.tilmanschweitzer.adventofcode.aoc2018.Day01());
-
-        // 2015
-        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day01());
-        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day02());
-        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day03());
-        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day04());
-        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day05());
-        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day06());
-        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day07());
-        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day08());
-        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day09());
-        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day10());
-        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day11());
-        registry.addDay(2015, new de.tilmanschweitzer.adventofcode.aoc2015.Day12());
+        for (AdventOfCodeDay adventOfCodeDay : serviceLoader) {
+            registry.addDay(adventOfCodeDay);
+        }
 
         return registry;
     }

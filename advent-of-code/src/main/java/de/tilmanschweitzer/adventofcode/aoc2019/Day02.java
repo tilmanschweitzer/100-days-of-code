@@ -13,6 +13,10 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day02 extends MultiLineAdventOfCodeDay<List<Integer>, Integer> {
 
+    public Day02() {
+        super(2019, 2);
+    }
+
     private enum OpCode {
         ADD(1),
         MULTIPLY(2),

@@ -13,6 +13,10 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day02 extends MultiLineAdventOfCodeDay<Dimensions, Integer> {
 
+    public Day02() {
+        super(2015, 2);
+    }
+
     @Override
     public Integer getResultOfFirstPuzzle(final List<Dimensions> inputDimensions) {
         return inputDimensions.stream().map(Dimensions::getSurfaceWithSlack).reduce(Integer::sum).orElse(0);

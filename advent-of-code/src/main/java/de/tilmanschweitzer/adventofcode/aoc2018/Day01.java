@@ -11,6 +11,10 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day01 extends MultiLineAdventOfCodeDay<Integer, Integer> {
 
+    public Day01() {
+        super(2018, 1);
+    }
+
     public static int firstFirstDuplicateFrequency(List<Integer> inputNumbers) {
         int currentFrequency = 0;
         final Set<Integer> previousFrequency = new HashSet<>();

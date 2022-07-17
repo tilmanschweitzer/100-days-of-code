@@ -11,6 +11,10 @@ import static java.util.stream.Collectors.toUnmodifiableList;
 
 public abstract class MultiLineAdventOfCodeDay<I, A> extends AdventOfCodeDay<List<I>, A> {
 
+    public MultiLineAdventOfCodeDay(int year, int day) {
+        super(year, day);
+    }
+
     protected abstract I parseLine(String line);
 
     protected List<I> getParsedInput() {

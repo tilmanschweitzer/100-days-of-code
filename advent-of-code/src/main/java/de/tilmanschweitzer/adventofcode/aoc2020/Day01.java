@@ -13,6 +13,9 @@ import static java.util.stream.Collectors.toList;
 
 public class Day01 extends MultiLineAdventOfCodeDay<Integer, Integer> {
 
+    public Day01() {
+        super(2020, 1);
+    }
     @Override
     public Integer getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
         final Optional<Pair<Integer>> matchingNumberPair = findMatchingNumberPair(inputNumbers, 2020);

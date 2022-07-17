@@ -12,6 +12,9 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day11 extends SingleLineAdventOfCodeDay<String, String> {
 
+    public Day11() {
+        super(2015, 11);
+    }
     public static String alphabet = "abcdefghijklmnopqrstuvwxyz";
 
     public static String findNextPassword(String lastPassword) {

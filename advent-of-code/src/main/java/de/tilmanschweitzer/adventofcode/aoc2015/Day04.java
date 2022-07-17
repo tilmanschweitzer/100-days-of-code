@@ -12,6 +12,10 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day04 extends SingleLineAdventOfCodeDay<String, Long> {
 
+    public Day04() {
+        super(2015, 4);
+    }
+
     public static String md5(String input) {
         return Hashing.md5().hashString(input, StandardCharsets.UTF_8).toString();
     }

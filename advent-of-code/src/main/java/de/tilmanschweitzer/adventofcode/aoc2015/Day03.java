@@ -16,6 +16,10 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day03 extends SingleLineAdventOfCodeDay<List<Day03.Move>, Integer> {
 
+    public Day03() {
+        super(2015, 3);
+    }
+
     public static int numberOfHousesFromMoves(final List<Move> moves) {
         return housesFromMoves(moves).size();
     }

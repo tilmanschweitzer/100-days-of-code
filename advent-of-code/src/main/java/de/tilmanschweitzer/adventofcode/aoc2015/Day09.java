@@ -20,6 +20,9 @@ import static java.util.stream.Collectors.*;
 
 public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route, Integer> {
 
+    public Day09() {
+        super(2015, 9);
+    }
     @Override
     public Integer getResultOfFirstPuzzle(final List<Route> input) {
         return getShortestTrip(input).getDistance();

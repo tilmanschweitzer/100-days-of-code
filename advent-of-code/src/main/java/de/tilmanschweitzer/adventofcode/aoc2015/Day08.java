@@ -10,6 +10,9 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day08 extends MultiLineAdventOfCodeDay<String, Integer> {
 
+    public Day08() {
+        super(2015, 8);
+    }
 
     @Override
     public Integer getResultOfFirstPuzzle(final List<String> input) {

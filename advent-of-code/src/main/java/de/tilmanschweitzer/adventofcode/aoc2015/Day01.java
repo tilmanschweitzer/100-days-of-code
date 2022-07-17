@@ -11,6 +11,10 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day01 extends SingleLineAdventOfCodeDay<List<Character>, Integer> {
 
+    public Day01() {
+        super(2015, 1);
+    }
+
     @Override
     public Integer getResultOfFirstPuzzle(final List<Character> inputNumbers) {
         return getFloorForInput(inputNumbers);

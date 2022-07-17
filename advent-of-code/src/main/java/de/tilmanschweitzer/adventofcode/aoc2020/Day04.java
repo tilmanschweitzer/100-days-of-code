@@ -24,6 +24,10 @@ cid (Country ID)
  */
 public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>, Long> {
 
+    public Day04() {
+        super(2020, 4);
+    }
+
     private static final char TREE = '#';
 
 

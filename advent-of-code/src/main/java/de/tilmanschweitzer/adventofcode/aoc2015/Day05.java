@@ -13,6 +13,10 @@ import static java.util.stream.Collectors.toUnmodifiableList;
 
 public class Day05 extends MultiLineAdventOfCodeDay<String, Long> {
 
+    public Day05() {
+        super(2015, 5);
+    }
+
     public static boolean isVowel(String s) {
         Preconditions.checkArgument(s.length() == 1);
         return "aeiou".contains(s);

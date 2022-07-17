@@ -16,6 +16,10 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day02 extends MultiLineAdventOfCodeDay<Day02.PasswordPolicyAndPassword, Long> {
 
+    public Day02() {
+        super(2020, 2);
+    }
+
     @Override
     protected Long getResultOfFirstPuzzle(List<PasswordPolicyAndPassword> passwordsAndPolicies) {
         return passwordsAndPolicies.stream().filter(passwordAndPolicy -> passwordAndPolicy.policy.validateMethodA(passwordAndPolicy.password)).count();

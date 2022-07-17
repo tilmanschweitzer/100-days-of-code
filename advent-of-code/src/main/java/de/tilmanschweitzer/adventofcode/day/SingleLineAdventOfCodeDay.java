@@ -8,6 +8,10 @@ import java.util.Objects;
 
 public abstract class SingleLineAdventOfCodeDay<I, A> extends AdventOfCodeDay<I, A> {
 
+    public SingleLineAdventOfCodeDay(int year, int day) {
+        super(year, day);
+    }
+
     protected abstract I parseLine(String line);
 
     protected I getParsedInput() {

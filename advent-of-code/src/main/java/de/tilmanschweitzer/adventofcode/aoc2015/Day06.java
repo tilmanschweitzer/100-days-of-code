@@ -17,6 +17,10 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction, Long> {
 
+    public Day06() {
+        super(2015, 6);
+    }
+
     @Override
     public Long getResultOfFirstPuzzle(final List<LightInstruction> input) {
         final LightGrid lightGrid = new BasicLightGrid(1000);

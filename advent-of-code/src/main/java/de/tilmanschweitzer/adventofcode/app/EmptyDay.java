@@ -9,6 +9,10 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class EmptyDay extends MultiLineAdventOfCodeDay<Integer, Integer> {
 
+    public EmptyDay() {
+        super(-1, -1);
+    }
+
     @Override
     public Integer getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
         return 0;

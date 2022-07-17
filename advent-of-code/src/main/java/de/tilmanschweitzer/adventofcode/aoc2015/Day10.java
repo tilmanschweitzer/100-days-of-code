@@ -11,6 +11,9 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day10 extends SingleLineAdventOfCodeDay<String, Integer> {
 
+    public Day10() {
+        super(2015, 10);
+    }
     public static String lookAndSay(String input) {
         final StringBuilder output = new StringBuilder();
         final List<Character> characters = Arrays.stream(input.split("")).map(s -> s.charAt(0)).collect(Collectors.toUnmodifiableList());

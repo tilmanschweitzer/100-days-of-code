@@ -16,6 +16,10 @@ import static java.util.stream.Collectors.*;
 
 public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>, Integer> {
 
+    public Day03() {
+        super(2019, 3);
+    }
+
     public static Set<Point> findIntersectionOfPaths(List<Vector> firstPath, List<Vector> secondPath) {
         final List<Point> firstPoints = Point.fromPath(firstPath);
         final List<Point> secondPoints = Point.fromPath(secondPath);
