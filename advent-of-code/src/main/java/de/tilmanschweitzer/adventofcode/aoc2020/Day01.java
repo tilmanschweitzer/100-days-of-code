@@ -45,7 +45,7 @@ public class Day01 extends MultiLineAdventOfCodeDay<Integer, Integer> {
 
     @Override
     protected InputStream getInputAsStream() {
-        return getSystemResourceAsStream("day01-input.txt");
+        return getSystemResourceAsStream("2020/day01-input.txt");
     }
 
     private static final String LINE_SEPARATOR = "\n";

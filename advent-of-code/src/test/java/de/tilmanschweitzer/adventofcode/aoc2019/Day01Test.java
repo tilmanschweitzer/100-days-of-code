@@ -9,6 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day01Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(3267890, new Day01().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(4898972, new Day01().getResultOfSecondPuzzle());
+    }
+
+    @Test
     void getFuelForMass_calculatesCorrectFules() {
         assertEquals(2, getFuelForMass(12));
         assertEquals(2, getFuelForMass(14));

@@ -8,6 +8,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day02Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(1606483, new Day02().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(3842356, new Day02().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void testDimensionsFromInput() {
         assertEquals(new Dimensions(2, 3, 4), Dimensions.fromInput("2x3x4"));
         assertEquals(new Dimensions(1, 1, 10), Dimensions.fromInput("1x1x10"));

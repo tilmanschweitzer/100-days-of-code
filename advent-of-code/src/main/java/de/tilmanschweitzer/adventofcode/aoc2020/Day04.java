@@ -82,10 +82,8 @@ public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>, L
 
     @Override
     protected InputStream getInputAsStream() {
-        return getSystemResourceAsStream("day04-input.txt");
+        return getSystemResourceAsStream("2020/day04-input.txt");
     }
-
-
 
     @EqualsAndHashCode
     @ToString

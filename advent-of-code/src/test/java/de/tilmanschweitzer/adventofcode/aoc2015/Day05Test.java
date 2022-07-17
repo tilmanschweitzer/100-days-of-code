@@ -7,6 +7,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day05Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(236, new Day05().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(51, new Day05().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void detectNiceStrings() {
         assertTrue(Day05.isNiceString("ugknbfddgicrmopn"));
         assertTrue(Day05.isNiceString("aaa"));

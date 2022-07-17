@@ -11,6 +11,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day09Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(251, new Day09().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(898, new Day09().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void parseLine() {
         assertEquals(new Route("London", "Dublin", 464), Route.parse("London to Dublin = 464"));
     }

@@ -1,6 +1,5 @@
 package de.tilmanschweitzer.adventofcode.aoc2020;
 
-import de.tilmanschweitzer.adventofcode.aoc2020.Day02;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -11,6 +10,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Day02Test {
 
+    @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(607, new Day02().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(321, new Day02().getResultOfSecondPuzzle());
+    }
 
     @Test
     public void parseLine_parsesTestInputAsExpected() {

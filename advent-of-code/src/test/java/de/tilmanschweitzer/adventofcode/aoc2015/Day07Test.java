@@ -12,6 +12,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day07Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(46065, new Day07().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(14134, new Day07().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void testProvideValueToWireStepParser_matches() {
         final CircuitStepParser<?> parser = new ProvideValueToWire.Parser();
         assertTrue(parser.matches("123 -> x"));

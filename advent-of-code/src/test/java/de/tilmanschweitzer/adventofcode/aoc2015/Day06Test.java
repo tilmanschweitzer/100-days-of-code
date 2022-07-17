@@ -10,6 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day06Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(569999, new Day06().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(17836115, new Day06().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void parseLine() {
         assertEquals(new LightInstruction(new LightCoordinate(0,0), new LightCoordinate(999,0), TURN_ON), parseLightInstruction("turn on 0,0 through 999,0"));
         assertEquals(new LightInstruction(new LightCoordinate(123,17), new LightCoordinate(234,23), TOGGLE), parseLightInstruction("toggle 123,17 through 234,23"));

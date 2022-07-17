@@ -8,6 +8,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Day01Test {
 
+    @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(513, new Day01().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(287, new Day01().getResultOfSecondPuzzle());
+    }
 
     @Test
     public void firstFirstDuplicateFrequency() {

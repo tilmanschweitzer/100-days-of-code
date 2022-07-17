@@ -7,6 +7,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day08Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(1342, new Day08().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(2074, new Day08().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void countInputChars() {
         assertEquals(2, Day08.countInputChars("\"\""));
         assertEquals(5, Day08.countInputChars("\"abc\""));

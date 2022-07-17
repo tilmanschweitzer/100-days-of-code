@@ -10,6 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day12Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(191164, new Day12().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(87842, new Day12().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void extractAllNumbersFromString() {
         assertEquals(List.of(1L, 2L, 3L), Day12.extractAllNumbersFromString("[1,2,3]"));
         assertEquals(List.of(2L, 4L), Day12.extractAllNumbersFromString("{\"a\":2,\"b\":4}"));

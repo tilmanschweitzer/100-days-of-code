@@ -11,6 +11,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day03Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(156L, new Day03().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(3521829480L, new Day03().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void parseLine_parsesTestInputAsExpected() {
         final String testInput =  "..##.......\n" +
                 "#...#...#..\n" +

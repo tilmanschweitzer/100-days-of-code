@@ -50,7 +50,7 @@ public class Day10 extends SingleLineAdventOfCodeDay<String, Integer> {
 
     @Override
     public Integer getResultOfSecondPuzzle(final String input) {
-        return lookAndSay(input, 60).length();
+        return lookAndSay(input, 50).length();
     }
 
     @Override

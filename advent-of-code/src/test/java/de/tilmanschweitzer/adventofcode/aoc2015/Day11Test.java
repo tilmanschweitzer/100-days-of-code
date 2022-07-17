@@ -7,6 +7,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day11Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals("hxbxxyzz", new Day11().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals("hxcaabcc", new Day11().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void findNextPassword() {
         assertEquals("abcdffaa", Day11.findNextPassword("abcdefgh"));
         assertEquals("ghjaabcc", Day11.findNextPassword("ghijklmn"));
@@ -24,7 +34,7 @@ class Day11Test {
     @Test
     public void isValidPassword() {
         assertTrue(Day11.isValidPassword("abcdffaa"));
-        assertTrue(Day11.isValidPassword("abcdefhh"));
+        assertTrue(Day11.isValidPassword("ghjaabcc"));
         assertFalse(Day11.isValidPassword("hijklmmn"));
         assertFalse(Day11.isValidPassword("abbceffg"));
         assertFalse(Day11.isValidPassword("abbcegjk"));

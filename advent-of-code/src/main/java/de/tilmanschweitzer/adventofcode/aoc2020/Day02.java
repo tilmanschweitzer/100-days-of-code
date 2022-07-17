@@ -46,7 +46,7 @@ public class Day02 extends MultiLineAdventOfCodeDay<Day02.PasswordPolicyAndPassw
 
     @Override
     protected InputStream getInputAsStream() {
-        return getSystemResourceAsStream("day02-input.txt");
+        return getSystemResourceAsStream("2020/day02-input.txt");
     }
 
     private static final String LINE_SEPARATOR = "\n";

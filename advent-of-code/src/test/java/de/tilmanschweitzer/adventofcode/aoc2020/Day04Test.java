@@ -14,6 +14,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day04Test {
 
+    @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(216, new Day04().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(150, new Day04().getResultOfSecondPuzzle());
+    }
+
     static final String testInput =  "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd\n" +
             "byr:1937 iyr:2017 cid:147 hgt:183cm\n" +
             "\n" +

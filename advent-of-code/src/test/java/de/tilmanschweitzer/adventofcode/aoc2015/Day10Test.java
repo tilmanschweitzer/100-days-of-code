@@ -7,6 +7,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day10Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(252594, new Day10().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(3579328, new Day10().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void lookAndSay() {
         assertEquals("11", Day10.lookAndSay("1"));
         assertEquals("21", Day10.lookAndSay("11"));

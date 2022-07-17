@@ -8,6 +8,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Day02Test {
 
+    @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(3562624, new Day02().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(8298, new Day02().getResultOfSecondPuzzle());
+    }
 
     @Test
     public void interpret_testInput1() throws Day02.UnknownOpCodeException {

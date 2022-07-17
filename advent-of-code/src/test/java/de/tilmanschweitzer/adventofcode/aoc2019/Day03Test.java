@@ -13,6 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day03Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(217, new Day03().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        // TODO: Solve
+    }
+
+    @Test
     public void intersectionOfPaths_example1() {
         final List<Vector> firstPath = Vector.fromPathList("R8,U5,L5,D3");
         final List<Vector> secondPath = Vector.fromPathList("U7,R6,D4,L4");

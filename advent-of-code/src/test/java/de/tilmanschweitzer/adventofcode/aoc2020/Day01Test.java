@@ -12,6 +12,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day01Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(1019371, new Day01().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(278064990, new Day01().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void findMatchingNumberPair_returns1721and299forTestInput() {
         final List<Integer> testInput = List.of(1721, 979, 366, 299, 675, 1456);
 
