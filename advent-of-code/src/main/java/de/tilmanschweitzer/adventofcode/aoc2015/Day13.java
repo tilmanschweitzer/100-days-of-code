@@ -31,7 +31,18 @@ public class Day13 extends MultiLineAdventOfCodeDay<Day13.SeatPreference, Intege
 
     @Override
     public Integer getResultOfSecondPuzzle(final List<SeatPreference> input) {
-        return 0;
+        final List<SeatPreference> newInput = new ArrayList(input);
+        final Set<String> allPersons = input.stream().map(SeatPreference::getPerson).collect(Collectors.toSet());
+
+        for (String person : allPersons) {
+            newInput.add(new SeatPreference("Me", person, 0));
+            newInput.add(new SeatPreference(person, "Me", 0));
+
+        }
+
+        final SeatCombinationExplorer seatCombinationExplorer = new SeatCombinationExplorer(newInput);
+        final Ring<String> happiestCombination = seatCombinationExplorer.searchHappiestCombination();
+        return seatCombinationExplorer.happinessForSeatCombination(happiestCombination);
     }
 
     @Override
