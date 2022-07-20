@@ -2,6 +2,8 @@ package de.tilmanschweitzer.adventofcode.aoc2015;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import de.tilmanschweitzer.adventofcode.common.Combinations;
+import de.tilmanschweitzer.adventofcode.common.Pair;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,6 +11,7 @@ import lombok.ToString;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
@@ -52,48 +55,42 @@ public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route, Integer> {
     }
 
     public abstract static class TripSearchHelper {
-        final int tripLength;
         final List<Route> routes;
-        final Map<String, List<Route>> routesByStartCity;
+        final Map<Pair<String>, Route> routesByStartAndEndCity;
+
+
         final List<String> allCities;
         Trip currentShortestTrip = Trip.emptyTrip();
 
         public TripSearchHelper(List<Route> routes) {
             this.routes = Routes.union(routes, Routes.reverse(routes));
             this.allCities = Routes.allCities(this.routes);
-            this.tripLength = allCities.size() - 1;
-            this.routesByStartCity = this.routes.stream().collect(groupingBy(Route::getStart));
+            this.routesByStartAndEndCity = this.routes.stream().collect(toMap(route -> new Pair<>(route.start, route.end), Function.identity()));
+
         }
 
         public Trip search() {
-            for (String startCity : allCities) {
-                final List<Route> startRoutes = routesByStartCity.get(startCity);
-                for (Route startRoute : startRoutes) {
-                    final Trip currentTrip = new Trip(startRoute);
-                    searchForCandidates(currentTrip);
-                }
+            final Set<Trip> allTripPossibilities = Combinations.allCombinations(new HashSet<>(allCities))
+                    .stream()
+                    .map(citiesCombination -> IntStream.range(1, citiesCombination.size())
+                                .boxed()
+                                .map(index -> {
+                                    final Pair<String> startAndEndCityKey = Pair.of(citiesCombination.get(index - 1), citiesCombination.get(index));
+                                    return routesByStartAndEndCity.get(startAndEndCityKey);
+                                }).collect(toUnmodifiableList())
+                    ).map(Trip::new)
+                    .collect(toSet());
+
+
+            for (Trip tripCandidate : allTripPossibilities) {
+                tryToUpdateShortestTrip(tripCandidate);
             }
+
             return currentShortestTrip;
         }
 
-        private void searchForCandidates(Trip currentTrip) {
-            if (currentTrip.length() == tripLength) {
-                tryToUpdateShortestTrip(currentTrip);
-                return;
-            }
-            final String nextStart = currentTrip.lastCity();
-            final List<Route> nextAvailableRoutes = routesByStartCity.getOrDefault(nextStart, emptyList());
-            final Set<String> alreadyVisitedCities = currentTrip.getAllStarts();
-            final List<Route> nextRoutesWithourAlreadyVisitedCities = nextAvailableRoutes.stream()
-                    .filter(route -> !alreadyVisitedCities.contains(route.getEnd()))
-                    .collect(toUnmodifiableList());
-            for (Route nextRoute : nextRoutesWithourAlreadyVisitedCities) {
-                searchForCandidates(currentTrip.appendRoute(nextRoute));
-            }
-        }
-
         public boolean tryToUpdateShortestTrip(Trip candidateTrip) {
-            if (candidateTrip.length() != tripLength) {
+            if (candidateTrip.length() != allCities.size() - 1) {
                 throw new RuntimeException("Unexpected trip length " + candidateTrip.length());
             };
             if (!checkAndUpdateCandidateCondition(candidateTrip)) {
@@ -264,14 +261,5 @@ public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route, Integer> {
         public int length() {
             return routes.size();
         }
-
-        public String lastCity() {
-            return routes.get(length() - 1).getEnd();
-        }
-
-        public Set<String> getAllStarts() {
-            return Routes.getAllStarts(routes);
-        }
     }
-
 }

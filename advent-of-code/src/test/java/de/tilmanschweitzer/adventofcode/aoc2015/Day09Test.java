@@ -28,7 +28,6 @@ class Day09Test {
     @Test
     public void getShortestTripForTwoCities() {
         final List<Route> allRoutes = List.of(
-                new Route("London", "Dublin", 464),
                 new Route("Dublin", "London", 463)
         );
         final Trip trip = getShortestTrip(allRoutes);

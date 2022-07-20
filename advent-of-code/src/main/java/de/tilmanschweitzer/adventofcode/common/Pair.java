@@ -12,6 +12,10 @@ public class Pair<T> {
         this.rightValue = rightValue;
     }
 
+    public static <T> Pair<T> of (T leftValue, T rightValue) {
+        return new Pair<>(leftValue, rightValue);
+    }
+
     public T getLeftValue() {
         return leftValue;
     }
