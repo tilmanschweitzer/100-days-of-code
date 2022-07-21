@@ -44,19 +44,6 @@ public class Day14ReindeerOlympics extends MultiLineAdventOfCodeDay<Day14Reindee
         return Reindeer.parse(line);
     }
 
-    @EqualsAndHashCode
-    @ToString
-    @Getter
-    public static class PersonPartnerPair {
-        final String person;
-        final String partner;
-
-        public PersonPartnerPair(String person, String partner) {
-            this.person = person;
-            this.partner = partner;
-        }
-    }
-
     public static class ReindeerRace {
         public static List<Reindeer> positionsAfterRaceDuration(final List<Reindeer> reindeers, final int raceDuration) {
             return reindeers.stream()
