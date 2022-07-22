@@ -5,6 +5,7 @@ import de.tilmanschweitzer.adventofcode.aoc2015.Day15PerfectRecipe.Recipe;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static java.util.List.of;
@@ -39,18 +40,34 @@ class Day15PerfectRecipeTest {
     }
 
     @Test
-    public void findMax() {
+    public void findRecipeWithHighestScoreForTeaspoonsAndIngredients() {
         final Ingredient butterscotch = Ingredient.parse("Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8");
         final Ingredient cinnamon = Ingredient.parse("Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3");
 
+        final Optional<Recipe> recipeOptional = Day15PerfectRecipe.findRecipeWithHighestScoreForTeaspoonsAndIngredients(100, List.of(butterscotch, cinnamon));
 
-        final Recipe recipe = Day15PerfectRecipe.findRecipeWithHighestScoreForTeaspoonsAndIngredients(100, List.of(butterscotch, cinnamon));
+        assertTrue(recipeOptional.isPresent());
+
+        final Recipe recipe = recipeOptional.get();
 
         assertEquals(44, recipe.getTeaspoonForIngredient(butterscotch));
         assertEquals(56, recipe.getTeaspoonForIngredient(cinnamon));
-
     }
 
+    @Test
+    public void findRecipeMatchingCaloriesForTeaspoonsAndIngredients() {
+        final Ingredient butterscotch = Ingredient.parse("Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8");
+        final Ingredient cinnamon = Ingredient.parse("Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3");
+
+        final Optional<Recipe> recipeOptional = Day15PerfectRecipe.findRecipeMatchingCaloriesForTeaspoonsAndIngredients(100, 500, List.of(butterscotch, cinnamon));
+
+        assertTrue(recipeOptional.isPresent());
+
+        final Recipe recipe = recipeOptional.get();
+        assertEquals(40, recipe.getTeaspoonForIngredient(butterscotch));
+        assertEquals(60, recipe.getTeaspoonForIngredient(cinnamon));
+        assertEquals(57600000, recipe.getScore());
+    }
 
     @Test
     public void combinations() {

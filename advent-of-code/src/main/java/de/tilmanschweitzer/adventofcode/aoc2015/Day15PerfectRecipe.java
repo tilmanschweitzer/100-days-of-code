@@ -1,6 +1,7 @@
 package de.tilmanschweitzer.adventofcode.aoc2015;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Streams;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
@@ -22,6 +23,28 @@ public class Day15PerfectRecipe extends MultiLineAdventOfCodeDay<Day15PerfectRec
 
     public Day15PerfectRecipe() {
         super(2015, 15);
+    }
+
+    @Override
+    public Integer getResultOfFirstPuzzle(final List<Ingredient> ingredients) {
+        final Optional<Recipe> recipe = findRecipeWithHighestScoreForTeaspoonsAndIngredients(100, ingredients);
+        return recipe.get().getScore();
+    }
+
+    @Override
+    public Integer getResultOfSecondPuzzle(final List<Ingredient> ingredients) {
+        final Optional<Recipe> recipe = findRecipeMatchingCaloriesForTeaspoonsAndIngredients(100, 500, ingredients);
+        return recipe.get().getScore();
+    }
+
+    @Override
+    protected InputStream getInputAsStream() {
+        return getSystemResourceAsStream("2015/day15-input.txt");
+    }
+
+    @Override
+    protected Ingredient parseLine(String line) {
+        return Ingredient.parse(line);
     }
 
     public static Set<List<Integer>> combinations(int elements, int sum) {
@@ -52,43 +75,29 @@ public class Day15PerfectRecipe extends MultiLineAdventOfCodeDay<Day15PerfectRec
         return nums.reduce(Integer::sum).orElse(0);
     }
 
-    public static Recipe findRecipeWithHighestScoreForTeaspoonsAndIngredients(int maxTeaspoons, List<Ingredient> ingredients) {
+    public static Optional<Recipe> findRecipeWithHighestScoreForTeaspoonsAndIngredients(int maxTeaspoons, List<Ingredient> ingredients) {
+        return findRecipeWithHighestScoreForTeaspoonsAndIngredients(maxTeaspoons, ingredients, (recipe) -> true);
+    }
 
+    public static Optional<Recipe> findRecipeWithHighestScoreForTeaspoonsAndIngredients(int maxTeaspoons, List<Ingredient> ingredients, Predicate<Recipe> additionalCondition) {
         final Set<List<Integer>> teaspoonCombinations = combinations(ingredients.size(), maxTeaspoons);
         int currentHighestScore = 0;
-        Recipe currentHighestScoredRecipe = null;
+        Optional<Recipe> currentHighestScoredRecipe = Optional.empty();
 
         for (List<Integer> teaspoons : teaspoonCombinations) {
             final Recipe candidate = Recipe.of(ingredients, teaspoons);
             final int candidateScore = candidate.getScore();
-            if (candidateScore > currentHighestScore) {
+            if (candidateScore > currentHighestScore && additionalCondition.apply(candidate)) {
                 currentHighestScore = candidateScore;
-                currentHighestScoredRecipe = candidate;
+                currentHighestScoredRecipe = Optional.of(candidate);
             }
         }
 
         return currentHighestScoredRecipe;
     }
 
-    @Override
-    public Integer getResultOfFirstPuzzle(final List<Ingredient> ingredients) {
-        final Recipe recipe = findRecipeWithHighestScoreForTeaspoonsAndIngredients(100, ingredients);
-        return recipe.getScore();
-    }
-
-    @Override
-    public Integer getResultOfSecondPuzzle(final List<Ingredient> ingredients) {
-        return 0;
-    }
-
-    @Override
-    protected InputStream getInputAsStream() {
-        return getSystemResourceAsStream("2015/day15-input.txt");
-    }
-
-    @Override
-    protected Ingredient parseLine(String line) {
-        return Ingredient.parse(line);
+    public static Optional<Recipe> findRecipeMatchingCaloriesForTeaspoonsAndIngredients(int maxTeaspoons, int wantedCalories, List<Ingredient> ingredients) {
+        return findRecipeWithHighestScoreForTeaspoonsAndIngredients(maxTeaspoons, ingredients, (recipe) -> recipe.getCalories() == wantedCalories);
     }
 
     public static class Recipe {
@@ -126,6 +135,10 @@ public class Day15PerfectRecipe extends MultiLineAdventOfCodeDay<Day15PerfectRec
 
         public int getScore() {
             return score(Ingredient::getCapacity) * score(Ingredient::getDurability) * score(Ingredient::getFlavor) * score(Ingredient::getTexture);
+        }
+
+        public int getCalories() {
+            return score(Ingredient::getCalories);
         }
     }
 
