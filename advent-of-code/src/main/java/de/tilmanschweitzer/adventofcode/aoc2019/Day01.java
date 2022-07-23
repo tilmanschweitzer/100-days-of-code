@@ -6,23 +6,23 @@ import java.io.InputStream;
 import java.util.List;
 
 
+import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day01 extends MultiLineAdventOfCodeDay<Integer, Long> {
+public class Day01 extends MultiLineAdventOfCodeDay<Integer, Integer> {
 
     public Day01() {
         super(2019, 1);
     }
     @Override
-    public Long getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
-        return inputNumbers.stream().map(Day01::getFuelForMass).reduce(Long::sum).orElse(0L);
+    public Integer getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
+        return sum(inputNumbers.stream().map(Day01::getFuelForMass));
     }
 
     @Override
-    public Long getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
-        return inputNumbers.stream().map(Day01::getTotalFuelForMass).reduce(Long::sum).orElse(0L);
+    public Integer getResultOfSecondPuzzle(final List<Integer> inputNumbers) {
+        return sum(inputNumbers.stream().map(Day01::getTotalFuelForMass));
     }
-
 
     @Override
     public Integer parseLine(String line) {
@@ -35,12 +35,12 @@ public class Day01 extends MultiLineAdventOfCodeDay<Integer, Long> {
     }
 
 
-    public static long getFuelForMass(long mass) {
+    public static int getFuelForMass(int mass) {
         return mass / 3 - 2;
     }
 
-    public static long getTotalFuelForMass(long mass) {
-        final long fuel = getFuelForMass(mass);
+    public static int getTotalFuelForMass(int mass) {
+        final int fuel = getFuelForMass(mass);
 
         if (fuel <= 0) {
             return 0;

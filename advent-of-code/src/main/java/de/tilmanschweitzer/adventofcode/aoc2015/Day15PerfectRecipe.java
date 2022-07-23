@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day15PerfectRecipe extends MultiLineAdventOfCodeDay<Day15PerfectRecipe.Ingredient, Integer> {
@@ -65,14 +66,6 @@ public class Day15PerfectRecipe extends MultiLineAdventOfCodeDay<Day15PerfectRec
             final List<Integer> nextCandidate = new ImmutableList.Builder<Integer>().addAll(currentCandidate).add(num).build();
             return combinations(nextCandidate, elements, sum);
         }).flatMap(Streams::concat);
-    }
-
-    private static int sum(List<Integer> nums) {
-        return sum(nums.stream());
-    }
-
-    private static int sum(Stream<Integer> nums) {
-        return nums.reduce(Integer::sum).orElse(0);
     }
 
     public static Optional<Recipe> findRecipeWithHighestScoreForTeaspoonsAndIngredients(int maxTeaspoons, List<Ingredient> ingredients) {

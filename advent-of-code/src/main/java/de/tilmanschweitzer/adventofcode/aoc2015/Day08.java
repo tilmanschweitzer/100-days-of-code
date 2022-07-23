@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day08 extends MultiLineAdventOfCodeDay<String, Integer> {
@@ -16,15 +17,15 @@ public class Day08 extends MultiLineAdventOfCodeDay<String, Integer> {
 
     @Override
     public Integer getResultOfFirstPuzzle(final List<String> input) {
-        final Integer sumOfInputChars = input.stream().map(Day08::countInputChars).reduce(Integer::sum).orElse(0);
-        final Integer sumOfParsedChars = input.stream().map(Day08::countParsedChars).reduce(Integer::sum).orElse(0);
+        final Integer sumOfInputChars = sum(input.stream().map(Day08::countInputChars));
+        final Integer sumOfParsedChars = sum(input.stream().map(Day08::countParsedChars));
         return sumOfInputChars - sumOfParsedChars;
     }
 
     @Override
     public Integer getResultOfSecondPuzzle(final List<String> input) {
-        final Integer sumOfEscapedChars = input.stream().map(Day08::countEscapedChars).reduce(Integer::sum).orElse(0);
-        final Integer sumOfInputChars = input.stream().map(Day08::countInputChars).reduce(Integer::sum).orElse(0);
+        final Integer sumOfEscapedChars = sum(input.stream().map(Day08::countEscapedChars));
+        final Integer sumOfInputChars = sum(input.stream().map(Day08::countInputChars));
         return sumOfEscapedChars - sumOfInputChars;
     }
 

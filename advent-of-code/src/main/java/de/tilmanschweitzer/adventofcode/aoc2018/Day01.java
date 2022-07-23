@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day01 extends MultiLineAdventOfCodeDay<Integer, Integer> {
@@ -31,7 +32,7 @@ public class Day01 extends MultiLineAdventOfCodeDay<Integer, Integer> {
 
     @Override
     public Integer getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
-        return inputNumbers.stream().reduce(Integer::sum).orElse(0);
+        return sum(inputNumbers);
     }
 
     @Override

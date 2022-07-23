@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static de.tilmanschweitzer.adventofcode.aoc2015.Day02.*;
+import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day02 extends MultiLineAdventOfCodeDay<Dimensions, Integer> {
@@ -19,12 +20,12 @@ public class Day02 extends MultiLineAdventOfCodeDay<Dimensions, Integer> {
 
     @Override
     public Integer getResultOfFirstPuzzle(final List<Dimensions> inputDimensions) {
-        return inputDimensions.stream().map(Dimensions::getSurfaceWithSlack).reduce(Integer::sum).orElse(0);
+        return sum(inputDimensions.stream().map(Dimensions::getSurfaceWithSlack));
     }
 
     @Override
     public Integer getResultOfSecondPuzzle(final List<Dimensions> inputDimensions) {
-        return inputDimensions.stream().map(Dimensions::getTotalRibbon).reduce(Integer::sum).orElse(0);
+        return sum(inputDimensions.stream().map(Dimensions::getTotalRibbon));
     }
 
     @Override

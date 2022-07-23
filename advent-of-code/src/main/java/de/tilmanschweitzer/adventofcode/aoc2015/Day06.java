@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static de.tilmanschweitzer.adventofcode.aoc2015.Day06.LightInstruction.Instruction.*;
+import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction, Long> {
@@ -236,7 +237,7 @@ public class Day06 extends MultiLineAdventOfCodeDay<Day06.LightInstruction, Long
 
         @Override
         public long count() {
-            return lightGrid.values().stream().reduce(Integer::sum).orElse(0);
+            return sum(lightGrid.values());
         }
     }
 }

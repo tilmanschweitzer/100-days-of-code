@@ -85,7 +85,7 @@ public class Day13 extends MultiLineAdventOfCodeDay<Day13.SeatPreference, Intege
         }
 
         public Ring<String> searchHappiestCombination() {
-            final Set<Ring<String>> allCombinations = Combinations.allCombinations(allPersonsAsSet).stream().map(Ring::of).collect(Collectors.toSet());
+            final Set<Ring<String>> allCombinations = Combinations.allCombinationsAsSet(allPersonsAsSet).stream().map(Ring::of).collect(Collectors.toSet());
 
             for (Ring<String> combinationCandidate : allCombinations) {
                 final int candidateHappiness = happinessForSeatCombination(combinationCandidate);

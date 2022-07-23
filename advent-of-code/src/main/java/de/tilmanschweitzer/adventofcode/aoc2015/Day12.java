@@ -12,9 +12,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day12 extends SingleLineAdventOfCodeDay<String, Long> {
+public class Day12 extends SingleLineAdventOfCodeDay<String, Integer> {
 
     public Day12() {
         super(2015, 12);
@@ -30,7 +31,7 @@ public class Day12 extends SingleLineAdventOfCodeDay<String, Long> {
             this.skipCondition = skipCondition;
         }
 
-        public List<Long> extractAllNumbersFromJson(String s) {
+        public List<Integer> extractAllNumbersFromJson(String s) {
             try {
                 final ObjectMapper objectMapper = new ObjectMapper();
                 final JsonNode jsonNode = objectMapper.readValue(s, JsonNode.class);
@@ -40,12 +41,12 @@ public class Day12 extends SingleLineAdventOfCodeDay<String, Long> {
             }
         }
 
-        public List<Long> extractAllNumbersFromJson(JsonNode jsonNode) {
+        public List<Integer> extractAllNumbersFromJson(JsonNode jsonNode) {
             if (skipCondition.test(jsonNode)) {
                 return Collections.emptyList();
             }
             if (jsonNode.isNumber()) {
-                return List.of(jsonNode.longValue());
+                return List.of(jsonNode.intValue());
             }
             if (jsonNode.isArray()) {
                 return iteratorToStream(jsonNode.elements())
@@ -63,8 +64,8 @@ public class Day12 extends SingleLineAdventOfCodeDay<String, Long> {
             return Collections.emptyList();
         }
 
-        public Long sumAllNumbersInJson(String s) {
-            return extractAllNumbersFromJson(s).stream().reduce(Long::sum).orElse(0L);
+        public Integer sumAllNumbersInJson(String s) {
+            return sum(extractAllNumbersFromJson(s));
         }
         public static <T> Stream<T>  iteratorToStream(Iterator<T> iterator) {
             final Iterable<T> iterable = () -> iterator;
@@ -82,22 +83,22 @@ public class Day12 extends SingleLineAdventOfCodeDay<String, Long> {
             return false;
         }
     }
-    public static List<Long> extractAllNumbersFromString(String s) {
+    public static List<Integer> extractAllNumbersFromString(String s) {
         final String[] split = s.split("[^-\\d]+");
-        return Arrays.stream(split).filter(Predicate.not(String::isBlank)).map(Long::parseLong).collect(Collectors.toUnmodifiableList());
+        return Arrays.stream(split).filter(Predicate.not(String::isBlank)).map(Integer::parseInt).collect(Collectors.toUnmodifiableList());
     }
 
-    public static Long sumAllNumbersInString(String s) {
-        return extractAllNumbersFromString(s).stream().reduce(Long::sum).orElse(0L);
+    public static Integer sumAllNumbersInString(String s) {
+        return sum(extractAllNumbersFromString(s));
     }
 
     @Override
-    public Long getResultOfFirstPuzzle(final String input) {
+    public Integer getResultOfFirstPuzzle(final String input) {
         return sumAllNumbersInString(input);
     }
 
     @Override
-    public Long getResultOfSecondPuzzle(final String input) {
+    public Integer getResultOfSecondPuzzle(final String input) {
         return new JsonNumberExtractor(JsonNumberExtractor::isObjectNodeWithRedValue).sumAllNumbersInJson(input);
     }
 

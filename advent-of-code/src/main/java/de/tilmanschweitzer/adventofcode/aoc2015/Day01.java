@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day01 extends SingleLineAdventOfCodeDay<List<Character>, Integer> {
@@ -36,9 +37,7 @@ public class Day01 extends SingleLineAdventOfCodeDay<List<Character>, Integer> {
     }
 
     public int getFloorForInput(List<Character> line) {
-        return line.stream()
-                .map(Day01::floorMoveForChar).reduce(Integer::sum)
-                .orElse(0);
+        return sum(line.stream().map(Day01::floorMoveForChar));
     }
 
     public int getFirstPositionForFloor(List<Character> line, int searchedFloor) {

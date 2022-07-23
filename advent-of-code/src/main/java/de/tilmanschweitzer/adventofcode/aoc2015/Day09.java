@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.*;
@@ -70,7 +71,7 @@ public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route, Integer> {
         }
 
         public Trip search() {
-            final Set<Trip> allTripPossibilities = Combinations.allCombinations(new HashSet<>(allCities))
+            final Set<Trip> allTripPossibilities = Combinations.allCombinationsAsSet(new HashSet<>(allCities))
                     .stream()
                     .map(citiesCombination -> IntStream.range(1, citiesCombination.size())
                                 .boxed()
@@ -226,7 +227,7 @@ public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route, Integer> {
         }
 
         public static int getDistance(List<Route> routes) {
-            return routes.stream().map(Route::getDistance).reduce(Integer::sum).orElse(0);
+            return sum(routes.stream().map(Route::getDistance));
         }
 
         public static void checkRoutes(final List<Route> trip) {
