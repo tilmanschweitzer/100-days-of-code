@@ -20,7 +20,7 @@ class Day15PerfectRecipeTest {
 
     @Test
     public void getResultOfSecondPuzzle() {
-        assertEquals(0, new Day15PerfectRecipe().getResultOfSecondPuzzle());
+        assertEquals(11171160, new Day15PerfectRecipe().getResultOfSecondPuzzle());
     }
 
     @Test
