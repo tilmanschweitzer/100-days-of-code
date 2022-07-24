@@ -1,6 +1,7 @@
 package de.tilmanschweitzer.adventofcode.common;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public class CollectionFunctions {

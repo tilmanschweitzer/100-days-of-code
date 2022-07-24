@@ -14,7 +14,7 @@ public class Ring<T> {
         this.elements = Arrays.stream(elements).collect(Collectors.toUnmodifiableList());
     }
 
-    private Ring(List<T> elements) {
+    private Ring(Collection<T> elements) {
         this.elements = elements.stream().collect(Collectors.toUnmodifiableList());
     }
 
@@ -22,7 +22,7 @@ public class Ring<T> {
         return new Ring<>(elements);
     }
 
-    public static <T> Ring<T> of(List<T> elements) {
+    public static <T> Ring<T> of(Collection<T> elements) {
         return new Ring<>(elements);
     }
 

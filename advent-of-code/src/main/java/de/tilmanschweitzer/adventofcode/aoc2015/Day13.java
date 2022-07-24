@@ -1,6 +1,6 @@
 package de.tilmanschweitzer.adventofcode.aoc2015;
 
-import de.tilmanschweitzer.adventofcode.common.Combinations;
+import de.tilmanschweitzer.adventofcode.common.combination.OrderedCombinations;
 import de.tilmanschweitzer.adventofcode.common.Ring;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 import lombok.EqualsAndHashCode;
@@ -85,7 +85,7 @@ public class Day13 extends MultiLineAdventOfCodeDay<Day13.SeatPreference, Intege
         }
 
         public Ring<String> searchHappiestCombination() {
-            final Set<Ring<String>> allCombinations = Combinations.allCombinationsAsSet(allPersonsAsSet).stream().map(Ring::of).collect(Collectors.toSet());
+            final Set<Ring<String>> allCombinations = OrderedCombinations.allCombinationsAsSet(allPersonsAsSet).stream().map(Ring::of).collect(Collectors.toSet());
 
             for (Ring<String> combinationCandidate : allCombinations) {
                 final int candidateHappiness = happinessForSeatCombination(combinationCandidate);

@@ -2,7 +2,7 @@ package de.tilmanschweitzer.adventofcode.aoc2015;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import de.tilmanschweitzer.adventofcode.common.Combinations;
+import de.tilmanschweitzer.adventofcode.common.combination.OrderedCombinations;
 import de.tilmanschweitzer.adventofcode.common.Pair;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 import lombok.EqualsAndHashCode;
@@ -71,7 +71,7 @@ public class Day09 extends MultiLineAdventOfCodeDay<Day09.Route, Integer> {
         }
 
         public Trip search() {
-            final Set<Trip> allTripPossibilities = Combinations.allCombinationsAsSet(new HashSet<>(allCities))
+            final Set<Trip> allTripPossibilities = OrderedCombinations.allCombinationsAsSet(new HashSet<>(allCities))
                     .stream()
                     .map(citiesCombination -> IntStream.range(1, citiesCombination.size())
                                 .boxed()
