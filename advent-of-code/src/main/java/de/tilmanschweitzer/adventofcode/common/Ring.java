@@ -1,6 +1,5 @@
 package de.tilmanschweitzer.adventofcode.common;
 
-import de.tilmanschweitzer.adventofcode.aoc2015.Day13;
 import lombok.ToString;
 
 import java.util.*;
