@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -48,9 +49,9 @@ public class Day19RudolphMedicine extends MultiLineAdventOfCodeDay<String, Integ
     }
 
     public static List<ReplacementAtPosition> findStepsToGenerate(String start, String molecule, List<Replacement> replacements) {
-        final Map<String, List<Replacement>> replacementsByReplacement = replacements.stream().collect(Collectors.groupingBy(Replacement::getReplacement));
+        final Map<String, Replacement> replacementByReplacement = replacements.stream().collect(Collectors.toMap(Replacement::getReplacement, Function.identity()));
 
-        final List<List<ReplacementAtPosition>> possibleSteps = findReplacements(start, molecule, Collections.emptyList(), replacementsByReplacement).collect(Collectors.toUnmodifiableList());
+        final List<List<ReplacementAtPosition>> possibleSteps = findReplacements(start, molecule, Collections.emptyList(), replacementByReplacement).collect(Collectors.toUnmodifiableList());
 
         for (List<ReplacementAtPosition> possibleStep : possibleSteps) {
             System.out.println(possibleStep);
@@ -59,7 +60,7 @@ public class Day19RudolphMedicine extends MultiLineAdventOfCodeDay<String, Integ
         return possibleSteps.stream().sorted(Comparator.comparingInt(List::size)).findFirst().orElse(Collections.emptyList());
     }
 
-    public static Stream<List<ReplacementAtPosition>> findReplacements(String start, String currentString, List<ReplacementAtPosition> currentSteps, Map<String, List<Replacement>> replacementsByReplacement ) {
+    public static Stream<List<ReplacementAtPosition>> findReplacements(String start, String currentString, List<ReplacementAtPosition> currentSteps, Map<String, Replacement> replacementByReplacement ) {
         if (currentString.equals(start)) {
             return Stream.of(Lists.reverse(currentSteps));
         }
@@ -74,7 +75,7 @@ public class Day19RudolphMedicine extends MultiLineAdventOfCodeDay<String, Integ
         }
 
 
-        final Set<String> replacements = replacementsByReplacement.keySet();
+        final Set<String> replacements = replacementByReplacement.keySet();
 
         final Set<List<ReplacementAtPosition>> results = new HashSet<>();
 
@@ -83,13 +84,15 @@ public class Day19RudolphMedicine extends MultiLineAdventOfCodeDay<String, Integ
             String parsedMolecule = "";
             int matcherIndex = restMolecule.indexOf(replacementString);
             while (matcherIndex >= 0) {
-                for (Replacement replacement : replacementsByReplacement.get(replacementString)) {
-                    final String result = parsedMolecule + restMolecule.replaceFirst(replacementString, replacement.getMatch());
-                    final int replacementPosition = matcherIndex + parsedMolecule.length();
-                    final List<ReplacementAtPosition> nextSteps = new ArrayList<>(currentSteps);
-                    nextSteps.add(new ReplacementAtPosition(replacementPosition, replacement));
-                    findReplacements(start, result, nextSteps, replacementsByReplacement).forEach(results::add);
-                }
+                Replacement replacement = replacementByReplacement.get(replacementString);
+
+                final String result = parsedMolecule + restMolecule.replaceFirst(replacementString, replacement.getMatch());
+
+                final int replacementPosition = matcherIndex + parsedMolecule.length();
+                final List<ReplacementAtPosition> nextSteps = new ArrayList<>(currentSteps);
+                nextSteps.add(new ReplacementAtPosition(replacementPosition, replacement));
+                findReplacements(start, result, nextSteps, replacementByReplacement).forEach(results::add);
+
                 final int parsedUntil = matcherIndex + replacementString.length();
                 parsedMolecule = parsedMolecule + restMolecule.substring(0, parsedUntil);
                 restMolecule = restMolecule.substring(parsedUntil);
