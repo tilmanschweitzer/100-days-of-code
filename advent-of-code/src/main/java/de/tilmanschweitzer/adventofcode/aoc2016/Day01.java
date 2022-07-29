@@ -7,8 +7,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
@@ -20,25 +19,45 @@ public class Day01 extends SingleLineAdventOfCodeDay<List<Day01.Instruction>, In
     }
 
     public Integer getResultOfFirstPuzzle(final List<Instruction> instructions) {
-        return distance(instructions);
+        return followPath(instructions).getManhattanDistance();
     }
 
     @Override
     public Integer getResultOfSecondPuzzle(final List<Instruction> instructions) {
-        return 0;
+        return findFirstIntersection(instructions).get().getManhattanDistance();
     }
 
-    public static int distance(List<Instruction> instructions) {
-        EasterBunnyHQCoordinates easterBunnyHQCoordinates = new EasterBunnyHQCoordinates(0,0);
+    public static Position followPath(List<Instruction> instructions) {
+        Position position = new Position(0,0);
         Instruction.Orientation currentOrientation = Instruction.Orientation.NORTH;
-
 
         for (Instruction instruction : instructions) {
             currentOrientation = currentOrientation.turn(instruction.direction);
-            easterBunnyHQCoordinates = easterBunnyHQCoordinates.move(currentOrientation, instruction.steps);
+            position = position.move(currentOrientation, instruction.steps);
         }
 
-        return easterBunnyHQCoordinates.getManhattanDistance();
+        return position;
+    }
+
+    public static Optional<Position> findFirstIntersection(List<Instruction> instructions) {
+        Set<Position> allPositions = new HashSet<>();
+        Position currentPosition = new Position(0,0);
+        allPositions.add(currentPosition);
+
+        Instruction.Orientation currentOrientation = Instruction.Orientation.NORTH;
+
+        for (Instruction instruction : instructions) {
+            currentOrientation = currentOrientation.turn(instruction.direction);
+            for (int i = 0; i < instruction.steps; i++) {
+                currentPosition = currentPosition.move(currentOrientation, 1);
+                if (allPositions.contains(currentPosition)) {
+                    return Optional.of(currentPosition);
+                }
+                allPositions.add(currentPosition);
+            }
+        }
+
+        return Optional.empty();
     }
 
     @Override
@@ -52,17 +71,15 @@ public class Day01 extends SingleLineAdventOfCodeDay<List<Day01.Instruction>, In
     }
 
 
-    @EqualsAndHashCode
-    @ToString
-    public static class EasterBunnyHQCoordinates extends Coordinate {
-        public EasterBunnyHQCoordinates(int x, int y) {
+    public static class Position extends Coordinate {
+        public Position(int x, int y) {
             super(x, y);
         }
 
-        public EasterBunnyHQCoordinates move(Instruction.Orientation orientation, int steps) {
+        public Position move(Instruction.Orientation orientation, int steps) {
             final int x = this.x + steps * orientation.x;
             final int y = this.y + steps * orientation.y;
-            return new EasterBunnyHQCoordinates(x, y);
+            return new Position(x, y);
         }
     }
 

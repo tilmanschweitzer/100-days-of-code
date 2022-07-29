@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Day01Test {
 
-
     @Test
     public void parse() {
         assertEquals(new Instruction(Direction.R, 5), Instruction.parse("R5"));
@@ -16,8 +15,13 @@ class Day01Test {
     }
 
     @Test
-    public void distanceAfterSteps() {
-        assertEquals(5, Day01.distance(Instruction.parse("R2", "L3")));
-        assertEquals(2, Day01.distance(Instruction.parse("R2", "R2", "R2")));
+    public void followPath() {
+        assertEquals(5, Day01.followPath(Instruction.parse("R2", "L3")).getManhattanDistance());
+        assertEquals(2, Day01.followPath(Instruction.parse("R2", "R2", "R2")).getManhattanDistance());
+    }
+
+    @Test
+    public void findFirstIntersection() {
+        assertEquals(4, Day01.findFirstIntersection(Instruction.parse("R8", "R4", "R4", "R8")).get().getManhattanDistance());
     }
 }
