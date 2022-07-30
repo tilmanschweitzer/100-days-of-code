@@ -9,6 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day01Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(243, new Day01().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(142, new Day01().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void parse() {
         assertEquals(new Instruction(Direction.R, 5), Instruction.parse("R5"));
         assertEquals(new Instruction(Direction.L, 6), Instruction.parse("L6"));
