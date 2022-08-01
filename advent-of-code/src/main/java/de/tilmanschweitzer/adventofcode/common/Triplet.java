@@ -1,9 +1,8 @@
 package de.tilmanschweitzer.adventofcode.common;
 
-
 import lombok.EqualsAndHashCode;
 
-import java.util.Objects;
+import java.util.stream.Stream;
 
 @EqualsAndHashCode
 public class Triplet<T> {
@@ -28,6 +27,10 @@ public class Triplet<T> {
 
     public T getThirdValue() {
         return thirdValue;
+    }
+
+    public Stream<T> values() {
+        return Stream.of(firstValue, secondValue, thirdValue);
     }
 
     @Override
