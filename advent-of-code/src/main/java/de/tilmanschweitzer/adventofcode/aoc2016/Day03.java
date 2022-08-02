@@ -1,5 +1,6 @@
 package de.tilmanschweitzer.adventofcode.aoc2016;
 
+import com.google.common.collect.Streams;
 import de.tilmanschweitzer.adventofcode.common.CollectionFunctions;
 import de.tilmanschweitzer.adventofcode.common.Pair;
 import de.tilmanschweitzer.adventofcode.common.Triplet;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
@@ -26,7 +28,17 @@ public class Day03 extends MultiLineAdventOfCodeDay<Day03.Triangle, Long> {
 
     @Override
     public Long getResultOfSecondPuzzle(final List<Triangle> triangels) {
-        return 0L;
+        final List<Triangle> verticalTriangles = IntStream.range(0, triangels.size() / 3).boxed().map(indexDividedByThree -> {
+            final int index = indexDividedByThree * 3;
+            final List<Triangle> trianglesByRow = triangels.subList(index, index + 3);
+
+            final Triangle firstVertical = Triangle.of(trianglesByRow.stream().map(Triangle::getFirstValue));
+            final Triangle secondVertical = Triangle.of(trianglesByRow.stream().map(Triangle::getSecondValue));
+            final Triangle thirdVertical = Triangle.of(trianglesByRow.stream().map(Triangle::getThirdValue));
+
+            return Stream.of(firstVertical, secondVertical, thirdVertical);
+        }).flatMap(Streams::concat).collect(Collectors.toUnmodifiableList());
+        return verticalTriangles.stream().filter(Triangle::isValid).count();
     }
 
     @Override

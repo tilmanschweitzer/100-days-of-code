@@ -8,6 +8,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day03Test {
 
     @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(983L, new Day03().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(1836L, new Day03().getResultOfSecondPuzzle());
+    }
+
+    @Test
     public void parse() {
         final Day03 day03 = new Day03();
         assertEquals(new Triangle(1, 2, 3), day03.parseLine("    1    2\t3    "));
