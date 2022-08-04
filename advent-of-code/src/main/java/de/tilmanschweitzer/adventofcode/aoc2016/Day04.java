@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static de.tilmanschweitzer.adventofcode.common.Converters.charsToString;
@@ -30,7 +29,7 @@ public class Day04 extends MultiLineAdventOfCodeDay<Day04.Room, Integer> {
 
     @Override
     public Integer getResultOfSecondPuzzle(final List<Room> rooms) {
-        return 0;
+        return rooms.stream().filter(room -> room.getDecryptedName().equals("northpole object storage")).findFirst().get().getId();
     }
 
     @Override
@@ -96,6 +95,15 @@ public class Day04 extends MultiLineAdventOfCodeDay<Day04.Room, Integer> {
                 return a;
             }
             return a + b;
+        }
+
+        public String getDecryptedName() {
+            return charsToString(stringToCharList(encryptedName).stream().map(c -> {
+                if (c == '-') {
+                    return ' ';
+                }
+                return (char) (((c - 'a' + getId()) % 26) + 'a');
+            }));
         }
 
         @EqualsAndHashCode

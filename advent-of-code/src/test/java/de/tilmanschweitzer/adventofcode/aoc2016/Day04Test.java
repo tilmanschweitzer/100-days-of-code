@@ -19,7 +19,7 @@ class Day04Test {
 
     @Test
     public void getResultOfSecondPuzzle() {
-        assertEquals(0, new Day04().getResultOfSecondPuzzle());
+        assertEquals(984, new Day04().getResultOfSecondPuzzle());
     }
 
     @Test
@@ -64,4 +64,11 @@ class Day04Test {
         assertFalse(Room.parse("totally-real-room-200[decoy]").isValid());
     }
 
+    @Test
+    public void getDecryptedName() {
+        assertEquals("b", Room.parse("a-1[q]").getDecryptedName());
+        assertEquals("z", Room.parse("a-25[q]").getDecryptedName());
+        assertEquals("a", Room.parse("a-26[q]").getDecryptedName());
+        assertEquals("very encrypted name", Room.parse("qzmt-zixmtkozy-ivhz-343[zimth]").getDecryptedName());
+    }
 }
