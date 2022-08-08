@@ -9,28 +9,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Day06Test {
 
+    final static List<String> testInput = List.of("eedadn",
+            "drvtee",
+            "eandsr",
+            "raavrd",
+            "atevrs",
+            "tsrnev",
+            "sdttsa",
+            "rasrtv",
+            "nssdts",
+            "ntnada",
+            "svetve",
+            "tesnvt",
+            "vntsnd",
+            "vrdear",
+            "dvrsen",
+            "enarar");
 
     @Test
-    public void reconstructMessage() {
-        final List<String> testInput = List.of("eedadn",
-                "drvtee",
-                "eandsr",
-                "raavrd",
-                "atevrs",
-                "tsrnev",
-                "sdttsa",
-                "rasrtv",
-                "nssdts",
-                "ntnada",
-                "svetve",
-                "tesnvt",
-                "vntsnd",
-                "vrdear",
-                "dvrsen",
-                "enarar");
+    public void reconstructMessageByMostCommonChar() {
+        assertEquals("easter", Day06.reconstructMessageByMostCommonChar(testInput));
+    }
 
-
-        assertEquals("easter", Day06.reconstructMessage(testInput));
+    @Test
+    public void reconstructMessageByLeastCommonChar() {
+        assertEquals("advent", Day06.reconstructMessageByLeastCommonChar(testInput));
     }
 
 

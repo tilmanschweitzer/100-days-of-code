@@ -18,12 +18,12 @@ public class Day06 extends MultiLineAdventOfCodeDay<String, String> {
     }
     @Override
     public String getResultOfFirstPuzzle(final List<String> input) {
-        return reconstructMessage(input);
+        return reconstructMessageByMostCommonChar(input);
     }
 
     @Override
     public String getResultOfSecondPuzzle(final List<String> input) {
-        return "";
+        return reconstructMessageByLeastCommonChar(input);
     }
 
     @Override
@@ -36,26 +36,51 @@ public class Day06 extends MultiLineAdventOfCodeDay<String, String> {
         return line;
     }
 
-    public static String reconstructMessage(List<String> input) {
+    public static String reconstructMessageByMostCommonChar(List<String> input) {
+        return reconstructMessage(input, Day06::getMostCommonChar);
+    }
+
+    public static String reconstructMessageByLeastCommonChar(List<String> input) {
+        return reconstructMessage(input, Day06::getLeastCommonChar);
+    }
+
+    public static String reconstructMessage(List<String> input, Function<Map<Character, Long>, Character> selectionFunction) {
+        return charsByPositionAndOccurrence(input).stream()
+                .map(selectionFunction)
+                .map(Objects::toString)
+                .collect(Collectors.joining());
+    }
+
+
+    private static Character getMostCommonChar(Map<Character, Long> charsByOccurrence) {
+        final Optional<Map.Entry<Character, Long>> max = charsByOccurrence.entrySet().stream().max(Map.Entry.comparingByValue());
+        if (max.isEmpty()) {
+            throw new RuntimeException("No entry found");
+        }
+        return max.get().getKey();
+    }
+
+    private static Character getLeastCommonChar(Map<Character, Long> charsByOccurrence) {
+        final Optional<Map.Entry<Character, Long>> min = charsByOccurrence.entrySet().stream().min(Map.Entry.comparingByValue());
+        if (min.isEmpty()) {
+            throw new RuntimeException("No entry found");
+        }
+        return min.get().getKey();
+    }
+
+    public static List<Map<Character, Long>> charsByPositionAndOccurrence(List<String> input) {
+        return allCharsByPosition(input).stream()
+                .map(Day06::countChars)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    private static List<List<Character>> allCharsByPosition(List<String> input) {
         int firstLineLength = input.get(0).length();
         checkLineLengthUniformity(firstLineLength, input);
 
-        final List<List<Character>> allCharsByPosition = IntStream.range(0, firstLineLength).boxed()
+        return IntStream.range(0, firstLineLength).boxed()
                 .map(position -> input.stream().map(line -> line.charAt(position)).collect(Collectors.toUnmodifiableList()))
                 .collect(Collectors.toUnmodifiableList());
-
-
-        final List<Map<Character, Long>> charsByPositionAndOccurrence = allCharsByPosition.stream()
-                .map(Day06::countChars)
-                .collect(Collectors.toUnmodifiableList());
-
-        return charsByPositionAndOccurrence.stream().map(charsByOccurrence -> {
-            final Optional<Map.Entry<Character, Long>> max = charsByOccurrence.entrySet().stream().max(Map.Entry.comparingByValue());
-            if (max.isEmpty()) {
-                throw new RuntimeException("No entry found");
-            }
-            return Objects.toString(max.get().getKey());
-        }).collect(Collectors.joining());
     }
 
     private static void checkLineLengthUniformity(int expectedLineLength, List<String> input) {
