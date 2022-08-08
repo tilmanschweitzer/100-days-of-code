@@ -9,6 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Day06Test {
 
+    @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals("mlncjgdg", new Day06().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals("bipjaytb", new Day06().getResultOfSecondPuzzle());
+    }
+
     final static List<String> testInput = List.of("eedadn",
             "drvtee",
             "eandsr",
