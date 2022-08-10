@@ -35,6 +35,10 @@ public class Pair<T> {
         return rightValue;
     }
 
+    public Pair<T> flip() {
+        return new Pair(rightValue, leftValue);
+    }
+
 
     public Stream<T> values() {
         return Stream.of(leftValue, rightValue);

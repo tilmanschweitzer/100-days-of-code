@@ -1,5 +1,6 @@
 package de.tilmanschweitzer.adventofcode.aoc2016;
 
+import de.tilmanschweitzer.adventofcode.common.Pair;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -47,4 +48,19 @@ class Day07Test {
         assertFalse(Day07.hasSupportForTLS("abcd[bddb]xyyx"));
     }
 
+    @Test
+    public void findAbaCombination() {
+        assertEquals(List.of(Pair.of('a', 'b')), Day07.findAbaCombination("aba"));
+        assertEquals(List.of(Pair.of('b', 'a')), Day07.findAbaCombination("bab"));
+        assertEquals(List.of(), Day07.findAbaCombination("aaa"));
+    }
+
+    @Test
+    public void hasSupportForSSL() {
+        assertTrue(Day07.hasSupportForSSL("aba[bab]xyz"));
+        assertTrue(Day07.hasSupportForSSL("aaa[kek]eke"));
+        assertTrue(Day07.hasSupportForSSL("zazbz[bzb]cdb"));
+
+        assertFalse(Day07.hasSupportForSSL("xyx[xyx]xyx"));
+    }
 }
