@@ -4,6 +4,8 @@ import de.tilmanschweitzer.adventofcode.common.Pair;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +18,7 @@ class Day07Test {
 
     @Test
     public void getResultOfSecondPuzzle() {
-        assertEquals(0L, new Day07().getResultOfSecondPuzzle());
+        assertEquals(260L, new Day07().getResultOfSecondPuzzle());
     }
 
     @Test
@@ -50,9 +52,9 @@ class Day07Test {
 
     @Test
     public void findAbaCombination() {
-        assertEquals(List.of(Pair.of('a', 'b')), Day07.findAbaCombination("aba"));
-        assertEquals(List.of(Pair.of('b', 'a')), Day07.findAbaCombination("bab"));
-        assertEquals(List.of(), Day07.findAbaCombination("aaa"));
+        assertEquals(Set.of(Pair.of('a', 'b')), Day07.findAbaCombination("aba").collect(Collectors.toSet()));
+        assertEquals(Set.of(Pair.of('b', 'a')), Day07.findAbaCombination("bab").collect(Collectors.toSet()));
+        assertEquals(Set.of(), Day07.findAbaCombination("aaa").collect(Collectors.toSet()));
     }
 
     @Test
