@@ -7,24 +7,23 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day09 extends SingleLineAdventOfCodeDay<String, Long> {
+public class Day09 extends SingleLineAdventOfCodeDay<String, Integer> {
 
     public Day09() {
         super(2016, 9);
     }
 
     @Override
-    public Long getResultOfFirstPuzzle(final String input) {
+    public Integer getResultOfFirstPuzzle(final String input) {
         return decompressLength(input);
     }
 
     @Override
-    public Long getResultOfSecondPuzzle(final String input) {
-        return 0L;
+    public Integer getResultOfSecondPuzzle(final String input) {
+        return 0;
     }
 
     @Override
@@ -37,97 +36,63 @@ public class Day09 extends SingleLineAdventOfCodeDay<String, Long> {
         return line;
     }
 
-
     public static String decompress(String input) {
-        final StringBuilder sb = new StringBuilder();
-
-        int lastCut = 0;
-
-        for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) == '(') {
-                sb.append(input, lastCut, i);
-
-                final String unparsedInput = input.substring(i);
-                final Optional<String> markerOptional = extractNextMarker(unparsedInput);
-
-                if (markerOptional.isPresent()) {
-                    final String marker = markerOptional.get();
-                    final Pair<Integer> markerValues = parseMarker(marker);
-                    i += marker.length();
-
-                    final Integer width = markerValues.getLeftValue();
-                    final Integer times = markerValues.getRightValue();
-
-                    final String repeatedString = unparsedInput.substring(marker.length(), marker.length() + width);
-
-
-                    sb.append(repeat(times, repeatedString));
-
-                    i += width ;
-                }
-
-                lastCut = i;
-                i--;
-            }
+        if (input.indexOf('(') < 0) {
+            return input;
         }
 
-        sb.append(input.substring(lastCut));
+        final int next = input.indexOf('(');
+
+        final String markerString = extractNextMarker(input);
+        final Pair<Integer> marker = parseMarker(markerString);
+        final int repeatRange = marker.getLeftValue();
+        final int repeatTimes = marker.getRightValue();
+
+        final String uncompressed = input.substring(0, next);
 
 
-        return sb.toString();
+        final int repeatedStringStartIndex = next + markerString.length();
+        final String stringToBeRepeated = input.substring(repeatedStringStartIndex, repeatedStringStartIndex + repeatRange);
+        final String repeatedString = repeat(repeatTimes, stringToBeRepeated);
+
+        final String remainingInput = input.substring(repeatedStringStartIndex + repeatRange);
+
+        return uncompressed + repeatedString + decompress(remainingInput);
     }
 
-    public static long decompressLength(String input) {
-        final StringBuilder sb = new StringBuilder();
-
-        long length = 0;
-
-        int lastCut = 0;
-        for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) == '(') {
-                length += i - lastCut;
-
-
-                final String unparsedInput = input.substring(i);
-                final Optional<String> markerOptional = extractNextMarker(unparsedInput);
-
-                if (markerOptional.isPresent()) {
-                    final String marker = markerOptional.get();
-                    final Pair<Integer> markerValues = parseMarker(marker);
-                    i += marker.length();
-
-                    final Integer width = markerValues.getLeftValue();
-                    final Integer times = markerValues.getRightValue();
-
-                    length += width * times;
-
-                    i += width;
-                }
-
-                lastCut = i;
-
-            }
+    public static int decompressLength(String input) {
+        if (input.indexOf('(') < 0) {
+            return input.length();
         }
 
-        sb.append(input.substring(lastCut));
+        final int next = input.indexOf('(');
 
-        length += input.length() - lastCut;
+        final String markerString = extractNextMarker(input);
+        final Pair<Integer> marker = parseMarker(markerString);
+        final int repeatRange = marker.getLeftValue();
+        final int repeatTimes = marker.getRightValue();
 
-        return length;
+        final int repeatedStringStartIndex = next + markerString.length();
+
+        final String remainingInput = input.substring(repeatedStringStartIndex + repeatRange);
+
+        final int repeatedLength = repeatRange * repeatTimes;
+
+        return next + repeatedLength + decompressLength(remainingInput);
     }
 
     public static String repeat(int repeat, String s) {
         return IntStream.range(0, repeat).boxed().map(i -> s).collect(Collectors.joining());
     }
 
-    public static Optional<String> extractNextMarker(String s) {
+    public static String extractNextMarker(String s) {
         final int startIndex = s.indexOf('(');
         final int endIndex = 1 + s.indexOf(')');
 
         if (startIndex < 0 || endIndex <= 0 || endIndex < startIndex) {
-            return Optional.empty();
+            throw new RuntimeException("Marker does not match format");
         }
-        return Optional.of(s.substring(startIndex, endIndex));
+        return s.substring(startIndex, endIndex);
     }
 
     public static Pair<Integer> parseMarker(String s) {

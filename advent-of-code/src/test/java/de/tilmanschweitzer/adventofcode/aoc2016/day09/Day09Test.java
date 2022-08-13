@@ -7,6 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Day09Test {
 
+    @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(107035, new Day09().getResultOfFirstPuzzle());
+    }
 
     @Test
     public void decompress() {
@@ -34,13 +38,12 @@ class Day09Test {
 
     @Test
     public void extractMarker() {
-        assertEquals("(1x5)", Day09.extractNextMarker("A(1x5)BC").get());
+        assertEquals("(1x5)", Day09.extractNextMarker("A(1x5)BC"));
     }
 
     @Test
     public void parseMarker() {
         assertEquals(Pair.of(3, 17), Day09.parseMarker("(3x17)"));
         assertEquals(Pair.of(13, 7), Day09.parseMarker("(13x7)"));
-
     }
 }
