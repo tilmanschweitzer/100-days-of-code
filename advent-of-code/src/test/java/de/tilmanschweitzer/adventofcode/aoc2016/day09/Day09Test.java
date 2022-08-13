@@ -9,8 +9,14 @@ class Day09Test {
 
     @Test
     public void getResultOfFirstPuzzle() {
-        assertEquals(107035, new Day09().getResultOfFirstPuzzle());
+        assertEquals(107035L, new Day09().getResultOfFirstPuzzle());
     }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(11451628995L, new Day09().getResultOfSecondPuzzle());
+    }
+
 
     @Test
     public void decompress() {
@@ -26,6 +32,14 @@ class Day09Test {
     }
 
     @Test
+    public void decompressV2() {
+        assertEquals("ADVENT", Day09.decompressV2("ADVENT"));
+        assertEquals("ABBBBBC", Day09.decompressV2("A(1x5)BC"));
+        assertEquals("XABCABCABCABCABCABCY", Day09.decompressV2("X(8x2)(3x3)ABCY"));
+        assertEquals(Day09.repeat(241920, "A"), Day09.decompressV2("(27x12)(20x12)(13x14)(7x10)(1x12)A"));
+        assertEquals(445, Day09.decompressV2("(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN").length());
+    }
+    @Test
     public void decompressLength() {
         assertEquals(6, Day09.decompressLength("ADVENT"));
         assertEquals("ABBBBBC".length(), Day09.decompressLength("A(1x5)BC"));
@@ -35,6 +49,16 @@ class Day09Test {
         assertEquals("X(3x3)ABC(3x3)ABCY".length(), Day09.decompressLength("X(8x2)(3x3)ABCY"));
         assertEquals(Day09.repeat(8, "(22x7)(4x15)XOPG(7x9)JDPAKGM(8x8)ALGCJRZQ(38x1)(4x10)VNSW(12x10)BZPAZABYKIDJ(3x14)IHF(40x15)(34x8)UGTIHCTVONZPPIWUAEGHGFJUNTIMIELOLW(6x1)XLMMKD").length(), Day09.decompressLength("(143x8)(22x7)(4x15)XOPG(7x9)JDPAKGM(8x8)ALGCJRZQ(38x1)(4x10)VNSW(12x10)BZPAZABYKIDJ(3x14)IHF(40x15)(34x8)UGTIHCTVONZPPIWUAEGHGFJUNTIMIELOLW(6x1)XLMMKD"));
     }
+
+    @Test
+    public void decompressV2Length() {
+        assertEquals("ADVENT".length(), Day09.decompressV2Length("ADVENT"));
+        assertEquals("ABBBBBC".length(), Day09.decompressV2Length("A(1x5)BC"));
+        assertEquals("XABCABCABCABCABCABCY".length(), Day09.decompressV2Length("X(8x2)(3x3)ABCY"));
+        assertEquals(241920, Day09.decompressV2Length("(27x12)(20x12)(13x14)(7x10)(1x12)A"));
+        assertEquals(445, Day09.decompressV2("(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN").length());
+    }
+
 
     @Test
     public void extractMarker() {

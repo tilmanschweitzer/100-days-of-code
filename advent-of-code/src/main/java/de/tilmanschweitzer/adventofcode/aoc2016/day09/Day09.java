@@ -1,29 +1,34 @@
 package de.tilmanschweitzer.adventofcode.aoc2016.day09;
 
+import com.google.common.cache.Weigher;
+import com.google.common.collect.Maps;
 import de.tilmanschweitzer.adventofcode.common.Pair;
 import de.tilmanschweitzer.adventofcode.day.SingleLineAdventOfCodeDay;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
-public class Day09 extends SingleLineAdventOfCodeDay<String, Integer> {
+public class Day09 extends SingleLineAdventOfCodeDay<String, Long> {
 
     public Day09() {
         super(2016, 9);
     }
 
     @Override
-    public Integer getResultOfFirstPuzzle(final String input) {
+    public Long getResultOfFirstPuzzle(final String input) {
         return decompressLength(input);
     }
 
     @Override
-    public Integer getResultOfSecondPuzzle(final String input) {
-        return 0;
+    public Long getResultOfSecondPuzzle(final String input) {
+        return decompressV2Length(input);
     }
 
     @Override
@@ -37,6 +42,41 @@ public class Day09 extends SingleLineAdventOfCodeDay<String, Integer> {
     }
 
     public static String decompress(String input) {
+        return genericDecompressX(input, Function.identity(), (a, b) -> a + b, Function.identity(), Day09::decompress);
+    }
+
+    public static String decompressV2(String input) {
+        return genericDecompressX(input, Function.identity(), (a, b) -> a + b, Day09::decompressV2, Day09::decompressV2);
+    }
+
+    private static <T> T genericDecompressX(String input, Function<String, T> map, BiFunction<T, T, T> reduce, Function<String, T> decompressRepeatedString, Function<String, T> decompressRemainingInput) {
+        if (input.indexOf('(') < 0) {
+            return map.apply(input);
+        }
+
+        final int next = input.indexOf('(');
+
+        final String markerString = extractNextMarker(input);
+        final Pair<Integer> marker = parseMarker(markerString);
+        final int repeatRange = marker.getLeftValue();
+        final int repeatTimes = marker.getRightValue();
+
+        final String uncompressed = input.substring(0, next);
+
+        final int repeatedStringStartIndex = next + markerString.length();
+        final String stringToBeRepeated = input.substring(repeatedStringStartIndex, repeatedStringStartIndex + repeatRange);
+        final String repeatedString = repeat(repeatTimes, stringToBeRepeated);
+
+        final String remainingInput = input.substring(repeatedStringStartIndex + repeatRange);
+
+        final T firstReduction = reduce.apply(map.apply(uncompressed), decompressRepeatedString.apply(repeatedString));
+        final T secondReduction = reduce.apply(firstReduction, decompressRemainingInput.apply(remainingInput));
+
+        return secondReduction;
+    }
+
+
+    private static String genericDecompress(String input, Function<String, String> decompressRepeatedString, Function<String, String> decompressRemainingInput) {
         if (input.indexOf('(') < 0) {
             return input;
         }
@@ -57,10 +97,19 @@ public class Day09 extends SingleLineAdventOfCodeDay<String, Integer> {
 
         final String remainingInput = input.substring(repeatedStringStartIndex + repeatRange);
 
-        return uncompressed + repeatedString + decompress(remainingInput);
+        return uncompressed + decompressRepeatedString.apply(repeatedString) + decompressRemainingInput.apply(remainingInput);
     }
 
-    public static int decompressLength(String input) {
+    public static long decompressLength(String input) {
+        return genericDecompressX(input, s -> (long) s.length(), Long::sum, s -> (long) s.length(), Day09::decompressLength);
+    }
+
+    public static long decompressV2Length(String input) {
+        return genericDecompressX(input, s -> (long) s.length(), Long::sum, Day09::decompressV2Length, Day09::decompressV2Length);
+    }
+
+
+    private static long genericDecompressLength(String input, Function<String, Long> decompressRepeatedString, Function<String, Long> decompressRemainingInput) {
         if (input.indexOf('(') < 0) {
             return input.length();
         }
@@ -72,13 +121,16 @@ public class Day09 extends SingleLineAdventOfCodeDay<String, Integer> {
         final int repeatRange = marker.getLeftValue();
         final int repeatTimes = marker.getRightValue();
 
+        final String uncompressed = input.substring(0, next);
+
+
         final int repeatedStringStartIndex = next + markerString.length();
+        final String stringToBeRepeated = input.substring(repeatedStringStartIndex, repeatedStringStartIndex + repeatRange);
+        final String repeatedString = repeat(repeatTimes, stringToBeRepeated);
 
         final String remainingInput = input.substring(repeatedStringStartIndex + repeatRange);
 
-        final int repeatedLength = repeatRange * repeatTimes;
-
-        return next + repeatedLength + decompressLength(remainingInput);
+        return uncompressed.length() + decompressRepeatedString.apply(repeatedString) + decompressRemainingInput.apply(remainingInput);
     }
 
     public static String repeat(int repeat, String s) {
