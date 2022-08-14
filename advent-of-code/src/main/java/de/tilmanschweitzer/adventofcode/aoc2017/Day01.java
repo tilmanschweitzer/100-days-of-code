@@ -21,7 +21,7 @@ public class Day01 extends SingleLineAdventOfCodeDay<List<Integer>, Integer> {
 
     @Override
     public Integer getResultOfSecondPuzzle(final List<Integer> numbers) {
-        return 0;
+        return sumDuplicateNumbersV2(numbers);
     }
 
     @Override
@@ -40,8 +40,16 @@ public class Day01 extends SingleLineAdventOfCodeDay<List<Integer>, Integer> {
     }
 
     public static int sumDuplicateNumbers(List<Integer> numbers) {
+        return sumDuplicateNumbers(numbers, 1);
+    }
+
+    public static int sumDuplicateNumbersV2(List<Integer> numbers) {
+        return sumDuplicateNumbers(numbers, numbers.size() / 2);
+    }
+
+    private static int sumDuplicateNumbers(List<Integer> numbers, int distance) {
         return IntStream.range(0, numbers.size()).boxed().map(index -> {
-            int nextIndex = (index + 1) % numbers.size();
+            int nextIndex = (index + distance) % numbers.size();
             if (numbers.get(index) != numbers.get(nextIndex)) {
                 return 0;
             }
