@@ -1,10 +1,6 @@
 package de.tilmanschweitzer.adventofcode.aoc2017;
 
-import de.tilmanschweitzer.adventofcode.common.Coordinate;
 import de.tilmanschweitzer.adventofcode.day.SingleLineAdventOfCodeDay;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
 
 import java.io.InputStream;
 import java.util.*;
@@ -18,7 +14,6 @@ public class Day01 extends SingleLineAdventOfCodeDay<List<Integer>, Integer> {
     public Day01() {
         super(2017, 1);
     }
-
 
     public Integer getResultOfFirstPuzzle(final List<Integer> numbers) {
         return sumDuplicateNumbers(numbers);
