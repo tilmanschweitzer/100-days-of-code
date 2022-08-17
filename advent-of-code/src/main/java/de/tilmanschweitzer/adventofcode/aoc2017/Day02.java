@@ -1,13 +1,14 @@
 package de.tilmanschweitzer.adventofcode.aoc2017;
 
+import de.tilmanschweitzer.adventofcode.common.Pair;
+import de.tilmanschweitzer.adventofcode.common.combination.OrderedCombinations;
+import de.tilmanschweitzer.adventofcode.common.combination.UnorderedCombinations;
+import de.tilmanschweitzer.adventofcode.common.combination.validator.CollectionSizeValidator;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 import de.tilmanschweitzer.adventofcode.day.SingleLineAdventOfCodeDay;
 
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -25,7 +26,7 @@ public class Day02 extends MultiLineAdventOfCodeDay<List<Integer>, Integer> {
 
     @Override
     public Integer getResultOfSecondPuzzle(final List<List<Integer>> numbers) {
-        return 0;
+        return spreadsheetChecksumV2(numbers);
     }
 
     @Override
@@ -53,6 +54,37 @@ public class Day02 extends MultiLineAdventOfCodeDay<List<Integer>, Integer> {
         return input.stream().map(Day02::rowChecksum).reduce(Integer::sum).orElse(0);
     }
 
+    public static int spreadsheetChecksumV2(List<List<Integer>> input) {
+        return input.stream().map(Day02::findEvenlyDivisiblePair).map(Day02::divide).reduce(Integer::sum).orElse(0);
+    }
+
+    public static int divide(Pair<Integer> pair) {
+        return pair.getLeftValue() / pair.getRightValue();
+    }
+
+    public static boolean isEvenlyDivisible(Pair<Integer> pair) {
+        return isEvenlyDivisible(pair.getLeftValue(), pair.getRightValue());
+    }
+
+    public static boolean isEvenlyDivisible(int n, int d) {
+        return n % d == 0;
+    }
+
+    public static Pair<Integer> findEvenlyDivisiblePair(List<Integer> numbers) {
+        final Set<Pair<Integer>> allCombinations = OrderedCombinations.allCombinations(numbers, new CollectionSizeValidator<>(2))
+                .map(pair -> Pair.of(pair.stream()))
+                .collect(Collectors.toSet());
+
+        final List<Pair<Integer>> result = allCombinations.stream().filter(Day02::isEvenlyDivisible).collect(Collectors.toUnmodifiableList());
+
+        if (result.isEmpty()) {
+            throw new RuntimeException("No result for : " + numbers);
+        }
+        if (result.size() != 1) {
+            throw new RuntimeException("Unexpected size " + result.size() + " for : " + numbers);
+        }
+        return result.get(0);
+    }
 
 
 }

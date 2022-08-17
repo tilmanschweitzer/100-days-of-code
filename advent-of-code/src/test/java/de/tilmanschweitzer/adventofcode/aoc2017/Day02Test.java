@@ -1,5 +1,6 @@
 package de.tilmanschweitzer.adventofcode.aoc2017;
 
+import de.tilmanschweitzer.adventofcode.common.Pair;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day02Test {
 
@@ -17,7 +19,7 @@ class Day02Test {
 
     @Test
     public void getResultOfSecondPuzzle() {
-        assertEquals(0, new Day02().getResultOfSecondPuzzle());
+        assertEquals(280, new Day02().getResultOfSecondPuzzle());
     }
 
     @Test
@@ -32,6 +34,19 @@ class Day02Test {
     }
 
     @Test
+    public void findEvenlyDivisiblePair() {
+        assertEquals(Pair.of(8, 2), Day02.findEvenlyDivisiblePair(List.of(5, 9, 2, 8)));
+    }
+    @Test
+    public void isEvenlyDivisible() {
+        assertTrue(Day02.isEvenlyDivisible(8, 2));
+        assertTrue(Day02.isEvenlyDivisible(9, 3));
+
+        assertFalse(Day02.isEvenlyDivisible(2, 8));
+        assertFalse(Day02.isEvenlyDivisible(3, 9));
+    }
+
+    @Test
     public void spreadsheetChecksum() {
         final String s = "5 1 9 5\n" +
                 "7 5 3\n" +
@@ -40,5 +55,16 @@ class Day02Test {
         final List<List<Integer>> input = Arrays.stream(s.split("\n")).map(Day02::parseNumbers).collect(Collectors.toUnmodifiableList());
 
         assertEquals(18, Day02.spreadsheetChecksum(input));
+    }
+
+    @Test
+    public void spreadsheetChecksumV2() {
+        final String s = "5 9 2 8\n" +
+                "9 4 7 3\n" +
+                "3 8 6 5";
+
+        final List<List<Integer>> input = Arrays.stream(s.split("\n")).map(Day02::parseNumbers).collect(Collectors.toUnmodifiableList());
+
+        assertEquals(9, Day02.spreadsheetChecksumV2(input));
     }
 }
