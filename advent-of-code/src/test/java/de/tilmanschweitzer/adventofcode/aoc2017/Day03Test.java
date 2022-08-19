@@ -51,4 +51,18 @@ class Day03Test {
         assertEquals(2, Day03.getManhattanDistanceForAccessPort(23));
         assertEquals(31, Day03.getManhattanDistanceForAccessPort(1024));
     }
+
+    @Test
+    public void getValueForAccessPortV2() {
+        assertEquals(1, Day03.getValueForAccessPortV2(1));
+        assertEquals(1, Day03.getValueForAccessPortV2(2));
+        assertEquals(2, Day03.getValueForAccessPortV2(3));
+        assertEquals(4, Day03.getValueForAccessPortV2(4));
+        assertEquals(5, Day03.getValueForAccessPortV2(5));
+        assertEquals(10, Day03.getValueForAccessPortV2(6));
+
+        assertEquals(25, Day03.getValueForAccessPortV2(9));
+        assertEquals(806, Day03.getValueForAccessPortV2(23));
+
+    }
 }

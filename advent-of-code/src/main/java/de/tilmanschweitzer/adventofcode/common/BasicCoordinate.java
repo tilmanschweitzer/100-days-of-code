@@ -34,6 +34,9 @@ public class BasicCoordinate extends Coordinate {
         }).collect(Collectors.toUnmodifiableSet());
     }
 
+    public Set<BasicCoordinate> getAllNeighborCoordinates() {
+        return Set.of(up(), down(), right(), left(), upLeft(), upRight(), downLeft(), downRight());
+    }
 
     public BasicCoordinate up() {
         return BasicCoordinate.of(x, y - 1);
@@ -49,6 +52,23 @@ public class BasicCoordinate extends Coordinate {
 
     public BasicCoordinate left() {
         return BasicCoordinate.of(x - 1, y);
+    }
+
+
+    public BasicCoordinate upLeft() {
+        return BasicCoordinate.of(x - 1, y - 1);
+    }
+
+    public BasicCoordinate upRight() {
+        return BasicCoordinate.of(x + 1, y - 1);
+    }
+
+    public BasicCoordinate downLeft() {
+        return BasicCoordinate.of(x - 1, y + 1);
+    }
+
+    public BasicCoordinate downRight() {
+        return BasicCoordinate.of(x + 1, y + 1);
     }
 
     @Override
