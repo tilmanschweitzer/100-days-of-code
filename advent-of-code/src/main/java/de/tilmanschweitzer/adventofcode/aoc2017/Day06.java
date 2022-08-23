@@ -19,13 +19,12 @@ public class Day06 extends SingleLineAdventOfCodeDay<List<Integer>, Integer> {
     }
 
     public Integer getResultOfFirstPuzzle(final List<Integer> input) {
-        final MemoryBlocks memoryBlocks = MemoryBlocks.from(input);
-        return memoryBlocks.findCombinationsUntilInfiniteLoopIsDetected().size();
+        return MemoryBlocks.from(input).findCombinationsUntilInfiniteLoopIsDetected().size();
     }
 
     @Override
     public Integer getResultOfSecondPuzzle(final List<Integer> input) {
-        return 0;
+        return MemoryBlocks.from(input).findNumberOfCyclesInInfinite();
     }
 
     @Override
@@ -59,6 +58,19 @@ public class Day06 extends SingleLineAdventOfCodeDay<List<Integer>, Integer> {
             }
 
             return existingConfigurations;
+        }
+
+        public int findNumberOfCyclesInInfinite() {
+            final Set<List<Integer>> existingConfigurations = new HashSet<>();
+            final List<List<Integer>> orderedExistingConfigurations = new ArrayList<>();
+            while (!existingConfigurations.contains(currentConfiguration())) {
+                existingConfigurations.add(currentConfiguration());
+                orderedExistingConfigurations.add(currentConfiguration());
+                redistribute();
+            }
+
+            final int firstOccurrence = orderedExistingConfigurations.indexOf(currentConfiguration());
+            return orderedExistingConfigurations.size() - firstOccurrence;
         }
 
         public List<Integer> currentConfiguration() {

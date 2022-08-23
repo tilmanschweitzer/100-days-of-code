@@ -9,6 +9,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Day06Test {
 
+    @Test
+    public void getResultOfFirstPuzzle() {
+        assertEquals(11137, new Day06().getResultOfFirstPuzzle());
+    }
+
+    @Test
+    public void getResultOfSecondPuzzle() {
+        assertEquals(1037, new Day06().getResultOfSecondPuzzle());
+    }
 
     @Test
     public void findCombinationsUntilInfiniteLoopIsDetected() {
@@ -21,5 +30,10 @@ class Day06Test {
         );
 
         assertEquals(expectedResult, Day06.MemoryBlocks.from(List.of(0, 2, 7, 0)).findCombinationsUntilInfiniteLoopIsDetected());
+    }
+
+    @Test
+    public void findNumberOfCyclesInInfinite() {
+        assertEquals(4, Day06.MemoryBlocks.from(List.of(0, 2, 7, 0)).findNumberOfCyclesInInfinite());
     }
 }
