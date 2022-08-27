@@ -32,7 +32,9 @@ public class Day08 extends MultiLineAdventOfCodeDay<Day08.Instruction, Integer> 
 
     @Override
     public Integer getResultOfSecondPuzzle(final List<Instruction> input) {
-        return 0;
+        final Registers registers = new Registers();
+        registers.execute(input);
+        return registers.getHighestRegisteredValue();
     }
 
     @Override
@@ -102,10 +104,19 @@ public class Day08 extends MultiLineAdventOfCodeDay<Day08.Instruction, Integer> 
 
     @ToString
     public static class Registers {
+        public static int DEFAULT_VALUE = 0;
+
+        int highestRegisteredValue = DEFAULT_VALUE;
+
         final Map<String, Integer> registers = new HashMap<>();
 
         public Registers() {
-            registers.put("a", 0);
+            registers.put("a", DEFAULT_VALUE);
+        }
+
+
+        public int getHighestRegisteredValue() {
+            return highestRegisteredValue;
         }
 
         public int getRegisterValue(String registerName) {
@@ -115,11 +126,18 @@ public class Day08 extends MultiLineAdventOfCodeDay<Day08.Instruction, Integer> 
             return registers.get(registerName);
         }
 
+        private void updateRegisterValue(String registerName, int value) {
+            registers.put(registerName, value);
+            if (value > highestRegisteredValue) {
+                highestRegisteredValue = value;
+            }
+        }
+
         public void execute(Instruction instruction) {
             if (instruction.condition.check(this)) {
                 final int registerValue = getRegisterValue(instruction.getRegister());
                 final int newRegisterValue = instruction.operation.execute(registerValue);
-                registers.put(instruction.getRegister(), newRegisterValue);
+                updateRegisterValue(instruction.getRegister(), newRegisterValue);
             }
         }
 
@@ -128,7 +146,7 @@ public class Day08 extends MultiLineAdventOfCodeDay<Day08.Instruction, Integer> 
         }
 
         public Integer getLargestValueInAnyRegister() {
-            return registers.values().stream().reduce(Integer::max).orElse(0);
+            return registers.values().stream().reduce(Integer::max).orElse(DEFAULT_VALUE);
         }
     }
 
