@@ -20,21 +20,18 @@ class Day01NotQuiteLispTest {
 
     final Day01NotQuiteLisp day01 = new Day01NotQuiteLisp();
 
-    @Test
     @ParameterizedTest
     @ValueSource(strings = { "(())", "()()" })
     void getFloorForInput_balanced(String balancedInput) {
         assertEquals(0, day01.getFloorForInput(day01.parseLine(balancedInput)));
     }
 
-    @Test
     @ParameterizedTest
     @ValueSource(strings = { "(((", "(()(()(", "(()(()(" })
     void getFloorForInput_openingParenthesisOverweight(String openingOverweight) {
         assertEquals(3, day01.getFloorForInput(day01.parseLine(openingOverweight)));
     }
 
-    @Test
     @ParameterizedTest
     @ValueSource(strings = { ")))", ")())())" })
     void getFloorForInput_closingParenthesisOverweight(String closingOverweight) {
