@@ -28,15 +28,12 @@ public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>, L
         super(2020, 4);
     }
 
-    private static final char TREE = '#';
-
-
     public static List<Passport> passportsFromFieldsList(final List<List<PassportField>> lines) {
         final List<Passport> passports = new ArrayList<>();
         Passport currentPassport = new Passport();
 
         for (List<PassportField> line : lines) {
-            if (line.size() == 0) {
+            if (line.isEmpty()) {
                 passports.add(currentPassport);
                 currentPassport = new Passport();
             } else {
@@ -44,7 +41,7 @@ public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>, L
             }
         }
 
-        if (!passports.contains(currentPassport) && currentPassport.fields.size() > 0) {
+        if (!passports.contains(currentPassport) && !currentPassport.fields.isEmpty()) {
             passports.add(currentPassport);
         }
 

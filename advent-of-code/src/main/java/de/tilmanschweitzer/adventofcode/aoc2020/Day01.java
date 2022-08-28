@@ -49,8 +49,6 @@ public class Day01 extends MultiLineAdventOfCodeDay<Integer, Integer> {
         return getSystemResourceAsStream("2020/day01-input.txt");
     }
 
-    private static final String LINE_SEPARATOR = "\n";
-
     public static Optional<Pair<Integer>> findMatchingNumberPair(final List<Integer> testInput, int sumOfPair) {
         if (testInput.size() < 2) {
             return Optional.empty();

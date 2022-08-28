@@ -48,8 +48,6 @@ public class Day02 extends MultiLineAdventOfCodeDay<Day02.PasswordPolicyAndPassw
         return getSystemResourceAsStream("2020/day02-input.txt");
     }
 
-    private static final String LINE_SEPARATOR = "\n";
-
     @EqualsAndHashCode
     @ToString
     public static class PasswordPolicyAndPassword {
