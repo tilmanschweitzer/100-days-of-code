@@ -225,6 +225,11 @@ New repository: [sudoku-solver](https://github.com/tilmanschweitzer/sudoku-solve
 
 New repository: [tomcat-stuck-thread-log-parser](https://github.com/tilmanschweitzer/tomcat-stuck-thread-log-parser)
 
+    # advent-of-code
+    git filter-branch -f --prune-empty --msg-filter 'sed "s/advent-of-code: //g"' --subdirectory-filter advent-of-code master
+    git remote set-url origin git@github.com:tilmanschweitzer/advent-of-code.git
+
+New repository: [advent-of-code](https://github.com/tilmanschweitzer/advent-of-code)
 
 
 ## Idea Backlog
