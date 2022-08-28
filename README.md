@@ -219,7 +219,11 @@ Extract folders as custom repositories.
 
 New repository: [sudoku-solver](https://github.com/tilmanschweitzer/sudoku-solver)
 
+    # tomcat-stuck-thread-log-parser
+    git filter-branch -f --prune-empty --msg-filter 'sed "s/tomcat-stuck-thread-log-parser: //g"' --subdirectory-filter tomcat-stuck-thread-log-parser master
+    git remote set-url origin git@github.com:tilmanschweitzer/tomcat-stuck-thread-log-parser.git
 
+New repository: [tomcat-stuck-thread-log-parser](https://github.com/tilmanschweitzer/tomcat-stuck-thread-log-parser)
 
 
 
