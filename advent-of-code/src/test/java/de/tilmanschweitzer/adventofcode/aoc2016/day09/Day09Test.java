@@ -3,7 +3,7 @@ package de.tilmanschweitzer.adventofcode.aoc2016.day09;
 import de.tilmanschweitzer.adventofcode.common.Pair;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day09Test {
 
@@ -39,6 +39,7 @@ class Day09Test {
         assertEquals(Day09.repeat(241920, "A"), Day09.decompressV2("(27x12)(20x12)(13x14)(7x10)(1x12)A"));
         assertEquals(445, Day09.decompressV2("(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN").length());
     }
+
     @Test
     public void decompressLength() {
         assertEquals(6, Day09.decompressLength("ADVENT"));

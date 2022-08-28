@@ -1,10 +1,10 @@
 package de.tilmanschweitzer.adventofcode.aoc2016.day08.command;
 
-import de.tilmanschweitzer.adventofcode.aoc2016.day08.screen.Screen;
 import de.tilmanschweitzer.adventofcode.aoc2016.day08.command.parser.CreateRectCommandParser;
+import de.tilmanschweitzer.adventofcode.aoc2016.day08.screen.Screen;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CreateRectCommandTest {
 

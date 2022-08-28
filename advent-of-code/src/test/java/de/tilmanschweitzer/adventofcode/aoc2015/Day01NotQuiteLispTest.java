@@ -2,7 +2,7 @@ package de.tilmanschweitzer.adventofcode.aoc2015;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day01NotQuiteLispTest {
 

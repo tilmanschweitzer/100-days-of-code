@@ -2,7 +2,7 @@ package de.tilmanschweitzer.adventofcode.aoc2015;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day08CountEncodedAndDecodedStringsTest {
 
@@ -45,7 +45,8 @@ class Day08CountEncodedAndDecodedStringsTest {
         assertEquals("\\", Day08CountEncodedAndDecodedStrings.parseString("\"\\\\\""));
         assertEquals("abc", Day08CountEncodedAndDecodedStrings.parseString("\"abc\""));
         assertEquals("aaa\"aaa", Day08CountEncodedAndDecodedStrings.parseString("\"aaa\\\"aaa\""));
-        assertEquals("'", Day08CountEncodedAndDecodedStrings.parseString("\"\\x27\""));;
+        assertEquals("'", Day08CountEncodedAndDecodedStrings.parseString("\"\\x27\""));
+        ;
         assertEquals("d\\gkbqo\\fwukyxab\"u", Day08CountEncodedAndDecodedStrings.parseString("\"d\\\\gkbqo\\\\fwukyxab\\\"u\""));
     }
 

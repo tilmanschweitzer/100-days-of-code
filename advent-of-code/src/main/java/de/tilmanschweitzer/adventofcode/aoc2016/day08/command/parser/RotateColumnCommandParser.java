@@ -1,7 +1,6 @@
 package de.tilmanschweitzer.adventofcode.aoc2016.day08.command.parser;
 
 import de.tilmanschweitzer.adventofcode.aoc2016.day08.command.RotateColumnCommand;
-import de.tilmanschweitzer.adventofcode.aoc2016.day08.command.RotateRowCommand;
 import de.tilmanschweitzer.adventofcode.common.Pair;
 
 import java.util.regex.Pattern;

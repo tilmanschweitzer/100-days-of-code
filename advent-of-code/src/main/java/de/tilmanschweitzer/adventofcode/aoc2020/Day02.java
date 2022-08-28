@@ -5,7 +5,6 @@ import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;

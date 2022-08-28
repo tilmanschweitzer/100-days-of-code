@@ -15,6 +15,7 @@ public class Day11SantasPasswordPolicy extends SingleLineAdventOfCodeDay<String,
     public Day11SantasPasswordPolicy() {
         super(2015, 11);
     }
+
     public static String alphabet = "abcdefghijklmnopqrstuvwxyz";
 
     public static String findNextPassword(String lastPassword) {
@@ -65,7 +66,7 @@ public class Day11SantasPasswordPolicy extends SingleLineAdventOfCodeDay<String,
             if (index < password.length() - 2 && password.charAt(index + 2) == secondChar) {
                 return false;
             }
-            if (index > 0 && password.charAt(index -1 ) == firstChar) {
+            if (index > 0 && password.charAt(index - 1) == firstChar) {
                 return false;
             }
             return true;
@@ -76,7 +77,7 @@ public class Day11SantasPasswordPolicy extends SingleLineAdventOfCodeDay<String,
         return !(password.contains("i") || password.contains("o") || password.contains("l"));
     }
 
-    public  static boolean exactlyEightLowercaseLetters(String password) {
+    public static boolean exactlyEightLowercaseLetters(String password) {
         return password.length() == 8 && password.toLowerCase().equals(password);
     }
 

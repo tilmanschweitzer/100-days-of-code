@@ -22,6 +22,7 @@ public class Day03 extends MultiLineAdventOfCodeDay<Day03.Triangle, Long> {
         super(2016, 3);
     }
 
+    @Override
     public Long getResultOfFirstPuzzle(final List<Triangle> triangels) {
         return triangels.stream().filter(Triangle::isValid).count();
     }

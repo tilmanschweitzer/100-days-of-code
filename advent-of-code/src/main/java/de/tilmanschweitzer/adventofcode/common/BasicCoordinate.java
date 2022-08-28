@@ -2,10 +2,7 @@ package de.tilmanschweitzer.adventofcode.common;
 
 import com.google.common.base.Preconditions;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.checkerframework.common.value.qual.IntRange;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

@@ -1,14 +1,14 @@
 package de.tilmanschweitzer.adventofcode.aoc2015;
 
-import de.tilmanschweitzer.adventofcode.common.Ring;
 import de.tilmanschweitzer.adventofcode.aoc2015.Day13PerfectDinnerHappiness.SeatPreference;
+import de.tilmanschweitzer.adventofcode.common.Ring;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day13PerfectDinnerHappinessTest {
 
@@ -52,7 +52,6 @@ class Day13PerfectDinnerHappinessTest {
     @Test
     public void searchHappiestCombination() {
         final List<SeatPreference> input = Arrays.stream(testInput.split("\n")).map(SeatPreference::parse).collect(Collectors.toUnmodifiableList());
-        final Day13PerfectDinnerHappiness.SeatCombinationExplorer seatCombinationExplorer = new Day13PerfectDinnerHappiness.SeatCombinationExplorer(input);
         final Ring<String> happiestCombination = new Day13PerfectDinnerHappiness.SeatCombinationExplorer(input).searchHappiestCombination();
         assertEquals(Ring.of("David", "Alice", "Bob", "Carol"), happiestCombination);
     }

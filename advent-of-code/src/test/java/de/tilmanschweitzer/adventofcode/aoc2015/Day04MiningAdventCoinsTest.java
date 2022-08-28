@@ -2,7 +2,7 @@ package de.tilmanschweitzer.adventofcode.aoc2015;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day04MiningAdventCoinsTest {
 
@@ -18,7 +18,7 @@ class Day04MiningAdventCoinsTest {
 
     @Test
     public void findHashStaringWith() {
-        assertEquals( 609043, Day04MiningAdventCoins.findAdventCoinForKey("abcdef"));
-        assertEquals( 1048970, Day04MiningAdventCoins.findAdventCoinForKey("pqrstuv"));
+        assertEquals(609043, Day04MiningAdventCoins.findAdventCoinForKey("abcdef"));
+        assertEquals(1048970, Day04MiningAdventCoins.findAdventCoinForKey("pqrstuv"));
     }
 }

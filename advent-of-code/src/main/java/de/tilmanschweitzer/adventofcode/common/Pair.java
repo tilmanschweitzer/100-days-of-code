@@ -20,13 +20,14 @@ public class Pair<T> {
         return new Pair<>(leftValue, rightValue);
     }
 
-    public static <T> Pair<T>  of(Stream<T> valueStream) {
+    public static <T> Pair<T> of(Stream<T> valueStream) {
         final List<T> values = valueStream.collect(Collectors.toUnmodifiableList());
         if (values.size() != 2) {
             throw new IllegalArgumentException("Pair must be created from 2 values but got " + values.size() + " values");
         }
         return new Pair<>(values.get(0), values.get(1));
     }
+
     public T getLeftValue() {
         return leftValue;
     }

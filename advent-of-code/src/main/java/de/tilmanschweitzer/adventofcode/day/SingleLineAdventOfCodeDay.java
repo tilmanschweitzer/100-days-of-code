@@ -14,6 +14,7 @@ public abstract class SingleLineAdventOfCodeDay<I, A> extends AdventOfCodeDay<I,
 
     protected abstract I parseLine(String line);
 
+    @Override
     protected I getParsedInput() {
         return parseInputFromStream(getInputAsStream());
     }

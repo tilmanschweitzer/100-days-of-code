@@ -21,9 +21,10 @@ public class Day05NiceAndNaughtyStrings extends MultiLineAdventOfCodeDay<String,
         Preconditions.checkArgument(s.length() == 1);
         return "aeiou".contains(s);
     }
+
     public static boolean isNiceString(String input) {
         final String[] split = input.split("");
-        final boolean containsAtLeastThreeVowels =  Arrays.stream(split).filter(Day05NiceAndNaughtyStrings::isVowel).count() >= 3;
+        final boolean containsAtLeastThreeVowels = Arrays.stream(split).filter(Day05NiceAndNaughtyStrings::isVowel).count() >= 3;
         final boolean containsAtLeastOneDoubleLetter = IntStream.range(0, input.length() - 1).anyMatch(index -> split[index].equals(split[index + 1]));
         final boolean containsForbiddenCombinations = List.of("ab", "cd", "pq", "xy").stream().anyMatch(forbiddenCombination -> input.contains(forbiddenCombination));
         return containsAtLeastThreeVowels && containsAtLeastOneDoubleLetter && !containsForbiddenCombinations;

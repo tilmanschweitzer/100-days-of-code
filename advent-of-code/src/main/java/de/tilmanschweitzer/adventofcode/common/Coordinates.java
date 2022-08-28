@@ -1,10 +1,6 @@
 package de.tilmanschweitzer.adventofcode.common;
 
-import com.google.common.collect.Streams;
-import org.checkerframework.checker.units.qual.A;
-
 import java.util.concurrent.atomic.AtomicInteger;
-
 import java.util.stream.Stream;
 
 public class Coordinates {

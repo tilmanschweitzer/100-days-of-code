@@ -50,6 +50,7 @@ public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>, Integer>
         return Grid.from(points).getPrintableVersion();
 
     }
+
     public static String getPrintableVersion(List<Vector> firstPath, List<Vector> secondPath) {
         final List<Point> firstPoints = Point.fromPath(firstPath);
         final List<Point> secondPoints = Point.fromPath(secondPath);
@@ -164,7 +165,7 @@ public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>, Integer>
 
         @Override
         public String toString() {
-            return "(" + x + "," + y +")";
+            return "(" + x + "," + y + ")";
         }
 
         @Override
@@ -172,6 +173,7 @@ public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>, Integer>
             return getManhattanDistance() - o.getManhattanDistance();
         }
     }
+
     public static class Vector extends Coordinate {
 
         public Vector(int x, int y) {
@@ -181,6 +183,7 @@ public class Day03 extends MultiLineAdventOfCodeDay<List<Day03.Vector>, Integer>
         public static List<Vector> fromPathList(String pathList) {
             return Arrays.stream(pathList.split(",")).map(Vector::fromPath).collect(toUnmodifiableList());
         }
+
         public static Vector fromPath(String path) {
             final char direction = path.charAt(0);
             final int number = Integer.parseInt(path.substring(1));

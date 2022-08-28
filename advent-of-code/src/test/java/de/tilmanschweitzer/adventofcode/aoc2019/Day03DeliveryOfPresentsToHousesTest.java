@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day03DeliveryOfPresentsToHousesTest {
 
@@ -19,7 +19,7 @@ class Day03DeliveryOfPresentsToHousesTest {
 
     @Test
     public void getResultOfSecondPuzzle() {
-        // TODO: Solve
+        // TODO: Implement part 2
     }
 
     @Test

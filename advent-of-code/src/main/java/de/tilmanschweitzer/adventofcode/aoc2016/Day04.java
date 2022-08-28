@@ -23,6 +23,7 @@ public class Day04 extends MultiLineAdventOfCodeDay<Day04.Room, Integer> {
         super(2016, 4);
     }
 
+    @Override
     public Integer getResultOfFirstPuzzle(final List<Room> rooms) {
         return sum(rooms.stream().filter(Room::isValid).map(Room::getId));
     }

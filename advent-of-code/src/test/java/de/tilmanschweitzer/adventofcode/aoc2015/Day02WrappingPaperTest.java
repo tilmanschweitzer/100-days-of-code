@@ -3,7 +3,7 @@ package de.tilmanschweitzer.adventofcode.aoc2015;
 import de.tilmanschweitzer.adventofcode.aoc2015.Day02WrappingPaper.Dimensions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day02WrappingPaperTest {
 

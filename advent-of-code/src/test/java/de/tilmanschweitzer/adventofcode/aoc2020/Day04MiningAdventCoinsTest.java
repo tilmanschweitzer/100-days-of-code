@@ -1,6 +1,5 @@
 package de.tilmanschweitzer.adventofcode.aoc2020;
 
-import de.tilmanschweitzer.adventofcode.aoc2020.Day04;
 import de.tilmanschweitzer.adventofcode.aoc2020.Day04.Passport;
 import de.tilmanschweitzer.adventofcode.aoc2020.Day04.PassportField;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ class Day04MiningAdventCoinsTest {
         assertEquals(150, new Day04().getResultOfSecondPuzzle());
     }
 
-    static final String testInput =  "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd\n" +
+    static final String testInput = "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd\n" +
             "byr:1937 iyr:2017 cid:147 hgt:183cm\n" +
             "\n" +
             "iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884\n" +
@@ -38,7 +37,7 @@ class Day04MiningAdventCoinsTest {
             "hcl:#cfa07d eyr:2025 pid:166559648\n" +
             "iyr:2011 ecl:brn hgt:59in";
 
-    static final String validPassports =  "pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980\n" +
+    static final String validPassports = "pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980\n" +
             "hcl:#623a2f\n" +
             "\n" +
             "eyr:2029 ecl:blu cid:129 byr:1989\n" +

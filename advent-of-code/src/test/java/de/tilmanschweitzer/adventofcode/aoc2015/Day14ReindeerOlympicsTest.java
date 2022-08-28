@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day14ReindeerOlympicsTest {
 
@@ -52,8 +52,8 @@ class Day14ReindeerOlympicsTest {
         final List<ReindeerScore> actualScores = ReindeerRace.scoresAfterRaceDuration(List.of(comet, dancer), 1000);
 
         final List<ReindeerScore> expectedScores = List.of(
-            new ReindeerScore(dancer, 689),
-            new ReindeerScore(comet, 312)
+                new ReindeerScore(dancer, 689),
+                new ReindeerScore(comet, 312)
         );
 
         assertEquals(expectedScores, actualScores);

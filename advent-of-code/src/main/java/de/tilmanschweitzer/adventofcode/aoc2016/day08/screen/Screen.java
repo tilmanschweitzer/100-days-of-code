@@ -1,8 +1,6 @@
 package de.tilmanschweitzer.adventofcode.aoc2016.day08.screen;
 
-import com.google.common.collect.Streams;
 import de.tilmanschweitzer.adventofcode.aoc2016.day08.command.ModifyScreenCommand;
-import de.tilmanschweitzer.adventofcode.common.Converters;
 import de.tilmanschweitzer.adventofcode.common.Coordinates;
 
 import java.util.ArrayList;
@@ -52,6 +50,7 @@ public class Screen {
     public boolean isOn(int x, int y) {
         return getPixel(x, y).isOn();
     }
+
     public void turnOn(int x, int y) {
         getPixel(x, y).turnOn();
     }
@@ -67,7 +66,7 @@ public class Screen {
     }
 
     private static char displayChar(ScreenPixel screenPixel) {
-        return screenPixel.isOn()  ? '#' : '.';
+        return screenPixel.isOn() ? '#' : '.';
     }
 
 

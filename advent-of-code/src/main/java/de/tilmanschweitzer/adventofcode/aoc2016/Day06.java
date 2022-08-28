@@ -4,7 +4,10 @@ import com.google.common.base.Preconditions;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -16,6 +19,7 @@ public class Day06 extends MultiLineAdventOfCodeDay<String, String> {
     public Day06() {
         super(2016, 6);
     }
+
     @Override
     public String getResultOfFirstPuzzle(final List<String> input) {
         return reconstructMessageByMostCommonChar(input);

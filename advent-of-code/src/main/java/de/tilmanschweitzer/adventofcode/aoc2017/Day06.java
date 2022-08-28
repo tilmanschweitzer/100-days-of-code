@@ -18,6 +18,7 @@ public class Day06 extends SingleLineAdventOfCodeDay<List<Integer>, Integer> {
         super(2017, 6);
     }
 
+    @Override
     public Integer getResultOfFirstPuzzle(final List<Integer> input) {
         return MemoryBlocks.from(input).findCombinationsUntilInfiniteLoopIsDetected().size();
     }

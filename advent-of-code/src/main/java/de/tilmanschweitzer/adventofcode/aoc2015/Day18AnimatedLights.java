@@ -10,7 +10,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day18AnimatedLights extends MultiLineAdventOfCodeDay<String, Long> {
@@ -33,10 +32,12 @@ public class Day18AnimatedLights extends MultiLineAdventOfCodeDay<String, Long> 
     @Override
     protected Long getResultOfSecondPuzzle(List<String> input) {
         AnimatedLightGrid currentGrid = AnimatedLightGrid.parse(input);
-        currentGrid.turnOnCorners();;
+        currentGrid.turnOnCorners();
+        ;
         for (int i = 0; i < 100; i++) {
             currentGrid = currentGrid.nextGrid();
-            currentGrid.turnOnCorners();;
+            currentGrid.turnOnCorners();
+            ;
         }
         return currentGrid.count();
     }
@@ -105,16 +106,17 @@ public class Day18AnimatedLights extends MultiLineAdventOfCodeDay<String, Long> 
         public int countNeighbors(LightCoordinate lightCoordinate, boolean state) {
             return (int) getNeighbors(lightCoordinate).stream().filter(neighbor -> lightGrid.get(neighbor) == state).count();
         }
+
         public Set<LightCoordinate> getNeighbors(int x, int y) {
             return getNeighbors(LightCoordinate.of(x, y));
         }
 
         public Set<LightCoordinate> getNeighbors(LightCoordinate lightCoordinate) {
             return IntStream.range(0, 9).boxed().map(index -> {
-                int x = lightCoordinate.getX() - 1 + index % 3;
-                int y = lightCoordinate.getY() - 1 + index / 3;
-                return new LightCoordinate(x, y);
-            }).filter(neighborCoordinate -> lightGrid.containsKey(neighborCoordinate) && !lightCoordinate.equals(neighborCoordinate))
+                        int x = lightCoordinate.getX() - 1 + index % 3;
+                        int y = lightCoordinate.getY() - 1 + index / 3;
+                        return new LightCoordinate(x, y);
+                    }).filter(neighborCoordinate -> lightGrid.containsKey(neighborCoordinate) && !lightCoordinate.equals(neighborCoordinate))
                     .collect(Collectors.toUnmodifiableSet());
         }
 
@@ -176,8 +178,8 @@ public class Day18AnimatedLights extends MultiLineAdventOfCodeDay<String, Long> 
         @Override
         public String toString() {
             return IntStream.range(0, gridSize).boxed()
-                    .map(row-> IntStream.range(0, gridSize).boxed()
-                            .map(col-> getDisplayStringForCoordinate(new LightCoordinate(col, row)))
+                    .map(row -> IntStream.range(0, gridSize).boxed()
+                            .map(col -> getDisplayStringForCoordinate(new LightCoordinate(col, row)))
                             .collect(Collectors.joining()))
                     .collect(Collectors.joining("\n"));
         }

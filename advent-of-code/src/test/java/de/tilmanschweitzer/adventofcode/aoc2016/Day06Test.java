@@ -1,11 +1,12 @@
 package de.tilmanschweitzer.adventofcode.aoc2016;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
 
 import static de.tilmanschweitzer.adventofcode.common.Converters.stringToCharList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day06Test {
 

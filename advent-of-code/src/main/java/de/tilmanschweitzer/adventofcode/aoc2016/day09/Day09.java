@@ -1,14 +1,11 @@
 package de.tilmanschweitzer.adventofcode.aoc2016.day09;
 
-import com.google.common.cache.Weigher;
-import com.google.common.collect.Maps;
 import de.tilmanschweitzer.adventofcode.common.Pair;
 import de.tilmanschweitzer.adventofcode.day.SingleLineAdventOfCodeDay;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.Arrays;
 import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

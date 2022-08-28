@@ -1,6 +1,5 @@
 package de.tilmanschweitzer.adventofcode.day;
 
-import de.tilmanschweitzer.adventofcode.app.AdventOfCode;
 import lombok.EqualsAndHashCode;
 
 import java.io.InputStream;

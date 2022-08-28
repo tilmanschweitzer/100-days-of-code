@@ -5,7 +5,6 @@ import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 import java.io.InputStream;
 import java.util.List;
 
-
 import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
@@ -14,6 +13,7 @@ public class Day01 extends MultiLineAdventOfCodeDay<Integer, Integer> {
     public Day01() {
         super(2019, 1);
     }
+
     @Override
     public Integer getResultOfFirstPuzzle(final List<Integer> inputNumbers) {
         return sum(inputNumbers.stream().map(Day01::getFuelForMass));

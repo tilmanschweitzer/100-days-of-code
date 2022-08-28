@@ -2,15 +2,14 @@ package de.tilmanschweitzer.adventofcode.aoc2017;
 
 import de.tilmanschweitzer.adventofcode.common.Pair;
 import de.tilmanschweitzer.adventofcode.common.combination.OrderedCombinations;
-import de.tilmanschweitzer.adventofcode.common.combination.UnorderedCombinations;
 import de.tilmanschweitzer.adventofcode.common.combination.validator.CollectionSizeValidator;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
-import de.tilmanschweitzer.adventofcode.day.SingleLineAdventOfCodeDay;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
@@ -20,6 +19,7 @@ public class Day02 extends MultiLineAdventOfCodeDay<List<Integer>, Integer> {
         super(2017, 2);
     }
 
+    @Override
     public Integer getResultOfFirstPuzzle(final List<List<Integer>> numbers) {
         return spreadsheetChecksum(numbers);
     }

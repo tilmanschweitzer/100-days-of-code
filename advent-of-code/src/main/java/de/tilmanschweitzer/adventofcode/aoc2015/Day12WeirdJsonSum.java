@@ -20,6 +20,7 @@ public class Day12WeirdJsonSum extends SingleLineAdventOfCodeDay<String, Integer
     public Day12WeirdJsonSum() {
         super(2015, 12);
     }
+
     public static class JsonNumberExtractor {
         final Predicate<JsonNode> skipCondition;
 
@@ -67,7 +68,8 @@ public class Day12WeirdJsonSum extends SingleLineAdventOfCodeDay<String, Integer
         public Integer sumAllNumbersInJson(String s) {
             return sum(extractAllNumbersFromJson(s));
         }
-        public static <T> Stream<T>  iteratorToStream(Iterator<T> iterator) {
+
+        public static <T> Stream<T> iteratorToStream(Iterator<T> iterator) {
             final Iterable<T> iterable = () -> iterator;
             return StreamSupport.stream(iterable.spliterator(), false);
         }
@@ -83,6 +85,7 @@ public class Day12WeirdJsonSum extends SingleLineAdventOfCodeDay<String, Integer
             return false;
         }
     }
+
     public static List<Integer> extractAllNumbersFromString(String s) {
         final String[] split = s.split("[^-\\d]+");
         return Arrays.stream(split).filter(Predicate.not(String::isBlank)).map(Integer::parseInt).collect(Collectors.toUnmodifiableList());

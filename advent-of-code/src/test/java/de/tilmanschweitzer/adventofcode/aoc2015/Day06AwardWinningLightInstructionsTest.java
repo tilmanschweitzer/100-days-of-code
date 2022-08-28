@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static de.tilmanschweitzer.adventofcode.aoc2015.Day06AwardWinningLightInstructions.LightInstruction.Instruction.*;
 import static de.tilmanschweitzer.adventofcode.aoc2015.Day06AwardWinningLightInstructions.LightInstruction.parseLightInstruction;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Day06AwardWinningLightInstructionsTest {
 
@@ -21,9 +22,9 @@ class Day06AwardWinningLightInstructionsTest {
 
     @Test
     public void parseLine() {
-        assertEquals(new LightInstruction(new LightCoordinate(0,0), new LightCoordinate(999,0), TURN_ON), parseLightInstruction("turn on 0,0 through 999,0"));
-        assertEquals(new LightInstruction(new LightCoordinate(123,17), new LightCoordinate(234,23), TOGGLE), parseLightInstruction("toggle 123,17 through 234,23"));
-        assertEquals(new LightInstruction(new LightCoordinate(17,123), new LightCoordinate(23, 234), TURN_OFF), parseLightInstruction("turn off 17,123 through 23,234"));
+        assertEquals(new LightInstruction(new LightCoordinate(0, 0), new LightCoordinate(999, 0), TURN_ON), parseLightInstruction("turn on 0,0 through 999,0"));
+        assertEquals(new LightInstruction(new LightCoordinate(123, 17), new LightCoordinate(234, 23), TOGGLE), parseLightInstruction("toggle 123,17 through 234,23"));
+        assertEquals(new LightInstruction(new LightCoordinate(17, 123), new LightCoordinate(23, 234), TURN_OFF), parseLightInstruction("turn off 17,123 through 23,234"));
     }
 
     @Test
@@ -46,7 +47,7 @@ class Day06AwardWinningLightInstructionsTest {
                 "   ";
         assertEquals(expectedOutput, lightGrid.toString());
 
-        assertTrue(lightGrid.lightGrid.containsKey(new LightCoordinate(0,0)));
+        assertTrue(lightGrid.lightGrid.containsKey(new LightCoordinate(0, 0)));
     }
 
     @Test
@@ -113,7 +114,7 @@ class Day06AwardWinningLightInstructionsTest {
                 "   ";
         assertEquals(expectedOutput, lightGrid.toString());
 
-        assertTrue(lightGrid.lightGrid.containsKey(new LightCoordinate(0,0)));
+        assertTrue(lightGrid.lightGrid.containsKey(new LightCoordinate(0, 0)));
     }
 
     @Test

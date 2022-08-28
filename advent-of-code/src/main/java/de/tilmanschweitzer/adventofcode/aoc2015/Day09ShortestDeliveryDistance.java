@@ -2,8 +2,8 @@ package de.tilmanschweitzer.adventofcode.aoc2015;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import de.tilmanschweitzer.adventofcode.common.combination.OrderedCombinations;
 import de.tilmanschweitzer.adventofcode.common.Pair;
+import de.tilmanschweitzer.adventofcode.common.combination.OrderedCombinations;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,6 +27,7 @@ public class Day09ShortestDeliveryDistance extends MultiLineAdventOfCodeDay<Day0
     public Day09ShortestDeliveryDistance() {
         super(2015, 9);
     }
+
     @Override
     public Integer getResultOfFirstPuzzle(final List<Route> input) {
         return getShortestTrip(input).getDistance();
@@ -74,11 +75,11 @@ public class Day09ShortestDeliveryDistance extends MultiLineAdventOfCodeDay<Day0
             final Set<Trip> allTripPossibilities = OrderedCombinations.allCombinationsAsSet(new HashSet<>(allCities))
                     .stream()
                     .map(citiesCombination -> IntStream.range(1, citiesCombination.size())
-                                .boxed()
-                                .map(index -> {
-                                    final Pair<String> startAndEndCityKey = Pair.of(citiesCombination.get(index - 1), citiesCombination.get(index));
-                                    return routesByStartAndEndCity.get(startAndEndCityKey);
-                                }).collect(toUnmodifiableList())
+                            .boxed()
+                            .map(index -> {
+                                final Pair<String> startAndEndCityKey = Pair.of(citiesCombination.get(index - 1), citiesCombination.get(index));
+                                return routesByStartAndEndCity.get(startAndEndCityKey);
+                            }).collect(toUnmodifiableList())
                     ).map(Trip::new)
                     .collect(toSet());
 
@@ -93,7 +94,8 @@ public class Day09ShortestDeliveryDistance extends MultiLineAdventOfCodeDay<Day0
         public boolean tryToUpdateShortestTrip(Trip candidateTrip) {
             if (candidateTrip.length() != allCities.size() - 1) {
                 throw new RuntimeException("Unexpected trip length " + candidateTrip.length());
-            };
+            }
+            ;
             if (!checkAndUpdateCandidateCondition(candidateTrip)) {
                 return false;
             }
@@ -241,6 +243,7 @@ public class Day09ShortestDeliveryDistance extends MultiLineAdventOfCodeDay<Day0
                 throw new RuntimeException("Not all ends are unique");
             }
         }
+
         public static Trip emptyTrip() {
             return new Trip(emptyList());
         }

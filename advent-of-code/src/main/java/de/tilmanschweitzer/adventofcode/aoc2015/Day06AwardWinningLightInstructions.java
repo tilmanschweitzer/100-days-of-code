@@ -8,7 +8,10 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -69,6 +72,7 @@ public class Day06AwardWinningLightInstructions extends MultiLineAdventOfCodeDay
                 throw new RuntimeException("Could not parse instruction from line: " + line);
             }
         }
+
         final LightCoordinate startLight;
         final LightCoordinate endLight;
         final Instruction instruction;
@@ -88,6 +92,7 @@ public class Day06AwardWinningLightInstructions extends MultiLineAdventOfCodeDay
             return new LightInstruction(LightCoordinate.parseLightCoordinatePair(line.replace(instruction.inputText, "")), instruction);
         }
     }
+
     public static class LightCoordinate extends Coordinate {
         public LightCoordinate(int x, int y) {
             super(x, y);
@@ -138,7 +143,7 @@ public class Day06AwardWinningLightInstructions extends MultiLineAdventOfCodeDay
                         turnOn(currentLight);
                     } else if (lightInstruction.instruction == TURN_OFF) {
                         turnOff(currentLight);
-                    } else if (lightInstruction.instruction == TOGGLE){
+                    } else if (lightInstruction.instruction == TOGGLE) {
                         toggle(currentLight);
                     } else {
                         throw new RuntimeException("Unknown light instruction: " + lightInstruction);
@@ -156,8 +161,8 @@ public class Day06AwardWinningLightInstructions extends MultiLineAdventOfCodeDay
         @Override
         public String toString() {
             return IntStream.range(0, gridSize).boxed()
-                    .map(row-> IntStream.range(0, gridSize).boxed()
-                            .map(col-> getDisplayStringForCoordinate(new LightCoordinate(row, col)))
+                    .map(row -> IntStream.range(0, gridSize).boxed()
+                            .map(col -> getDisplayStringForCoordinate(new LightCoordinate(row, col)))
                             .collect(Collectors.joining()))
                     .collect(Collectors.joining("\n"));
         }

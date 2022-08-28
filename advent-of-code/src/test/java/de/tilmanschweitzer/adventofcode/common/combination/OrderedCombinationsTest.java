@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import static java.util.Collections.emptySet;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OrderedCombinationsTest {
 

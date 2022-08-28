@@ -79,6 +79,7 @@ public class Day14ReindeerOlympics extends MultiLineAdventOfCodeDay<Day14Reindee
         public ReindeerScore(Reindeer reindeer) {
             this(reindeer, 0);
         }
+
         public ReindeerScore(Reindeer reindeer, int score) {
             this.reindeer = reindeer;
             this.score = score;
@@ -92,6 +93,7 @@ public class Day14ReindeerOlympics extends MultiLineAdventOfCodeDay<Day14Reindee
             return score;
         }
     }
+
     @EqualsAndHashCode
     @ToString
     @Getter

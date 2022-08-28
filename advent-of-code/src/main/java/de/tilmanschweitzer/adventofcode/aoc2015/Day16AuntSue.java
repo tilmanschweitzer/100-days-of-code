@@ -9,7 +9,6 @@ import lombok.ToString;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -38,7 +37,7 @@ public class Day16AuntSue extends MultiLineAdventOfCodeDay<Day16AuntSue.AuntSue,
 
     public static final Map<String, Predicate<Integer>> resultFromMFCSAMWithRanges = Map.of(
             "children", equalTo(3),
-            "cats",  greaterThan(7),
+            "cats", greaterThan(7),
             "samoyeds", equalTo(2),
             "pomeranians", lessThan(3),
             "akitas", equalTo(0),

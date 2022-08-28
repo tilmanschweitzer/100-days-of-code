@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static de.tilmanschweitzer.adventofcode.aoc2015.Day02WrappingPaper.*;
+import static de.tilmanschweitzer.adventofcode.aoc2015.Day02WrappingPaper.Dimensions;
 import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 

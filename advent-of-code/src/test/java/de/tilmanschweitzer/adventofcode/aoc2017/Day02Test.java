@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day02Test {
 
@@ -37,6 +36,7 @@ class Day02Test {
     public void findEvenlyDivisiblePair() {
         assertEquals(Pair.of(8, 2), Day02.findEvenlyDivisiblePair(List.of(5, 9, 2, 8)));
     }
+
     @Test
     public void isEvenlyDivisible() {
         assertTrue(Day02.isEvenlyDivisible(8, 2));

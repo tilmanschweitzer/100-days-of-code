@@ -4,7 +4,7 @@ import de.tilmanschweitzer.adventofcode.aoc2016.Day01.Instruction;
 import de.tilmanschweitzer.adventofcode.aoc2016.Day01.Instruction.Direction;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day01Test {
 

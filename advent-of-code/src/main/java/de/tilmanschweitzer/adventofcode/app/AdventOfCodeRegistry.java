@@ -2,7 +2,9 @@ package de.tilmanschweitzer.adventofcode.app;
 
 import de.tilmanschweitzer.adventofcode.day.AdventOfCodeDay;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class AdventOfCodeRegistry {
 

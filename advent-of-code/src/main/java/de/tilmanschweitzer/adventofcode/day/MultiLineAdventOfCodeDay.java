@@ -17,6 +17,7 @@ public abstract class MultiLineAdventOfCodeDay<I, A> extends AdventOfCodeDay<Lis
 
     protected abstract I parseLine(String line);
 
+    @Override
     protected List<I> getParsedInput() {
         return parseInputFromStream(getInputAsStream());
     }

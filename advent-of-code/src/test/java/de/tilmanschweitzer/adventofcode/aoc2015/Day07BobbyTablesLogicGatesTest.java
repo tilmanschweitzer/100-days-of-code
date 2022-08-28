@@ -151,9 +151,9 @@ class Day07BobbyTablesLogicGatesTest {
         circuit.applyStep(new OrGate("x", "y", "e"));
         circuit.applyStep(new LeftShiftGate("x", 2, "f"));
         circuit.applyStep(new RightShiftGate("y", 2, "g"));
-        circuit.applyStep(new NotGate("x",  "h"));
-        circuit.applyStep(new NotGate("y",  "i"));
-        circuit.applyStep(new ProvideValueToWire("i",  "j"));
+        circuit.applyStep(new NotGate("x", "h"));
+        circuit.applyStep(new NotGate("y", "i"));
+        circuit.applyStep(new ProvideValueToWire("i", "j"));
 
         assertEquals("{d=72, e=507, f=492, g=114, h=65412, i=65079, j=65079, x=123, y=456}", circuit.getSignalsOnWire().toString());
     }
@@ -183,7 +183,7 @@ class Day07BobbyTablesLogicGatesTest {
                 new OrGate("x", "y", "e"),
                 new LeftShiftGate("x", 2, "f"),
                 new RightShiftGate("y", 2, "g"),
-                new NotGate("x",  "h"),
+                new NotGate("x", "h"),
                 new NotGate("y", "i"),
                 new ProvideValueToWire("i", "j"),
                 new AndGate(1, 2, "k"),

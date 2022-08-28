@@ -1,12 +1,11 @@
 package de.tilmanschweitzer.adventofcode.aoc2015;
 
-import de.tilmanschweitzer.adventofcode.aoc2015.Day09ShortestDeliveryDistance.Route;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static de.tilmanschweitzer.adventofcode.aoc2015.Day09ShortestDeliveryDistance.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day09ShortestDeliveryDistanceTest {
 
@@ -38,15 +37,15 @@ class Day09ShortestDeliveryDistanceTest {
     @Test
     public void getShortestTripForThreeCities() {
         final List<Route> allRoutes = List.of(
-            new Route("London", "Dublin", 464),
-            new Route("London", "Belfast", 518),
-            new Route("Dublin", "Belfast", 141)
+                new Route("London", "Dublin", 464),
+                new Route("London", "Belfast", 518),
+                new Route("Dublin", "Belfast", 141)
         );
         final Trip trip = getShortestTrip(allRoutes);
 
         final Trip expectedTrip = new Trip(
-            new Route("London", "Dublin", 464),
-            new Route("Dublin", "Belfast", 141)
+                new Route("London", "Dublin", 464),
+                new Route("Dublin", "Belfast", 141)
         );
 
         assertEquals(expectedTrip, trip);

@@ -18,6 +18,7 @@ public class Day03 extends SingleLineAdventOfCodeDay<Integer, Integer> {
     }
 
 
+    @Override
     public Integer getResultOfFirstPuzzle(final Integer number) {
         return getManhattanDistanceForAccessPort(number);
     }
@@ -46,7 +47,7 @@ public class Day03 extends SingleLineAdventOfCodeDay<Integer, Integer> {
     public static BasicCoordinate nextCoordinate(BasicCoordinate coordinate) {
         final int x = coordinate.getX();
         final int y = coordinate.getY();
-        final int level =  Math.max(Math.abs(x), Math.abs(y));
+        final int level = Math.max(Math.abs(x), Math.abs(y));
 
         if (level == y && x <= level) {
             // move to next level

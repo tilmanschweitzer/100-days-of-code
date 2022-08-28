@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import static de.tilmanschweitzer.adventofcode.aoc2015.Day18AnimatedLights.LightCoordinate.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static de.tilmanschweitzer.adventofcode.aoc2015.Day18AnimatedLights.LightCoordinate.of;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day18AnimatedLightsTest {
 
@@ -21,11 +21,11 @@ class Day18AnimatedLightsTest {
     }
 
     static final String input = ".#.#.#\n" +
-                                "...##.\n" +
-                                "#....#\n" +
-                                "..#...\n" +
-                                "#.#..#\n" +
-                                "####..";
+            "...##.\n" +
+            "#....#\n" +
+            "..#...\n" +
+            "#.#..#\n" +
+            "####..";
 
     @Test
     public void parse() {

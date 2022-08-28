@@ -14,12 +14,13 @@ public class Day10LookAndSay extends SingleLineAdventOfCodeDay<String, Integer> 
     public Day10LookAndSay() {
         super(2015, 10);
     }
+
     public static String lookAndSay(String input) {
         final StringBuilder output = new StringBuilder();
         final List<Character> characters = Arrays.stream(input.split("")).map(s -> s.charAt(0)).collect(Collectors.toUnmodifiableList());
         char lastChar = '\0';
         int charCount = 1;
-        for (char c: characters) {
+        for (char c : characters) {
             if (lastChar == '\0') {
                 lastChar = c;
             } else if (lastChar != c) {

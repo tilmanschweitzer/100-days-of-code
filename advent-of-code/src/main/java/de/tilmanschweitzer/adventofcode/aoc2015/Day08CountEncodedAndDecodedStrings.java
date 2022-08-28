@@ -4,7 +4,9 @@ import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
@@ -80,6 +82,7 @@ public class Day08CountEncodedAndDecodedStrings extends MultiLineAdventOfCodeDay
     private static class InputParser {
         final String input;
         final List<InputParserStep> parserSteps = new ArrayList<>();
+
         public InputParser(String input) {
             this.input = input;
         }
@@ -93,7 +96,7 @@ public class Day08CountEncodedAndDecodedStrings extends MultiLineAdventOfCodeDay
 
             int inputIndex = 0;
             while (inputIndex <= input.length()) {
-                final Character currentChar = inputIndex < input.length() ? input.charAt(inputIndex): null;
+                final Character currentChar = inputIndex < input.length() ? input.charAt(inputIndex) : null;
                 final String remainingInput = input.substring(inputIndex);
                 final StepParams stepParams = new StepParams(inputIndex, currentChar, remainingInput);
 
@@ -161,6 +164,7 @@ public class Day08CountEncodedAndDecodedStrings extends MultiLineAdventOfCodeDay
 
     private static class AddFirstQuote implements InputParserStep {
         private boolean alreadyAdded = false;
+
         @Override
         public boolean matches(StepParams stepParams) {
             return !alreadyAdded && stepParams.inputIndex == 0;

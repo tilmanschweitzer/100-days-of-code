@@ -3,7 +3,8 @@ package de.tilmanschweitzer.adventofcode.aoc2017;
 import de.tilmanschweitzer.adventofcode.day.SingleLineAdventOfCodeDay;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -15,6 +16,7 @@ public class Day01 extends SingleLineAdventOfCodeDay<List<Integer>, Integer> {
         super(2017, 1);
     }
 
+    @Override
     public Integer getResultOfFirstPuzzle(final List<Integer> numbers) {
         return sumDuplicateNumbers(numbers);
     }

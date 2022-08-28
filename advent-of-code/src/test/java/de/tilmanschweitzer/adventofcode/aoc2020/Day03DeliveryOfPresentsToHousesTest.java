@@ -1,12 +1,11 @@
 package de.tilmanschweitzer.adventofcode.aoc2020;
 
-import de.tilmanschweitzer.adventofcode.aoc2020.Day03;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day03DeliveryOfPresentsToHousesTest {
 
@@ -22,7 +21,7 @@ class Day03DeliveryOfPresentsToHousesTest {
 
     @Test
     public void parseLine_parsesTestInputAsExpected() {
-        final String testInput =  "..##.......\n" +
+        final String testInput = "..##.......\n" +
                 "#...#...#..\n" +
                 ".#....#..#.\n" +
                 "..#.#...#.#\n" +

@@ -1,19 +1,18 @@
 package de.tilmanschweitzer.adventofcode.common.combination;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Streams;
 import de.tilmanschweitzer.adventofcode.common.combination.validator.CollectionSizeValidator;
 import de.tilmanschweitzer.adventofcode.common.combination.validator.CombinationValidator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.util.Collections.emptyList;
-import static java.util.Collections.emptySet;
 
 public class OrderedCombinations {
 
@@ -25,7 +24,7 @@ public class OrderedCombinations {
         return allCombinations(elements).collect(Collectors.toUnmodifiableSet());
     }
 
-    private static <E> Stream<List<E>>  allCombinations(Collection<E> elements) {
+    private static <E> Stream<List<E>> allCombinations(Collection<E> elements) {
         return allCombinations(elements, new CollectionSizeValidator<>(elements.size()));
     }
 

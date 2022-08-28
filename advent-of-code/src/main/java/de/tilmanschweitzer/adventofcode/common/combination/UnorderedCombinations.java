@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.util.Collections.emptySet;
 
 public class UnorderedCombinations {

@@ -107,7 +107,7 @@ public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>, L
         public boolean isValid() {
             if (fieldName.equals("byr")) {
                 final int birthYear = Integer.parseInt(fieldValue);
-                return birthYear >= 1920 &&  birthYear <= 2002;
+                return birthYear >= 1920 && birthYear <= 2002;
             }
             if (fieldName.equals("iyr")) {
                 final int issueYear = Integer.parseInt(fieldValue);

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static de.tilmanschweitzer.adventofcode.aoc2016.Day02.BATHROOM_KEYPAD;
 import static de.tilmanschweitzer.adventofcode.aoc2016.Day02.SIMPLE_KEYPAD;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day02Test {
 
@@ -39,12 +39,12 @@ class Day02Test {
 
         assertEquals("1985", Day02.keyCodeForInstructions(SIMPLE_KEYPAD, '5', "ULL", "RRDDD", "LURDL", "UUUUD"));
 
-        assertEquals("3", Day02.keyCodeForInstructions(BATHROOM_KEYPAD, '7',"U"));
-        assertEquals("1", Day02.keyCodeForInstructions(BATHROOM_KEYPAD, '7',"UU"));
-        assertEquals("1", Day02.keyCodeForInstructions(BATHROOM_KEYPAD, '7',"UUU"));
+        assertEquals("3", Day02.keyCodeForInstructions(BATHROOM_KEYPAD, '7', "U"));
+        assertEquals("1", Day02.keyCodeForInstructions(BATHROOM_KEYPAD, '7', "UU"));
+        assertEquals("1", Day02.keyCodeForInstructions(BATHROOM_KEYPAD, '7', "UUU"));
 
-        assertEquals("B", Day02.keyCodeForInstructions(BATHROOM_KEYPAD, '7',"D"));
-        assertEquals("D", Day02.keyCodeForInstructions(BATHROOM_KEYPAD, '7',"DD"));
-        assertEquals("D", Day02.keyCodeForInstructions(BATHROOM_KEYPAD, '7',"DDD"));
+        assertEquals("B", Day02.keyCodeForInstructions(BATHROOM_KEYPAD, '7', "D"));
+        assertEquals("D", Day02.keyCodeForInstructions(BATHROOM_KEYPAD, '7', "DD"));
+        assertEquals("D", Day02.keyCodeForInstructions(BATHROOM_KEYPAD, '7', "DDD"));
     }
 }

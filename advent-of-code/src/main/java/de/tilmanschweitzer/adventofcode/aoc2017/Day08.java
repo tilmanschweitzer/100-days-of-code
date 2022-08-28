@@ -83,7 +83,7 @@ public class Day08 extends MultiLineAdventOfCodeDay<Day08.Instruction, Integer> 
     }
 
     @Value
-    public static class Operation  {
+    public static class Operation {
         OperationType type;
         int value;
 

@@ -5,12 +5,11 @@ import de.tilmanschweitzer.adventofcode.aoc2015.Day19RudolphMedicine.Replacement
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day19RudolphMedicineTest {
 
@@ -51,9 +50,9 @@ class Day19RudolphMedicineTest {
         final List<ReplacementAtPosition> result = Day19RudolphMedicine.findStepsToGenerate("e", "HOH", replacements);
 
         final List<ReplacementAtPosition> expectedResult = List.of(
-            new ReplacementAtPosition(0, new Replacement("e", "O")),
-            new ReplacementAtPosition(0, new Replacement("O", "HH")),
-            new ReplacementAtPosition(0, new Replacement("H", "HO"))
+                new ReplacementAtPosition(0, new Replacement("e", "O")),
+                new ReplacementAtPosition(0, new Replacement("O", "HH")),
+                new ReplacementAtPosition(0, new Replacement("H", "HO"))
         );
 
         assertEquals(expectedResult, result);

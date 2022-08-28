@@ -8,7 +8,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.lang.ClassLoader.getSystemResourceAsStream;

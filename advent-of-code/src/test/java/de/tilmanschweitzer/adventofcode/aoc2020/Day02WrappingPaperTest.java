@@ -22,7 +22,7 @@ class Day02WrappingPaperTest {
 
     @Test
     public void parseLine_parsesTestInputAsExpected() {
-        final String testInput =  "1-3 a: abcde\n" +
+        final String testInput = "1-3 a: abcde\n" +
                 "1-3 b: cdefg\n" +
                 "2-9 c: ccccccccc";
 

@@ -17,6 +17,7 @@ public class Day04 extends MultiLineAdventOfCodeDay<String, Long> {
         super(2017, 4);
     }
 
+    @Override
     public Long getResultOfFirstPuzzle(final List<String> passPhrase) {
         return passPhrase.stream().filter(Day04::isValidPassPhrase).count();
     }

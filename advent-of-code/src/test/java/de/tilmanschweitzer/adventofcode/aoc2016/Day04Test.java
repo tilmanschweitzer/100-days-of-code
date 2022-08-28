@@ -45,9 +45,6 @@ class Day04Test {
 
         final List<CharCount> expectedCharCounts2 = List.of(CharCount.of('e', 3), CharCount.of('f', 2), CharCount.of('h', 2), CharCount.of('d'), CharCount.of('g'), CharCount.of('i'));
         assertEquals(expectedCharCounts2, Room.parse("d-eee-ff-g-hh-i-123[efhdg]").getCharsWithCount());
-
-        final List<CharCount> expectedCharCounts3 = List.of(CharCount.of('e', 3), CharCount.of('f', 2), CharCount.of('h', 2), CharCount.of('d'), CharCount.of('g'), CharCount.of('i'));
-        assertEquals(expectedCharCounts2, Room.parse("d-eee-ff-g-hh-i-123[efhdg]").getCharsWithCount());
     }
 
     @Test

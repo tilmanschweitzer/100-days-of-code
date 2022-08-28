@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static de.tilmanschweitzer.adventofcode.aoc2019.Day01.getFuelForMass;
 import static de.tilmanschweitzer.adventofcode.aoc2019.Day01.getTotalFuelForMass;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day01NotQuiteLispTest {
 

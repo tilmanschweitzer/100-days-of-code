@@ -160,6 +160,7 @@ public class Day07 extends MultiLineAdventOfCodeDay<Day07.TowerDescription, Stri
         return Streams.concat(Stream.of(currentTower.getWeight()), successorWeights.stream());
     }
 
+    @Override
     public String getResultOfFirstPuzzle(final List<TowerDescription> input) {
         return findBottom(input).getName();
     }

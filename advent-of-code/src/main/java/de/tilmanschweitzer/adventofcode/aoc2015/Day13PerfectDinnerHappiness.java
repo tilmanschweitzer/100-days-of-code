@@ -1,14 +1,17 @@
 package de.tilmanschweitzer.adventofcode.aoc2015;
 
-import de.tilmanschweitzer.adventofcode.common.combination.OrderedCombinations;
 import de.tilmanschweitzer.adventofcode.common.Ring;
+import de.tilmanschweitzer.adventofcode.common.combination.OrderedCombinations;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -144,7 +147,7 @@ public class Day13PerfectDinnerHappiness extends MultiLineAdventOfCodeDay<Day13P
             }
 
             final String person = matcher.group(1);
-            final int gainOrLooseFactor = matcher.group(2).equals("gain") ? 1 : -1 ;
+            final int gainOrLooseFactor = matcher.group(2).equals("gain") ? 1 : -1;
             final int happinessChange = gainOrLooseFactor * Integer.parseInt(matcher.group(3));
             final String partner = matcher.group(4);
             return new SeatPreference(person, partner, happinessChange);

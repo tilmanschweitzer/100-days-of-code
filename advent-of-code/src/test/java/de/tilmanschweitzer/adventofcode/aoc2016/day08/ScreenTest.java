@@ -3,7 +3,7 @@ package de.tilmanschweitzer.adventofcode.aoc2016.day08;
 import de.tilmanschweitzer.adventofcode.aoc2016.day08.screen.Screen;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ScreenTest {
 

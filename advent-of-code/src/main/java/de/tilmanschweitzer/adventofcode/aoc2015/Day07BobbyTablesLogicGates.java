@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static de.tilmanschweitzer.adventofcode.aoc2015.Day07BobbyTablesLogicGates.*;
+import static de.tilmanschweitzer.adventofcode.aoc2015.Day07BobbyTablesLogicGates.CircuitStep;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
@@ -18,6 +18,7 @@ public class Day07BobbyTablesLogicGates extends MultiLineAdventOfCodeDay<Circuit
     public Day07BobbyTablesLogicGates() {
         super(2015, 7);
     }
+
     @Override
     public Integer getResultOfFirstPuzzle(final List<CircuitStep> circuitSteps) {
         final Circuit circuit = new Circuit();
@@ -65,6 +66,7 @@ public class Day07BobbyTablesLogicGates extends MultiLineAdventOfCodeDay<Circuit
 
     public interface ValueProvider {
         boolean isResolved(Circuit circuit);
+
         int value(Circuit circuit);
     }
 
@@ -130,6 +132,7 @@ public class Day07BobbyTablesLogicGates extends MultiLineAdventOfCodeDay<Circuit
 
     public static abstract class CircuitStepParser<T extends CircuitStep> {
         public abstract boolean matches(String line);
+
         public abstract T parse(String line);
     }
 
@@ -263,6 +266,7 @@ public class Day07BobbyTablesLogicGates extends MultiLineAdventOfCodeDay<Circuit
 
         public static class Parser extends CircuitStepParser<AndGate> {
             private static final Pattern AND_PATTERN = Pattern.compile("(\\w+)\\s*AND\\s*(\\w+)\\s*->\\s*(\\w+)");
+
             @Override
             public boolean matches(String line) {
                 return AND_PATTERN.matcher(line).matches();
@@ -299,6 +303,7 @@ public class Day07BobbyTablesLogicGates extends MultiLineAdventOfCodeDay<Circuit
 
         public static class Parser extends CircuitStepParser<OrGate> {
             private static final Pattern OR_PATTERN = Pattern.compile("(\\w+)\\s*OR\\s*(\\w+)\\s*->\\s*(\\w+)");
+
             @Override
             public boolean matches(String line) {
                 return OR_PATTERN.matcher(line).matches();
@@ -319,6 +324,7 @@ public class Day07BobbyTablesLogicGates extends MultiLineAdventOfCodeDay<Circuit
         public NotGate(String baseWire, String targetWire) {
             super(baseWire, "", targetWire);
         }
+
         @Override
         public Integer logicOperation(ValueProvider baseValue, ValueProvider ignoredValue, Circuit circuit) {
             return 65536 + ~baseValue.value(circuit);
@@ -332,6 +338,7 @@ public class Day07BobbyTablesLogicGates extends MultiLineAdventOfCodeDay<Circuit
 
         public static class Parser extends CircuitStepParser<NotGate> {
             private static final Pattern NOT_PATTERN = Pattern.compile("NOT\\s*(\\w+)\\s*->\\s*(\\w+)");
+
             @Override
             public boolean matches(String line) {
                 return NOT_PATTERN.matcher(line).matches();
@@ -393,6 +400,7 @@ public class Day07BobbyTablesLogicGates extends MultiLineAdventOfCodeDay<Circuit
 
         public static class Parser extends CircuitStepParser<LeftShiftGate> {
             private static final Pattern LSHIFT_PATTERN = Pattern.compile("(\\w+)\\s*LSHIFT\\s*(\\w+)\\s*->\\s*(\\w+)");
+
             @Override
             public boolean matches(String line) {
                 return LSHIFT_PATTERN.matcher(line).matches();
@@ -433,6 +441,7 @@ public class Day07BobbyTablesLogicGates extends MultiLineAdventOfCodeDay<Circuit
 
         public static class Parser extends CircuitStepParser<RightShiftGate> {
             private static final Pattern RSHIFT_PATTERN = Pattern.compile("(\\w+)\\s*RSHIFT\\s*(\\w+)\\s*->\\s*(\\w+)");
+
             @Override
             public boolean matches(String line) {
                 return RSHIFT_PATTERN.matcher(line).matches();
@@ -446,9 +455,11 @@ public class Day07BobbyTablesLogicGates extends MultiLineAdventOfCodeDay<Circuit
                 }
                 final ValueProvider leftInput = ValueProviderParser.parse(matcher.group(1));
                 final ValueProvider rightInput = ValueProviderParser.parse(matcher.group(2));
-                return new RightShiftGate(leftInput, rightInput, matcher.group(3));            }
+                return new RightShiftGate(leftInput, rightInput, matcher.group(3));
+            }
         }
     }
+
     public static class Circuit {
 
         private Map<String, Integer> wires = new HashMap<>();

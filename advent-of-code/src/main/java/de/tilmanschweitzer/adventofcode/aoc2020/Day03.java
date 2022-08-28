@@ -61,6 +61,4 @@ public class Day03 extends MultiLineAdventOfCodeDay<String, Long> {
     }
 
 
-
-
 }

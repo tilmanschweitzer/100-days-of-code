@@ -18,6 +18,7 @@ public class Day01 extends SingleLineAdventOfCodeDay<List<Day01.Instruction>, In
         super(2016, 1);
     }
 
+    @Override
     public Integer getResultOfFirstPuzzle(final List<Instruction> instructions) {
         return followPath(instructions).getManhattanDistance();
     }
@@ -28,7 +29,7 @@ public class Day01 extends SingleLineAdventOfCodeDay<List<Day01.Instruction>, In
     }
 
     public static Position followPath(List<Instruction> instructions) {
-        Position position = new Position(0,0);
+        Position position = new Position(0, 0);
         Instruction.Orientation currentOrientation = Instruction.Orientation.NORTH;
 
         for (Instruction instruction : instructions) {
@@ -41,7 +42,7 @@ public class Day01 extends SingleLineAdventOfCodeDay<List<Day01.Instruction>, In
 
     public static Optional<Position> findFirstIntersection(List<Instruction> instructions) {
         Set<Position> allPositions = new HashSet<>();
-        Position currentPosition = new Position(0,0);
+        Position currentPosition = new Position(0, 0);
         allPositions.add(currentPosition);
 
         Instruction.Orientation currentOrientation = Instruction.Orientation.NORTH;

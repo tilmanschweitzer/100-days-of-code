@@ -1,6 +1,5 @@
 package de.tilmanschweitzer.adventofcode.aoc2017;
 
-import com.google.common.base.Supplier;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +17,7 @@ public class Day05 extends MultiLineAdventOfCodeDay<Integer, Long> {
         super(2017, 5);
     }
 
+    @Override
     public Long getResultOfFirstPuzzle(final List<Integer> input) {
         return countStepsToExit(input.stream().map(StrangeJumpInstruction::new).collect(Collectors.toList()));
     }

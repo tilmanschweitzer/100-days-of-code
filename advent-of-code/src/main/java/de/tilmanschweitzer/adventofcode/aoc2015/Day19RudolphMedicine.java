@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.ToString;
 
 import java.io.InputStream;
 import java.util.*;
@@ -14,7 +13,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static de.tilmanschweitzer.adventofcode.common.CollectionFunctions.sum;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day19RudolphMedicine extends MultiLineAdventOfCodeDay<String, Integer> {
@@ -60,7 +58,7 @@ public class Day19RudolphMedicine extends MultiLineAdventOfCodeDay<String, Integ
         return possibleSteps.stream().sorted(Comparator.comparingInt(List::size)).findFirst().orElse(Collections.emptyList());
     }
 
-    public static Stream<List<ReplacementAtPosition>> findReplacements(String start, String currentString, List<ReplacementAtPosition> currentSteps, Map<String, Replacement> replacementByReplacement ) {
+    public static Stream<List<ReplacementAtPosition>> findReplacements(String start, String currentString, List<ReplacementAtPosition> currentSteps, Map<String, Replacement> replacementByReplacement) {
         if (currentString.equals(start)) {
             return Stream.of(Lists.reverse(currentSteps));
         }
@@ -141,7 +139,7 @@ public class Day19RudolphMedicine extends MultiLineAdventOfCodeDay<String, Integ
 
         @Override
         public String toString() {
-            return "{"+ position + ", " + replacement + "}";
+            return "{" + position + ", " + replacement + "}";
         }
     }
 

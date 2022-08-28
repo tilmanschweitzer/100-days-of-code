@@ -7,7 +7,10 @@ import de.tilmanschweitzer.adventofcode.common.Coordinates;
 import de.tilmanschweitzer.adventofcode.day.MultiLineAdventOfCodeDay;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,19 +18,21 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class Day02 extends MultiLineAdventOfCodeDay<String, String> {
 
-    public static final String SIMPLE_KEYPAD =  "123\n" +
-                                                "456\n" +
-                                                "789";
+    public static final String SIMPLE_KEYPAD = "123\n" +
+            "456\n" +
+            "789";
 
-    public static final String BATHROOM_KEYPAD =    "  1  \n" +
-                                                    " 234 \n" +
-                                                    "56789\n" +
-                                                    " ABC \n" +
-                                                    "  D  ";
+    public static final String BATHROOM_KEYPAD = "  1  \n" +
+            " 234 \n" +
+            "56789\n" +
+            " ABC \n" +
+            "  D  ";
+
     public Day02() {
         super(2016, 2);
     }
 
+    @Override
     public String getResultOfFirstPuzzle(final List<String> instructions) {
         return keyCodeForInstructions(SIMPLE_KEYPAD, '5', instructions.stream());
     }
@@ -107,7 +112,7 @@ public class Day02 extends MultiLineAdventOfCodeDay<String, String> {
             final int height = keyPadLines.size();
 
             final Map<BasicCoordinate, Character> keyPadCoordinates = Coordinates.coordinateStreamWithinGrid(width, height)
-                    .collect(Collectors.toMap(BasicCoordinate::of, coordinate ->  keyPadLines.get(coordinate.getY()).charAt(coordinate.getX())));
+                    .collect(Collectors.toMap(BasicCoordinate::of, coordinate -> keyPadLines.get(coordinate.getY()).charAt(coordinate.getX())));
 
             final Optional<BasicCoordinate> initialKeyOptional = keyPadCoordinates.entrySet().stream().filter(entry -> entry.getValue() == initialValue).map(Map.Entry::getKey).findFirst();
 
