@@ -33,11 +33,10 @@ public class Day18AnimatedLights extends MultiLineAdventOfCodeDay<String, Long> 
     protected Long getResultOfSecondPuzzle(List<String> input) {
         AnimatedLightGrid currentGrid = AnimatedLightGrid.parse(input);
         currentGrid.turnOnCorners();
-        ;
+
         for (int i = 0; i < 100; i++) {
             currentGrid = currentGrid.nextGrid();
             currentGrid.turnOnCorners();
-            ;
         }
         return currentGrid.count();
     }

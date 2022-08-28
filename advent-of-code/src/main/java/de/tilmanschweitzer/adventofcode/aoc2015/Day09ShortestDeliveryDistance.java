@@ -95,7 +95,7 @@ public class Day09ShortestDeliveryDistance extends MultiLineAdventOfCodeDay<Day0
             if (candidateTrip.length() != allCities.size() - 1) {
                 throw new RuntimeException("Unexpected trip length " + candidateTrip.length());
             }
-            ;
+
             if (!checkAndUpdateCandidateCondition(candidateTrip)) {
                 return false;
             }

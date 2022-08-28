@@ -46,7 +46,6 @@ class Day08CountEncodedAndDecodedStringsTest {
         assertEquals("abc", Day08CountEncodedAndDecodedStrings.parseString("\"abc\""));
         assertEquals("aaa\"aaa", Day08CountEncodedAndDecodedStrings.parseString("\"aaa\\\"aaa\""));
         assertEquals("'", Day08CountEncodedAndDecodedStrings.parseString("\"\\x27\""));
-        ;
         assertEquals("d\\gkbqo\\fwukyxab\"u", Day08CountEncodedAndDecodedStrings.parseString("\"d\\\\gkbqo\\\\fwukyxab\\\"u\""));
     }
 
