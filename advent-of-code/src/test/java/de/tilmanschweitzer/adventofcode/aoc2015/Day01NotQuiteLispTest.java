@@ -1,6 +1,8 @@
 package de.tilmanschweitzer.adventofcode.aoc2015;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,16 +21,24 @@ class Day01NotQuiteLispTest {
     final Day01NotQuiteLisp day01 = new Day01NotQuiteLisp();
 
     @Test
-    void getFloorForInput() {
-        assertEquals(0, day01.getFloorForInput(day01.parseLine("(())")));
-        assertEquals(0, day01.getFloorForInput(day01.parseLine("()()")));
-        assertEquals(3, day01.getFloorForInput(day01.parseLine("(((")));
-        assertEquals(3, day01.getFloorForInput(day01.parseLine("(()(()(")));
-        assertEquals(3, day01.getFloorForInput(day01.parseLine("))(((((")));
-        assertEquals(-1, day01.getFloorForInput(day01.parseLine("())")));
-        assertEquals(-1, day01.getFloorForInput(day01.parseLine("))(")));
-        assertEquals(-3, day01.getFloorForInput(day01.parseLine(")))")));
-        assertEquals(-3, day01.getFloorForInput(day01.parseLine(")())())")));
+    @ParameterizedTest
+    @ValueSource(strings = { "(())", "()()" })
+    void getFloorForInput_balanced(String balancedInput) {
+        assertEquals(0, day01.getFloorForInput(day01.parseLine(balancedInput)));
+    }
+
+    @Test
+    @ParameterizedTest
+    @ValueSource(strings = { "(((", "(()(()(", "(()(()(" })
+    void getFloorForInput_openingParenthesisOverweight(String openingOverweight) {
+        assertEquals(3, day01.getFloorForInput(day01.parseLine(openingOverweight)));
+    }
+
+    @Test
+    @ParameterizedTest
+    @ValueSource(strings = { ")))", ")())())" })
+    void getFloorForInput_closingParenthesisOverweight(String closingOverweight) {
+        assertEquals(-3, day01.getFloorForInput(day01.parseLine(closingOverweight)));
     }
 
     @Test
