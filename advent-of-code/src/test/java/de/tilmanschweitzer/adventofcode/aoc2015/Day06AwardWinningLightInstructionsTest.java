@@ -11,24 +11,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class Day06AwardWinningLightInstructionsTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(569999, new Day06AwardWinningLightInstructions().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(17836115, new Day06AwardWinningLightInstructions().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void parseLine() {
+    void parseLine() {
         assertEquals(new LightInstruction(new LightCoordinate(0, 0), new LightCoordinate(999, 0), TURN_ON), parseLightInstruction("turn on 0,0 through 999,0"));
         assertEquals(new LightInstruction(new LightCoordinate(123, 17), new LightCoordinate(234, 23), TOGGLE), parseLightInstruction("toggle 123,17 through 234,23"));
         assertEquals(new LightInstruction(new LightCoordinate(17, 123), new LightCoordinate(23, 234), TURN_OFF), parseLightInstruction("turn off 17,123 through 23,234"));
     }
 
     @Test
-    public void testBasicLightGrid_toString() {
+    void testBasicLightGrid_toString() {
         final LightGrid lightGrid = new BasicLightGrid(3);
         final String expectedOutput = "   \n" +
                 "   \n" +
@@ -37,7 +37,7 @@ class Day06AwardWinningLightInstructionsTest {
     }
 
     @Test
-    public void testBasicLightGrid_applyInstruction() {
+    void testBasicLightGrid_applyInstruction() {
         final LightGrid lightGrid = new BasicLightGrid(3);
 
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 0,0 through 0,1"));
@@ -51,7 +51,7 @@ class Day06AwardWinningLightInstructionsTest {
     }
 
     @Test
-    public void testBasicLightGrid_applyCrossInstructions() {
+    void testBasicLightGrid_applyCrossInstructions() {
         final LightGrid lightGrid = new BasicLightGrid(3);
 
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 0,1 through 2,1"));
@@ -65,7 +65,7 @@ class Day06AwardWinningLightInstructionsTest {
     }
 
     @Test
-    public void testBasicLightGrid_applyInvertedCrossInstructions() {
+    void testBasicLightGrid_applyInvertedCrossInstructions() {
         final LightGrid lightGrid = new BasicLightGrid(3);
 
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 0,1 through 2,1"));
@@ -81,7 +81,7 @@ class Day06AwardWinningLightInstructionsTest {
 
 
     @Test
-    public void testBasicLightGrid_count() {
+    void testBasicLightGrid_count() {
         final LightGrid lightGrid = new BasicLightGrid(3);
 
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 0,1 through 2,1"));
@@ -95,7 +95,7 @@ class Day06AwardWinningLightInstructionsTest {
 
 
     @Test
-    public void testBrightnessLightGrid_toString() {
+    void testBrightnessLightGrid_toString() {
         final LightGrid lightGrid = new BrightnessLightGrid(3);
         final String expectedOutput = "   \n" +
                 "   \n" +
@@ -104,7 +104,7 @@ class Day06AwardWinningLightInstructionsTest {
     }
 
     @Test
-    public void testBrightnessLightGrid_applyInstruction() {
+    void testBrightnessLightGrid_applyInstruction() {
         final LightGrid lightGrid = new BrightnessLightGrid(3);
 
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 0,0 through 0,1"));
@@ -118,7 +118,7 @@ class Day06AwardWinningLightInstructionsTest {
     }
 
     @Test
-    public void testBrightnessLightGrid_applyCrossInstructions() {
+    void testBrightnessLightGrid_applyCrossInstructions() {
         final LightGrid lightGrid = new BrightnessLightGrid(3);
 
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 0,1 through 2,1"));
@@ -132,7 +132,7 @@ class Day06AwardWinningLightInstructionsTest {
     }
 
     @Test
-    public void testBrightnessLightGrid_applyInvertedCrossInstructions() {
+    void testBrightnessLightGrid_applyInvertedCrossInstructions() {
         final LightGrid lightGrid = new BrightnessLightGrid(3);
 
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 0,1 through 2,1"));
@@ -148,7 +148,7 @@ class Day06AwardWinningLightInstructionsTest {
 
 
     @Test
-    public void testBrightnessLightGrid_count() {
+    void testBrightnessLightGrid_count() {
         final LightGrid lightGrid = new BrightnessLightGrid(3);
 
         lightGrid.applyLightInstruction(parseLightInstruction("turn on 0,1 through 2,1"));

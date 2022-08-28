@@ -11,17 +11,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day02WrappingPaperTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(607, new Day02().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(321, new Day02().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void parseLine_parsesTestInputAsExpected() {
+    void parseLine_parsesTestInputAsExpected() {
         final String testInput = "1-3 a: abcde\n" +
                 "1-3 b: cdefg\n" +
                 "2-9 c: ccccccccc";
@@ -36,7 +36,7 @@ class Day02WrappingPaperTest {
     }
 
     @Test
-    public void validateMethodA() {
+    void validateMethodA() {
         final Day02.PasswordPolicy passwordPolicy = new Day02.PasswordPolicy('a', 1, 3);
 
 
@@ -52,7 +52,7 @@ class Day02WrappingPaperTest {
     }
 
     @Test
-    public void validateMethodB() {
+    void validateMethodB() {
         final Day02.PasswordPolicy passwordPolicy = new Day02.PasswordPolicy('a', 1, 3);
 
         assertTrue(passwordPolicy.validateMethodB("abcde"));

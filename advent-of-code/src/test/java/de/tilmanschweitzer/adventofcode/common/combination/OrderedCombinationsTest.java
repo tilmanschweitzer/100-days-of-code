@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class OrderedCombinationsTest {
 
     @Test
-    public void allCombinationsAsSet() {
+    void allCombinationsAsSet() {
         assertEquals(Set.of(Collections.emptyList()), OrderedCombinations.allCombinationsAsSet(emptySet()));
         assertEquals(Set.of(List.of(1)), OrderedCombinations.allCombinationsAsSet(Set.of(1)));
         assertEquals(Set.of(List.of(1, 2), List.of(2, 1)), OrderedCombinations.allCombinationsAsSet(Set.of(1, 2)));
@@ -27,7 +27,7 @@ class OrderedCombinationsTest {
     }
 
     @Test
-    public void allCombinationsWithTwoElementsAsSet() {
+    void allCombinationsWithTwoElementsAsSet() {
         final Set<List<Integer>> result = OrderedCombinations.allCombinationsAsSet(Set.of(1, 2, 3), new CollectionSizeValidator<>(2));
         final Set<List<Integer>> expectedResult = Set.of(List.of(1, 2), List.of(1, 3), List.of(2, 1), List.of(2, 3), List.of(3, 1), List.of(3, 2));
         assertEquals(expectedResult, result);

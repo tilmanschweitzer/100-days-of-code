@@ -11,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day18AnimatedLightsTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(768, new Day18AnimatedLights().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(781, new Day18AnimatedLights().getResultOfSecondPuzzle());
     }
 
@@ -28,20 +28,20 @@ class Day18AnimatedLightsTest {
             "####..";
 
     @Test
-    public void parse() {
+    void parse() {
         final AnimatedLightGrid animatedLightGrid = AnimatedLightGrid.parse(input);
         assertEquals(input, animatedLightGrid.toString());
     }
 
     @Test
-    public void getNeighbors() {
+    void getNeighbors() {
         final AnimatedLightGrid animatedLightGrid = AnimatedLightGrid.parse(input);
         assertEquals(Set.of(of(0, 1), of(1, 1), of(1, 0)), animatedLightGrid.getNeighbors(0, 0));
         assertEquals(Set.of(of(2, 2), of(2, 3), of(2, 4), of(3, 2), of(3, 4), of(4, 2), of(4, 3), of(4, 4)), animatedLightGrid.getNeighbors(3, 3));
     }
 
     @Test
-    public void countNeighbors() {
+    void countNeighbors() {
         final AnimatedLightGrid animatedLightGrid = AnimatedLightGrid.parse(input);
         assertEquals(1, animatedLightGrid.countNeighbors(of(0, 0), true));
         assertEquals(2, animatedLightGrid.countNeighbors(of(1, 1), true));
@@ -50,7 +50,7 @@ class Day18AnimatedLightsTest {
     }
 
     @Test
-    public void nextGrid() {
+    void nextGrid() {
         final AnimatedLightGrid animatedLightGrid = AnimatedLightGrid.parse(input);
 
         final AnimatedLightGrid animatedLightGridAfterStep1 = animatedLightGrid.nextGrid();
@@ -95,7 +95,7 @@ class Day18AnimatedLightsTest {
 
 
     @Test
-    public void count() {
+    void count() {
         final AnimatedLightGrid animatedLightGrid = AnimatedLightGrid.parse(input);
         final AnimatedLightGrid animatedLightGridAfterStep4 = animatedLightGrid.nextGrid().nextGrid().nextGrid().nextGrid();
         assertEquals(15, animatedLightGrid.count());

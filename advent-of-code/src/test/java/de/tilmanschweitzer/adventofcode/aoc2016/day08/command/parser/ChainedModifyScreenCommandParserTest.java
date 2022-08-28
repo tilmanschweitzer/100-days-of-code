@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ChainedModifyScreenCommandParserTest {
 
     @Test
-    public void parse() {
+    void parse() {
         final ChainedModifyScreenCommandParser universalParser = ChainedModifyScreenCommandParser.of(new CreateRectCommandParser(), new RotateRowCommandParser(), new RotateColumnCommandParser());
 
         assertEquals(new RotateColumnCommand(13, 7), universalParser.parse("rotate column x=13 by 7"));

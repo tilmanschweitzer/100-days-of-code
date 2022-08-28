@@ -13,17 +13,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day03DeliveryOfPresentsToHousesTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(217, new Day03().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         // TODO: Implement part 2
     }
 
     @Test
-    public void intersectionOfPaths_example1() {
+    void intersectionOfPaths_example1() {
         final List<Vector> firstPath = Vector.fromPathList("R8,U5,L5,D3");
         final List<Vector> secondPath = Vector.fromPathList("U7,R6,D4,L4");
 
@@ -34,7 +34,7 @@ class Day03DeliveryOfPresentsToHousesTest {
     }
 
     @Test
-    public void getPrintableVersion_forOnePath() {
+    void getPrintableVersion_forOnePath() {
         final List<Vector> firstPath = Vector.fromPathList("R8,U5,L5,D3");
 
         final String result = Day03.getPrintableVersion(firstPath);
@@ -53,7 +53,7 @@ class Day03DeliveryOfPresentsToHousesTest {
     }
 
     @Test
-    public void getPrintableVersion_forHorizontalPath() {
+    void getPrintableVersion_forHorizontalPath() {
         final List<Vector> firstPath = Vector.fromPathList("R8");
 
         final String result = Day03.getPrintableVersion(firstPath);
@@ -67,7 +67,7 @@ class Day03DeliveryOfPresentsToHousesTest {
     }
 
     @Test
-    public void getPrintableVersion_forNegativeHorizontalPath() {
+    void getPrintableVersion_forNegativeHorizontalPath() {
         final List<Vector> firstPath = Vector.fromPathList("L8");
 
         final String result = Day03.getPrintableVersion(firstPath);
@@ -82,7 +82,7 @@ class Day03DeliveryOfPresentsToHousesTest {
 
 
     @Test
-    public void getPrintableVersion_forVerticalPath() {
+    void getPrintableVersion_forVerticalPath() {
         final List<Vector> firstPath = Vector.fromPathList("U5");
 
         final String result = Day03.getPrintableVersion(firstPath);
@@ -101,7 +101,7 @@ class Day03DeliveryOfPresentsToHousesTest {
     }
 
     @Test
-    public void getPrintableVersion_forNegativeVerticalPath() {
+    void getPrintableVersion_forNegativeVerticalPath() {
         final List<Vector> firstPath = Vector.fromPathList("D5");
 
         final String result = Day03.getPrintableVersion(firstPath);
@@ -121,7 +121,7 @@ class Day03DeliveryOfPresentsToHousesTest {
 
 
     @Test
-    public void getPrintableVersion_forTwoPathsWithIntersections() {
+    void getPrintableVersion_forTwoPathsWithIntersections() {
         final List<Vector> firstPath = Vector.fromPathList("R8,U5,L5,D3");
         final List<Vector> secondPath = Vector.fromPathList("U7,R6,D4,L4");
 
@@ -142,7 +142,7 @@ class Day03DeliveryOfPresentsToHousesTest {
     }
 
     @Test
-    public void findClosestIntersectionToCentralPort_example1() {
+    void findClosestIntersectionToCentralPort_example1() {
         final List<Vector> firstPath = Vector.fromPathList("R75,D30,R83,U83,L12,D49,R71,U7,L72");
         final List<Vector> secondPath = Vector.fromPathList("U62,R66,U55,R34,D71,R55,D58,R83");
 
@@ -153,7 +153,7 @@ class Day03DeliveryOfPresentsToHousesTest {
     }
 
     @Test
-    public void findClosestIntersectionToCentralPort_example2() {
+    void findClosestIntersectionToCentralPort_example2() {
         final List<Vector> firstPath = Vector.fromPathList("R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51");
         final List<Vector> secondPath = Vector.fromPathList("U98,R91,D20,R16,D67,R40,U7,R15,U6,R7");
 
@@ -163,7 +163,7 @@ class Day03DeliveryOfPresentsToHousesTest {
     }
 
     @Test
-    public void pointFromPath_withOneVector() {
+    void pointFromPath_withOneVector() {
         final List<Vector> input = Vector.fromPathList("R8");
 
         final List<Point> result = Point.fromPath(input);
@@ -173,7 +173,7 @@ class Day03DeliveryOfPresentsToHousesTest {
     }
 
     @Test
-    public void pointFromPath_withTwoVectors() {
+    void pointFromPath_withTwoVectors() {
         final List<Vector> input = Vector.fromPathList("R8,U3");
 
         final List<Point> result = Point.fromPath(input);
@@ -183,7 +183,7 @@ class Day03DeliveryOfPresentsToHousesTest {
     }
 
     @Test
-    public void pointFromPath_withFourVectors() {
+    void pointFromPath_withFourVectors() {
         final List<Vector> input = Vector.fromPathList("R8,U5,L5,D3");
 
         final List<Point> result = Point.fromPath(input);
@@ -194,14 +194,14 @@ class Day03DeliveryOfPresentsToHousesTest {
 
 
     @Test
-    public void pointFromInput() {
+    void pointFromInput() {
         assertEquals(new Point(8, 0), Point.fromInput("8,0"));
         assertEquals(new Point(11, -3), Point.fromInput("11,-3"));
         assertEquals(new Point(-1, 17), Point.fromInput("-1,17"));
     }
 
     @Test
-    public void vectorFromPath() {
+    void vectorFromPath() {
         assertEquals(new Vector(8, 0), Vector.fromPath("R8"));
         assertEquals(new Vector(0, 5), Vector.fromPath("U5"));
         assertEquals(new Vector(-5, 0), Vector.fromPath("L5"));
@@ -209,7 +209,7 @@ class Day03DeliveryOfPresentsToHousesTest {
     }
 
     @Test
-    public void vectorFromPathList() {
+    void vectorFromPathList() {
         final String input = "R8,U5,L5,D3";
 
         final List<Vector> result = Vector.fromPathList(input);

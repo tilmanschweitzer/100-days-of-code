@@ -14,12 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day04MiningAdventCoinsTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(216, new Day04().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(150, new Day04().getResultOfSecondPuzzle());
     }
 
@@ -65,7 +65,7 @@ class Day04MiningAdventCoinsTest {
             "pid:3556412378 byr:2007";
 
     @Test
-    public void parseLine_parsesTestInputAsExpected() {
+    void parseLine_parsesTestInputAsExpected() {
         final Day04 day04 = new Day04();
         final List<List<PassportField>> passportFieldsByLine = Arrays.stream(testInput.split("\n")).map(day04::parseLine).collect(Collectors.toList());
 
@@ -82,7 +82,7 @@ class Day04MiningAdventCoinsTest {
 
 
     @Test
-    public void passportsFromFieldsList_joinsPassportFieldsSeparatedByEmptyLines() {
+    void passportsFromFieldsList_joinsPassportFieldsSeparatedByEmptyLines() {
         final Day04 day04 = new Day04();
         final List<List<PassportField>> passportFieldsByLine = Arrays.stream(testInput.split("\n")).map(day04::parseLine).collect(Collectors.toList());
 
@@ -118,7 +118,7 @@ class Day04MiningAdventCoinsTest {
     }
 
     @Test
-    public void getResultOfFirstPuzzle_returns2forTestInput() {
+    void getResultOfFirstPuzzle_returns2forTestInput() {
         final Day04 day04 = new Day04();
         final List<List<PassportField>> passportFieldsByLine = Arrays.stream(testInput.split("\n")).map(day04::parseLine).collect(Collectors.toList());
 
@@ -128,7 +128,7 @@ class Day04MiningAdventCoinsTest {
     }
 
     @Test
-    public void getResultOfFirstPuzzle_returns4forValidPassports() {
+    void getResultOfFirstPuzzle_returns4forValidPassports() {
         final Day04 day04 = new Day04();
         final List<List<PassportField>> passportFieldsByLine = Arrays.stream(validPassports.split("\n")).map(day04::parseLine).collect(Collectors.toList());
 
@@ -138,7 +138,7 @@ class Day04MiningAdventCoinsTest {
     }
 
     @Test
-    public void getResultOfFirstPuzzle_returns0forInvalidPassports() {
+    void getResultOfFirstPuzzle_returns0forInvalidPassports() {
         final Day04 day04 = new Day04();
         final List<List<PassportField>> passportFieldsByLine = Arrays.stream(invalidPassports.split("\n")).map(day04::parseLine).collect(Collectors.toList());
 

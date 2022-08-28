@@ -9,29 +9,29 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day01Test {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(243, new Day01().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(142, new Day01().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void parse() {
+    void parse() {
         assertEquals(new Instruction(Direction.R, 5), Instruction.parse("R5"));
         assertEquals(new Instruction(Direction.L, 6), Instruction.parse("L6"));
     }
 
     @Test
-    public void followPath() {
+    void followPath() {
         assertEquals(5, Day01.followPath(Instruction.parse("R2", "L3")).getManhattanDistance());
         assertEquals(2, Day01.followPath(Instruction.parse("R2", "R2", "R2")).getManhattanDistance());
     }
 
     @Test
-    public void findFirstIntersection() {
+    void findFirstIntersection() {
         assertEquals(4, Day01.findFirstIntersection(Instruction.parse("R8", "R4", "R4", "R8")).get().getManhattanDistance());
     }
 }

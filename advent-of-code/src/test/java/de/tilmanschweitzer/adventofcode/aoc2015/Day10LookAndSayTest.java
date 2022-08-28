@@ -7,17 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day10LookAndSayTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(252594, new Day10LookAndSay().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(3579328, new Day10LookAndSay().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void lookAndSay() {
+    void lookAndSay() {
         assertEquals("11", Day10LookAndSay.lookAndSay("1"));
         assertEquals("21", Day10LookAndSay.lookAndSay("11"));
         assertEquals("1211", Day10LookAndSay.lookAndSay("21"));
@@ -25,7 +25,7 @@ class Day10LookAndSayTest {
     }
 
     @Test
-    public void lookAndSayWithRounds() {
+    void lookAndSayWithRounds() {
         assertEquals("11", Day10LookAndSay.lookAndSay("1", 1));
         assertEquals("21", Day10LookAndSay.lookAndSay("1", 2));
         assertEquals("1211", Day10LookAndSay.lookAndSay("1", 3));

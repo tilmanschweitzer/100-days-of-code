@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class RotateColumnCommandTest {
 
     @Test
-    public void parse() {
+    void parse() {
         assertEquals(new RotateColumnCommand(13, 7), new RotateColumnCommandParser().parse("rotate column x=13 by 7"));
         assertEquals(new RotateColumnCommand(3, 17), new RotateColumnCommandParser().parse("rotate column x=3 by 17"));
     }
 
     @Test
-    public void apply() {
+    void apply() {
         final Screen screen = Screen.of(7, 3);
         screen.turnOn(6, 1);
 

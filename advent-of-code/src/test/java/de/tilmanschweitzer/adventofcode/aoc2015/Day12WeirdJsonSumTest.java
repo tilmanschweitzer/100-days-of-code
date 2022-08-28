@@ -10,17 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day12WeirdJsonSumTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(191164, new Day12WeirdJsonSum().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(87842, new Day12WeirdJsonSum().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void extractAllNumbersFromString() {
+    void extractAllNumbersFromString() {
         assertEquals(List.of(1, 2, 3), Day12WeirdJsonSum.extractAllNumbersFromString("[1,2,3]"));
         assertEquals(List.of(2, 4), Day12WeirdJsonSum.extractAllNumbersFromString("{\"a\":2,\"b\":4}"));
         assertEquals(List.of(3), Day12WeirdJsonSum.extractAllNumbersFromString("[[[3]]]"));
@@ -28,7 +28,7 @@ class Day12WeirdJsonSumTest {
     }
 
     @Test
-    public void sumAllNumbersInString() {
+    void sumAllNumbersInString() {
         assertEquals(6, Day12WeirdJsonSum.sumAllNumbersInString("[1,2,3]"));
         assertEquals(6, Day12WeirdJsonSum.sumAllNumbersInString("{\"a\":2,\"b\":4}"));
         assertEquals(3, Day12WeirdJsonSum.sumAllNumbersInString("[[[3]]]"));
@@ -39,7 +39,7 @@ class Day12WeirdJsonSumTest {
     }
 
     @Test
-    public void extractAllNumbersFromJson() {
+    void extractAllNumbersFromJson() {
         final JsonNumberExtractor jsonNumberExtractor = new JsonNumberExtractor();
         assertEquals(List.of(1, 2, 3), jsonNumberExtractor.extractAllNumbersFromJson("[1,2,3]"));
         assertEquals(List.of(2, 4), jsonNumberExtractor.extractAllNumbersFromJson("{\"a\":2,\"b\":4}"));
@@ -48,7 +48,7 @@ class Day12WeirdJsonSumTest {
     }
 
     @Test
-    public void sumAllNumbersInJson() {
+    void sumAllNumbersInJson() {
         final JsonNumberExtractor jsonNumberExtractor = new JsonNumberExtractor();
         assertEquals(6, jsonNumberExtractor.sumAllNumbersInJson("[1,2,3]"));
         assertEquals(6, jsonNumberExtractor.sumAllNumbersInJson("{\"a\":2,\"b\":4}"));
@@ -60,7 +60,7 @@ class Day12WeirdJsonSumTest {
     }
 
     @Test
-    public void extractAllNumbersFromJsonSkippingRedNodes() {
+    void extractAllNumbersFromJsonSkippingRedNodes() {
         final JsonNumberExtractor jsonNumberExtractor = new JsonNumberExtractor(JsonNumberExtractor::isObjectNodeWithRedValue);
         assertEquals(List.of(1, 2, 3), jsonNumberExtractor.extractAllNumbersFromJson("[1,2,3]"));
         assertEquals(List.of(2, 4), jsonNumberExtractor.extractAllNumbersFromJson("{\"a\":2,\"b\":4}"));
@@ -69,7 +69,7 @@ class Day12WeirdJsonSumTest {
     }
 
     @Test
-    public void sumAllNumbersInJsonSkippingRedNodes() {
+    void sumAllNumbersInJsonSkippingRedNodes() {
         final JsonNumberExtractor jsonNumberExtractor = new JsonNumberExtractor(JsonNumberExtractor::isObjectNodeWithRedValue);
         assertEquals(6, jsonNumberExtractor.sumAllNumbersInJson("[1,2,3]"));
         assertEquals(4, jsonNumberExtractor.sumAllNumbersInJson("[1,{\"c\":\"red\",\"b\":2},3]"));

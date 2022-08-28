@@ -10,22 +10,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day09ShortestDeliveryDistanceTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(251, new Day09ShortestDeliveryDistance().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(898, new Day09ShortestDeliveryDistance().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void parseLine() {
+    void parseLine() {
         assertEquals(new Route("London", "Dublin", 464), Route.parse("London to Dublin = 464"));
     }
 
     @Test
-    public void getShortestTripForTwoCities() {
+    void getShortestTripForTwoCities() {
         final List<Route> allRoutes = List.of(
                 new Route("Dublin", "London", 463)
         );
@@ -35,7 +35,7 @@ class Day09ShortestDeliveryDistanceTest {
     }
 
     @Test
-    public void getShortestTripForThreeCities() {
+    void getShortestTripForThreeCities() {
         final List<Route> allRoutes = List.of(
                 new Route("London", "Dublin", 464),
                 new Route("London", "Belfast", 518),
@@ -53,7 +53,7 @@ class Day09ShortestDeliveryDistanceTest {
     }
 
     @Test
-    public void getShortestTripForFourCities() {
+    void getShortestTripForFourCities() {
         final List<Route> allRoutes = List.of(
                 new Route("Barcelona", "Paris", 1035),
                 new Route("Barcelona", "Brussels", 1338),
@@ -77,7 +77,7 @@ class Day09ShortestDeliveryDistanceTest {
     }
 
     @Test
-    public void getLongestTripForThreeCities() {
+    void getLongestTripForThreeCities() {
         final List<Route> allRoutes = List.of(
                 new Route("London", "Dublin", 464),
                 new Route("London", "Belfast", 518),

@@ -13,17 +13,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class Day01NotQuiteLispTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(1019371, new Day01().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(278064990, new Day01().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void findMatchingNumberPair_returns1721and299forTestInput() {
+    void findMatchingNumberPair_returns1721and299forTestInput() {
         final List<Integer> testInput = List.of(1721, 979, 366, 299, 675, 1456);
 
         final Optional<Pair<Integer>> result = Day01.findMatchingNumberPair(testInput, 2020);
@@ -33,7 +33,7 @@ class Day01NotQuiteLispTest {
     }
 
     @Test
-    public void findMatchingNumberPair_worksWithOnlyTwoValues() {
+    void findMatchingNumberPair_worksWithOnlyTwoValues() {
         final List<Integer> testInput = List.of(2010, 10);
 
         final Optional<Pair<Integer>> result = Day01.findMatchingNumberPair(testInput, 2020);
@@ -43,7 +43,7 @@ class Day01NotQuiteLispTest {
     }
 
     @Test
-    public void findMatchingNumberPair_returnsEmptyOptionalForLessThan2Numbers() {
+    void findMatchingNumberPair_returnsEmptyOptionalForLessThan2Numbers() {
         final List<Integer> testInput = List.of(2010);
 
         final Optional<Pair<Integer>> result = Day01.findMatchingNumberPair(testInput, 2020);
@@ -52,7 +52,7 @@ class Day01NotQuiteLispTest {
     }
 
     @Test
-    public void findMatchingNumberPair_returnsFirstPairIfMultipleOptionsMatch() {
+    void findMatchingNumberPair_returnsFirstPairIfMultipleOptionsMatch() {
         final List<Integer> testInput = List.of(2010, 2000, 20, 10);
 
         final Optional<Pair<Integer>> result = Day01.findMatchingNumberPair(testInput, 2020);
@@ -62,7 +62,7 @@ class Day01NotQuiteLispTest {
     }
 
     @Test
-    public void findMatchingNumberTriplet_returns1721and299forTestInput() {
+    void findMatchingNumberTriplet_returns1721and299forTestInput() {
         final List<Integer> testInput = List.of(1721, 979, 366, 299, 675, 1456);
 
         final Optional<Triplet<Integer>> result = Day01.findMatchingNumberTriplet(testInput, 2020);

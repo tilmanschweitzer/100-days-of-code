@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @EqualsAndHashCode
 @ToString
-public abstract class Coordinate {
+public class Coordinate {
     protected final int x;
     protected final int y;
 

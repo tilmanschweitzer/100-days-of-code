@@ -7,17 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day01Test {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(1158, new Day01().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(1132, new Day01().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void sumDuplicateNumbers() {
+    void sumDuplicateNumbers() {
         assertEquals(3, Day01.sumDuplicateNumbers(Day01.parseNumbers("1122")));
         assertEquals(4, Day01.sumDuplicateNumbers(Day01.parseNumbers("1111")));
         assertEquals(0, Day01.sumDuplicateNumbers(Day01.parseNumbers("1234")));
@@ -26,7 +26,7 @@ class Day01Test {
 
 
     @Test
-    public void sumDuplicateNumbersV2() {
+    void sumDuplicateNumbersV2() {
         assertEquals(6, Day01.sumDuplicateNumbersV2(Day01.parseNumbers("1212")));
         assertEquals(0, Day01.sumDuplicateNumbersV2(Day01.parseNumbers("1221")));
         assertEquals(4, Day01.sumDuplicateNumbersV2(Day01.parseNumbers("123425")));

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class Day04Test {
 
     @Test
-    public void isValidPassPhrase() {
+    void isValidPassPhrase() {
         assertTrue(Day04.isValidPassPhrase(List.of("aa", "bb", "cc", "dd", "ee")));
         assertTrue(Day04.isValidPassPhrase(List.of("aa", "bb", "cc", "dd", "aaa")));
 
@@ -18,7 +18,7 @@ class Day04Test {
     }
 
     @Test
-    public void isValidPassPhraseV2() {
+    void isValidPassPhraseV2() {
         assertTrue(Day04.isValidPassPhraseV2(List.of("abcde", "fghij")));
         assertTrue(Day04.isValidPassPhrase(List.of("a", "ab", "abc", "abd", "abf", "abj")));
         assertTrue(Day04.isValidPassPhrase(List.of("iiii", "oiii", "ooii", "oooi", "oooo")));

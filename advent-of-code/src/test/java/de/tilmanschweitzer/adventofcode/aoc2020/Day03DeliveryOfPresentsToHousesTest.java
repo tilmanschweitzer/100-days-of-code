@@ -10,17 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day03DeliveryOfPresentsToHousesTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(156L, new Day03().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(3521829480L, new Day03().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void parseLine_parsesTestInputAsExpected() {
+    void parseLine_parsesTestInputAsExpected() {
         final String testInput = "..##.......\n" +
                 "#...#...#..\n" +
                 ".#....#..#.\n" +

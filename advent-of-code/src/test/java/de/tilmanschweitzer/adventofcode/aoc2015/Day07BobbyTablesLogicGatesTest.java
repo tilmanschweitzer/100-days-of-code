@@ -12,17 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day07BobbyTablesLogicGatesTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(46065, new Day07BobbyTablesLogicGates().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(14134, new Day07BobbyTablesLogicGates().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void testProvideValueToWireStepParser_matches() {
+    void testProvideValueToWireStepParser_matches() {
         final CircuitStepParser<?> parser = new ProvideValueToWire.Parser();
         assertTrue(parser.matches("123 -> x"));
         assertTrue(parser.matches("456 -> y"));
@@ -36,7 +36,7 @@ class Day07BobbyTablesLogicGatesTest {
     }
 
     @Test
-    public void testProvideValueToWireStepParser_parse() {
+    void testProvideValueToWireStepParser_parse() {
         final CircuitStepParser<?> parser = new ProvideValueToWire.Parser();
         assertEquals(new ProvideValueToWire(123, "x"), parser.parse("123 -> x"));
         assertEquals(new ProvideValueToWire(456, "y"), parser.parse("456 -> y"));
@@ -45,7 +45,7 @@ class Day07BobbyTablesLogicGatesTest {
     }
 
     @Test
-    public void testAndGateParser_matches() {
+    void testAndGateParser_matches() {
         final CircuitStepParser<?> parser = new AndGate.Parser();
         assertTrue(parser.matches("x AND y -> d"));
         assertTrue(parser.matches("1 AND 2 -> k"));
@@ -58,14 +58,14 @@ class Day07BobbyTablesLogicGatesTest {
     }
 
     @Test
-    public void testAndGateParser_parse() {
+    void testAndGateParser_parse() {
         final CircuitStepParser<?> parser = new AndGate.Parser();
         assertEquals(new AndGate("x", "y", "d"), parser.parse("x AND y -> d"));
         assertEquals(new AndGate(1, 2, "k"), parser.parse("1 AND 2 -> k"));
     }
 
     @Test
-    public void testOrGateParser_matches() {
+    void testOrGateParser_matches() {
         final CircuitStepParser<?> parser = new OrGate.Parser();
         assertTrue(parser.matches("x OR y -> e"));
         assertTrue(parser.matches("3 OR 4 -> l"));
@@ -78,14 +78,14 @@ class Day07BobbyTablesLogicGatesTest {
     }
 
     @Test
-    public void testOrGateParser_parse() {
+    void testOrGateParser_parse() {
         final CircuitStepParser<?> parser = new OrGate.Parser();
         assertEquals(new OrGate("x", "y", "e"), parser.parse("x OR y -> e"));
         assertEquals(new OrGate(3, 4, "l"), parser.parse("3 OR 4 -> l"));
     }
 
     @Test
-    public void testLeftShiftGateParser_matches() {
+    void testLeftShiftGateParser_matches() {
         final CircuitStepParser<?> parser = new LeftShiftGate.Parser();
         assertTrue(parser.matches("x LSHIFT 2 -> f"));
 
@@ -97,14 +97,14 @@ class Day07BobbyTablesLogicGatesTest {
     }
 
     @Test
-    public void testShiftGateParser_parse() {
+    void testShiftGateParser_parse() {
         final CircuitStepParser<?> parser = new LeftShiftGate.Parser();
         assertEquals(new LeftShiftGate("x", 2, "f"), parser.parse("x LSHIFT 2 -> f"));
         assertEquals(new LeftShiftGate(5, 2, "m"), parser.parse("5 LSHIFT 2 -> m"));
     }
 
     @Test
-    public void testRightShiftGateParser_matches() {
+    void testRightShiftGateParser_matches() {
         final CircuitStepParser<?> parser = new RightShiftGate.Parser();
         assertTrue(parser.matches("y RSHIFT 2 -> g"));
         assertTrue(parser.matches("10 RSHIFT 2 -> n"));
@@ -118,14 +118,14 @@ class Day07BobbyTablesLogicGatesTest {
     }
 
     @Test
-    public void testLeftShiftGateParser_parse() {
+    void testLeftShiftGateParser_parse() {
         final CircuitStepParser<?> parser = new RightShiftGate.Parser();
         assertEquals(new RightShiftGate("y", 2, "g"), parser.parse("y RSHIFT 2 -> g"));
         assertEquals(new RightShiftGate(10, 2, "n"), parser.parse("10 RSHIFT 2 -> n"));
     }
 
     @Test
-    public void testNotGateParser_matches() {
+    void testNotGateParser_matches() {
         final CircuitStepParser<?> parser = new NotGate.Parser();
         assertTrue(parser.matches("NOT x -> h"));
 
@@ -137,13 +137,13 @@ class Day07BobbyTablesLogicGatesTest {
     }
 
     @Test
-    public void testNotGateParser_parse() {
+    void testNotGateParser_parse() {
         final CircuitStepParser<?> parser = new NotGate.Parser();
         assertEquals(new NotGate("x", "h"), parser.parse("NOT x -> h"));
     }
 
     @Test
-    public void testCircuit_applyStep() {
+    void testCircuit_applyStep() {
         Circuit circuit = new Circuit();
         circuit.applyStep(new ProvideValueToWire(123, "x"));
         circuit.applyStep(new ProvideValueToWire(456, "y"));
@@ -159,7 +159,7 @@ class Day07BobbyTablesLogicGatesTest {
     }
 
     @Test
-    public void testParseLine() {
+    void testParseLine() {
         final String input = "123 -> x\n" +
                 "456 -> y\n" +
                 "x AND y -> d\n" +

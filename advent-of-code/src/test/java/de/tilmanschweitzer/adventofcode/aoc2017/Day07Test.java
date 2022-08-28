@@ -55,30 +55,30 @@ class Day07Test {
 
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals("mkxke", new Day07().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals("268", new Day07().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void parse() {
+    void parse() {
         assertEquals(new TowerDescription("abcd", 10, emptyList()), TowerDescription.parse("abcd (10)"));
         assertEquals(new TowerDescription("xyz", 444, List.of("a", "b")), TowerDescription.parse("xyz (444) -> a, b"));
     }
 
 
     @Test
-    public void findBottom() {
+    void findBottom() {
         assertEquals("tknk", Day07.findBottom(towerDescriptions).getName());
     }
 
 
     @Test
-    public void weightOfNode() {
+    void weightOfNode() {
         assertEquals(251, Day07.weightOfNode(towerDescriptions, "ugml"));
         assertEquals(243, Day07.weightOfNode(towerDescriptions, "padx"));
         assertEquals(243, Day07.weightOfNode(towerDescriptions, "fwft"));
@@ -87,7 +87,7 @@ class Day07Test {
 
 
     @Test
-    public void weightsOfNode() {
+    void weightsOfNode() {
         assertEquals(251, Day07.weightsOfNode(towerDescriptions, "ugml").collect(toUnmodifiableList()));
         assertEquals(243, Day07.weightsOfNode(towerDescriptions, "padx").collect(toUnmodifiableList()));
         assertEquals(243, Day07.weightsOfNode(towerDescriptions, "fwft").collect(toUnmodifiableList()));
@@ -96,19 +96,19 @@ class Day07Test {
 
 
     @Test
-    public void getUpdatedTowerDescriptionToBalanceWeight() {
+    void getUpdatedTowerDescriptionToBalanceWeight() {
         assertEquals(60, Day07.getUpdatedTowerDescriptionToBalanceWeight(towerDescriptions).getWeight());
     }
 
 
     @Test
-    public void findUnbalancedTowerDescription() {
+    void findUnbalancedTowerDescription() {
         assertEquals("ugml", Day07.findUnbalancedTowerDescription(towerDescriptions).getName());
         assertEquals("m", Day07.findUnbalancedTowerDescription(unbalanceInLeafTowerDescriptions).getName());
     }
 
     @Test
-    public void hasUnbalancesSuccessors() {
+    void hasUnbalancesSuccessors() {
         assertTrue(Day07.hasUnbalancesSuccessors(unbalanceInLeafTowerDescriptions, "a"));
         assertFalse(Day07.hasUnbalancesSuccessors(unbalanceInLeafTowerDescriptions, "b"));
         assertFalse(Day07.hasUnbalancesSuccessors(unbalanceInLeafTowerDescriptions, "c"));

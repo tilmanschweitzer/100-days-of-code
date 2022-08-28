@@ -11,17 +11,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day17EggnogRefrigeratorTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(1638, new Day17EggnogRefrigerator().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(17, new Day17EggnogRefrigerator().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void findCombinations() {
+    void findCombinations() {
         final Refrigerator refrigerator20 = Refrigerator.of(20);
         final Refrigerator refrigerator15 = Refrigerator.of(15);
         final Refrigerator refrigerator10 = Refrigerator.of(10);

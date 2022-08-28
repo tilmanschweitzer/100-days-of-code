@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ScreenTest {
 
     @Test
-    public void testToString() {
+    void testToString() {
         final Screen screen = Screen.of(5, 4);
         final String expectedString = ".....\n" +
                 ".....\n" +
@@ -19,7 +19,7 @@ class ScreenTest {
     }
 
     @Test
-    public void turnOn() {
+    void turnOn() {
         final Screen screen = Screen.of(7, 3);
         screen.turnOn(5, 1);
 

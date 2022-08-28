@@ -10,17 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day06Test {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(11137, new Day06().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(1037, new Day06().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void findCombinationsUntilInfiniteLoopIsDetected() {
+    void findCombinationsUntilInfiniteLoopIsDetected() {
         final Set<List<Integer>> expectedResult = Set.of(
                 List.of(0, 2, 7, 0),
                 List.of(2, 4, 1, 2),
@@ -33,7 +33,7 @@ class Day06Test {
     }
 
     @Test
-    public void findNumberOfCyclesInInfinite() {
+    void findNumberOfCyclesInInfinite() {
         assertEquals(4, Day06.MemoryBlocks.from(List.of(0, 2, 7, 0)).findNumberOfCyclesInInfinite());
     }
 }

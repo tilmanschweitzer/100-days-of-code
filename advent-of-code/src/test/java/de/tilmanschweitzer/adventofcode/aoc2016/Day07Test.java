@@ -12,17 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day07Test {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(118L, new Day07().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(260L, new Day07().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void containsAbbaCombination() {
+    void containsAbbaCombination() {
         assertTrue(Day07.containsAbbaCombination("abba"));
         assertTrue(Day07.containsAbbaCombination("oxyyx"));
 
@@ -32,17 +32,17 @@ class Day07Test {
     }
 
     @Test
-    public void getStringsInsideBrackets() {
+    void getStringsInsideBrackets() {
         assertEquals(List.of("cd", "ij", "mn"), Day07.getStringsInsideBrackets("ab[cd]ef[ij]kl[mn]op"));
     }
 
     @Test
-    public void getStringsOutsideBrackets() {
+    void getStringsOutsideBrackets() {
         assertEquals(List.of("ab", "ef", "kl", "op"), Day07.getStringsOutsideBrackets("ab[cd]ef[ij]kl[mn]op"));
     }
 
     @Test
-    public void hasSupportForTLS() {
+    void hasSupportForTLS() {
         assertTrue(Day07.hasSupportForTLS("abba[mnop]qrst"));
         assertTrue(Day07.hasSupportForTLS("ioxxoj[asdfgh]zxcvbn"));
 
@@ -51,14 +51,14 @@ class Day07Test {
     }
 
     @Test
-    public void findAbaCombination() {
+    void findAbaCombination() {
         assertEquals(Set.of(Pair.of('a', 'b')), Day07.findAbaCombination("aba").collect(Collectors.toSet()));
         assertEquals(Set.of(Pair.of('b', 'a')), Day07.findAbaCombination("bab").collect(Collectors.toSet()));
         assertEquals(Set.of(), Day07.findAbaCombination("aaa").collect(Collectors.toSet()));
     }
 
     @Test
-    public void hasSupportForSSL() {
+    void hasSupportForSSL() {
         assertTrue(Day07.hasSupportForSSL("aba[bab]xyz"));
         assertTrue(Day07.hasSupportForSSL("aaa[kek]eke"));
         assertTrue(Day07.hasSupportForSSL("zazbz[bzb]cdb"));

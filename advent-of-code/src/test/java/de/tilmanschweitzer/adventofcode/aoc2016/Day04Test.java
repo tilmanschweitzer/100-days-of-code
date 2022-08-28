@@ -13,33 +13,33 @@ class Day04Test {
 
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(185371, new Day04().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(984, new Day04().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void parse() {
+    void parse() {
         assertEquals(new Room("aaaaa-bbb-z-y-x", 123, "abxyz"), Room.parse("aaaaa-bbb-z-y-x-123[abxyz]"));
     }
 
     @Test
-    public void getAllChars() {
+    void getAllChars() {
         assertEquals(stringToCharList("aaaaabbbzyx"), Room.parse("aaaaa-bbb-z-y-x-123[abxyz]").getAllChars());
     }
 
     @Test
-    public void getUniqueCharsInOrder() {
+    void getUniqueCharsInOrder() {
         assertEquals(stringToCharList("abzyx"), Room.parse("aaaaa-bbb-z-y-x-123[abxyz]").getUniqueCharsInOrder());
         assertEquals(stringToCharList("azdbui"), Room.parse("azdaabuiiaiai-123[azdbui]").getUniqueCharsInOrder());
     }
 
     @Test
-    public void getCharsWithCount() {
+    void getCharsWithCount() {
         final List<CharCount> expectedCharCounts = List.of(CharCount.of('a', 5), CharCount.of('b', 3), CharCount.of('x'), CharCount.of('y'), CharCount.of('z'));
         assertEquals(expectedCharCounts, Room.parse("aaaaa-bbb-z-y-x-123[abxyz]").getCharsWithCount());
 
@@ -48,13 +48,13 @@ class Day04Test {
     }
 
     @Test
-    public void getCalculatedCheckSum() {
+    void getCalculatedCheckSum() {
         assertEquals("abxyz", Room.parse("aaaaa-bbb-z-y-x-123[abxyz]").getCalculatedCheckSum());
         assertEquals("abcde", Room.parse("a-b-c-d-e-f-g-h-987[abcde]").getCalculatedCheckSum());
     }
 
     @Test
-    public void isValid() {
+    void isValid() {
         assertTrue(Room.parse("aaaaa-bbb-z-y-x-123[abxyz]").isValid());
         assertTrue(Room.parse("a-b-c-d-e-f-g-h-987[abcde]").isValid());
         assertTrue(Room.parse("not-a-real-room-404[oarel]").isValid());
@@ -62,7 +62,7 @@ class Day04Test {
     }
 
     @Test
-    public void getDecryptedName() {
+    void getDecryptedName() {
         assertEquals("b", Room.parse("a-1[q]").getDecryptedName());
         assertEquals("z", Room.parse("a-25[q]").getDecryptedName());
         assertEquals("a", Room.parse("a-26[q]").getDecryptedName());

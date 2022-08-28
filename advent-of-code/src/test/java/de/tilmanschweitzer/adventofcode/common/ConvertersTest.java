@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ConvertersTest {
 
     @Test
-    public void stringToCharList() {
+    void stringToCharList() {
         assertEquals(List.of('U', 'L', 'L'), Converters.stringToCharList("ULL"));
     }
 

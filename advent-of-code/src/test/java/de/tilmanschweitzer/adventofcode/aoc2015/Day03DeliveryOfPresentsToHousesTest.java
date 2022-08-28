@@ -9,17 +9,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day03DeliveryOfPresentsToHousesTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(2565, new Day03DeliveryOfPresentsToHouses().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(2639, new Day03DeliveryOfPresentsToHouses().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void testMoveFromInput() {
+    void testMoveFromInput() {
         assertEquals(Move.NORTH, Move.fromInput('^'));
         assertEquals(Move.SOUTH, Move.fromInput('v'));
         assertEquals(Move.EAST, Move.fromInput('>'));
@@ -28,14 +28,14 @@ class Day03DeliveryOfPresentsToHousesTest {
 
 
     @Test
-    public void testNumberOfHousesFromMoves() {
+    void testNumberOfHousesFromMoves() {
         assertEquals(2, Day03DeliveryOfPresentsToHouses.numberOfHousesFromMoves(Move.fromInput(">")));
         assertEquals(4, Day03DeliveryOfPresentsToHouses.numberOfHousesFromMoves(Move.fromInput("^>v<")));
         assertEquals(2, Day03DeliveryOfPresentsToHouses.numberOfHousesFromMoves(Move.fromInput("^v^v^v^v^v")));
     }
 
     @Test
-    public void testNumberOfHousesFromMovesFromSantaAndRoboSanta() {
+    void testNumberOfHousesFromMovesFromSantaAndRoboSanta() {
         assertEquals(3, Day03DeliveryOfPresentsToHouses.numberOfHousesFromMovesFromSantaAndRoboSanta(Move.fromInput("^v")));
         assertEquals(3, Day03DeliveryOfPresentsToHouses.numberOfHousesFromMovesFromSantaAndRoboSanta(Move.fromInput("^>v<")));
         assertEquals(11, Day03DeliveryOfPresentsToHouses.numberOfHousesFromMovesFromSantaAndRoboSanta(Move.fromInput("^v^v^v^v^v")));

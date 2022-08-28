@@ -15,23 +15,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class Day15PerfectRecipeTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(13882464, new Day15PerfectRecipe().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(11171160, new Day15PerfectRecipe().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void parseIngredient() {
+    void parseIngredient() {
         assertEquals(new Ingredient("Butterscotch", -1, -2, 6, 3, 8), Ingredient.parse("Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8"));
         assertEquals(new Ingredient("Cinnamon", 2, 3, -2, -1, 3), Ingredient.parse("Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3"));
     }
 
     @Test
-    public void recipeGetScore() {
+    void recipeGetScore() {
         final Ingredient butterscotch = Ingredient.parse("Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8");
         final Ingredient cinnamon = Ingredient.parse("Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3");
 
@@ -41,7 +41,7 @@ class Day15PerfectRecipeTest {
     }
 
     @Test
-    public void findRecipeWithHighestScoreForTeaspoonsAndIngredients() {
+    void findRecipeWithHighestScoreForTeaspoonsAndIngredients() {
         final Ingredient butterscotch = Ingredient.parse("Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8");
         final Ingredient cinnamon = Ingredient.parse("Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3");
 
@@ -56,7 +56,7 @@ class Day15PerfectRecipeTest {
     }
 
     @Test
-    public void findRecipeMatchingCaloriesForTeaspoonsAndIngredients() {
+    void findRecipeMatchingCaloriesForTeaspoonsAndIngredients() {
         final Ingredient butterscotch = Ingredient.parse("Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8");
         final Ingredient cinnamon = Ingredient.parse("Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3");
 
@@ -71,7 +71,7 @@ class Day15PerfectRecipeTest {
     }
 
     @Test
-    public void combinations() {
+    void combinations() {
         assertEquals(Set.of(of(0, 2), of(1, 1), of(2, 0)), Day15PerfectRecipe.combinations(2, 2));
         assertEquals(Set.of(of(0, 0, 2), of(0, 1, 1), of(0, 2, 0), of(1, 0, 1), of(1, 1, 0), of(2, 0, 0)), Day15PerfectRecipe.combinations(3, 2));
 

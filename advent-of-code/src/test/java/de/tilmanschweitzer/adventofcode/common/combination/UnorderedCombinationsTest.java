@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class UnorderedCombinationsTest {
 
     @Test
-    public void matchingUnorderedCombinationsAsSet() {
+    void matchingUnorderedCombinationsAsSet() {
         final SumValidator<Integer> integerSumValidator = new SumValidator<>(7, Function.identity());
 
         final Set<Set<Integer>> result = UnorderedCombinations.allCombinationsAsSet(List.of(1, 2, 3, 4, 5, 6), integerSumValidator);

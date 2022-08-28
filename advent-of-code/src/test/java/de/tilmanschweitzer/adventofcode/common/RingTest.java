@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 class RingTest {
 
     @Test
-    public void ring_equalsAndHashCode() {
+    void ring_equalsAndHashCode() {
         assertEquals(Ring.of(2, 3, 4, 1), Ring.of(1, 2, 3, 4));
         assertEquals(Ring.of(3, 4, 1, 2), Ring.of(1, 2, 3, 4));
         assertEquals(Ring.of(4, 1, 2, 3), Ring.of(1, 2, 3, 4));
@@ -27,7 +27,7 @@ class RingTest {
     }
 
     @Test
-    public void ring_elementAccess() {
+    void ring_elementAccess() {
         final Ring<Integer> ring = Ring.of(7, 6, 5);
         assertEquals(7, ring.get(0));
         assertEquals(6, ring.get(1));

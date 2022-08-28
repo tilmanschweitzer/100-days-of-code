@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day01NotQuiteLispTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(3267890, new Day01().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(4898972, new Day01().getResultOfSecondPuzzle());
     }
 

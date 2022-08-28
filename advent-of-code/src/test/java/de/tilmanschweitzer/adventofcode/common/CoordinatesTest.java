@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CoordinatesTest {
 
     @Test
-    public void forEachCoordinateInGrid() {
+    void forEachCoordinateInGrid() {
         final Set<Coordinate> result2x3Grid = Coordinates.coordinateStreamWithinGrid(2, 3).collect(Collectors.toUnmodifiableSet());
         final Set<BasicCoordinate> expectedResult2x3Grid = BasicCoordinate.of(0, 0, 0, 1, 0, 2, 1, 0, 1, 1, 1, 2);
 

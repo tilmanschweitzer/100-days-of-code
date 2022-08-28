@@ -8,17 +8,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day03Test {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(983L, new Day03().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(1836L, new Day03().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void parse() {
+    void parse() {
         final Day03 day03 = new Day03();
         assertEquals(new Triangle(1, 2, 3), day03.parseLine("    1    2\t3    "));
         assertEquals(new Triangle(315, 200, 999), day03.parseLine("  \t  315    200\t    999 "));
@@ -26,7 +26,7 @@ class Day03Test {
 
 
     @Test
-    public void isValidTriangle() {
+    void isValidTriangle() {
         assertTrue(new Triangle(2, 3, 4).isValid());
         assertTrue(new Triangle(10, 6, 5).isValid());
         assertFalse(new Triangle(1, 1, 2).isValid());

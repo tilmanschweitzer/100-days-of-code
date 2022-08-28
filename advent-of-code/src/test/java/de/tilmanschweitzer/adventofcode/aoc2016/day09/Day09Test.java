@@ -8,18 +8,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day09Test {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(107035L, new Day09().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(11451628995L, new Day09().getResultOfSecondPuzzle());
     }
 
 
     @Test
-    public void decompress() {
+    void decompress() {
         assertEquals("ADVENT", Day09.decompress("ADVENT"));
         assertEquals("ABBBBBC", Day09.decompress("A(1x5)BC"));
         assertEquals("BBBBBBBBBBBBBBB", Day09.decompress("(1x5)B(1x5)B(1x5)B"));
@@ -32,7 +32,7 @@ class Day09Test {
     }
 
     @Test
-    public void decompressV2() {
+    void decompressV2() {
         assertEquals("ADVENT", Day09.decompressV2("ADVENT"));
         assertEquals("ABBBBBC", Day09.decompressV2("A(1x5)BC"));
         assertEquals("XABCABCABCABCABCABCY", Day09.decompressV2("X(8x2)(3x3)ABCY"));
@@ -41,7 +41,7 @@ class Day09Test {
     }
 
     @Test
-    public void decompressLength() {
+    void decompressLength() {
         assertEquals(6, Day09.decompressLength("ADVENT"));
         assertEquals("ABBBBBC".length(), Day09.decompressLength("A(1x5)BC"));
         assertEquals("XYZXYZXYZ".length(), Day09.decompressLength("(3x3)XYZ"));
@@ -52,7 +52,7 @@ class Day09Test {
     }
 
     @Test
-    public void decompressV2Length() {
+    void decompressV2Length() {
         assertEquals("ADVENT".length(), Day09.decompressV2Length("ADVENT"));
         assertEquals("ABBBBBC".length(), Day09.decompressV2Length("A(1x5)BC"));
         assertEquals("XABCABCABCABCABCABCY".length(), Day09.decompressV2Length("X(8x2)(3x3)ABCY"));
@@ -62,12 +62,12 @@ class Day09Test {
 
 
     @Test
-    public void extractMarker() {
+    void extractMarker() {
         assertEquals("(1x5)", Day09.extractNextMarker("A(1x5)BC"));
     }
 
     @Test
-    public void parseMarker() {
+    void parseMarker() {
         assertEquals(Pair.of(3, 17), Day09.parseMarker("(3x17)"));
         assertEquals(Pair.of(13, 7), Day09.parseMarker("(13x7)"));
     }

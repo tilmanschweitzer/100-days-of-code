@@ -14,24 +14,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day19RudolphMedicineTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(518, new Day19RudolphMedicine().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(0, new Day19RudolphMedicine().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void parse() {
+    void parse() {
         assertEquals(new Replacement("H", "HO"), Replacement.parse("H => HO"));
         assertEquals(new Replacement("H", "OH"), Replacement.parse("H => OH"));
         assertEquals(new Replacement("O", "HH"), Replacement.parse("O => HH"));
     }
 
     @Test
-    public void distinctReplacements() {
+    void distinctReplacements() {
         final List<Replacement> replacements = Stream.of("H => HO", "H => OH", "O => HH")
                 .map(Replacement::parse)
                 .collect(Collectors.toUnmodifiableList());
@@ -42,7 +42,7 @@ class Day19RudolphMedicineTest {
     }
 
     @Test
-    public void findStepsToGenerate() {
+    void findStepsToGenerate() {
         final List<Replacement> replacements = Stream.of("e => H", "e => O", "H => HO", "H => OH", "O => HH")
                 .map(Replacement::parse)
                 .collect(Collectors.toUnmodifiableList());

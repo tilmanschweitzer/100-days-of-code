@@ -7,17 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day08CountEncodedAndDecodedStringsTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(1342, new Day08CountEncodedAndDecodedStrings().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(2074, new Day08CountEncodedAndDecodedStrings().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void countInputChars() {
+    void countInputChars() {
         assertEquals(2, Day08CountEncodedAndDecodedStrings.countInputChars("\"\""));
         assertEquals(5, Day08CountEncodedAndDecodedStrings.countInputChars("\"abc\""));
         assertEquals(10, Day08CountEncodedAndDecodedStrings.countInputChars("\"aaa\\\"aaa\""));
@@ -27,7 +27,7 @@ class Day08CountEncodedAndDecodedStringsTest {
     }
 
     @Test
-    public void countParsedChars() {
+    void countParsedChars() {
         assertEquals(0, Day08CountEncodedAndDecodedStrings.countParsedChars("\"\""));
         assertEquals(3, Day08CountEncodedAndDecodedStrings.countParsedChars("\"abc\""));
         assertEquals(7, Day08CountEncodedAndDecodedStrings.countParsedChars("\"aaa\\\"aaa\""));
@@ -40,7 +40,7 @@ class Day08CountEncodedAndDecodedStringsTest {
     }
 
     @Test
-    public void parseString() {
+    void parseString() {
         assertEquals("", Day08CountEncodedAndDecodedStrings.parseString("\"\""));
         assertEquals("\\", Day08CountEncodedAndDecodedStrings.parseString("\"\\\\\""));
         assertEquals("abc", Day08CountEncodedAndDecodedStrings.parseString("\"abc\""));
@@ -51,13 +51,13 @@ class Day08CountEncodedAndDecodedStringsTest {
     }
 
     @Test
-    public void escapeString() {
+    void escapeString() {
         assertEquals("\"\\\"\\\"\"", Day08CountEncodedAndDecodedStrings.escapeString("\"\""));
         assertEquals("\"\\\"abc\\\"\"", Day08CountEncodedAndDecodedStrings.escapeString("\"abc\""));
     }
 
     @Test
-    public void countEscapedChars() {
+    void countEscapedChars() {
         assertEquals(6, Day08CountEncodedAndDecodedStrings.countEscapedChars("\"\""));
         assertEquals(9, Day08CountEncodedAndDecodedStrings.countEscapedChars("\"abc\""));
         assertEquals(16, Day08CountEncodedAndDecodedStrings.countEscapedChars("\"aaa\\\"aaa\""));

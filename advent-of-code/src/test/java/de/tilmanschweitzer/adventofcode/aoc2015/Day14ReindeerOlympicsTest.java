@@ -12,22 +12,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day14ReindeerOlympicsTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(2696, new Day14ReindeerOlympics().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(1084, new Day14ReindeerOlympics().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void parseReindeer() {
+    void parseReindeer() {
         assertEquals(new Reindeer("Rudolph", 22, 8, 165), Reindeer.parse("Rudolph can fly 22 km/s for 8 seconds, but then must rest for 165 seconds."));
     }
 
     @Test
-    public void distanceAfterSeconds() {
+    void distanceAfterSeconds() {
         final Reindeer comet = Reindeer.parse("Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.");
         final Reindeer dancer = Reindeer.parse("Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.");
 
@@ -45,7 +45,7 @@ class Day14ReindeerOlympicsTest {
     }
 
     @Test
-    public void pointsAfterSecondsInRace() {
+    void pointsAfterSecondsInRace() {
         final Reindeer comet = Reindeer.parse("Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.");
         final Reindeer dancer = Reindeer.parse("Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.");
 

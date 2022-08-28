@@ -7,23 +7,23 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day11SantasPasswordPolicyTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals("hxbxxyzz", new Day11SantasPasswordPolicy().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals("hxcaabcc", new Day11SantasPasswordPolicy().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void findNextPassword() {
+    void findNextPassword() {
         assertEquals("abcdffaa", Day11SantasPasswordPolicy.findNextPassword("abcdefgh"));
         assertEquals("ghjaabcc", Day11SantasPasswordPolicy.findNextPassword("ghijklmn"));
     }
 
     @Test
-    public void incrementPassword() {
+    void incrementPassword() {
         assertEquals("xy", Day11SantasPasswordPolicy.incrementPassword("xx"));
         assertEquals("xz", Day11SantasPasswordPolicy.incrementPassword("xy"));
         assertEquals("ya", Day11SantasPasswordPolicy.incrementPassword("xz"));
@@ -32,7 +32,7 @@ class Day11SantasPasswordPolicyTest {
     }
 
     @Test
-    public void isValidPassword() {
+    void isValidPassword() {
         assertTrue(Day11SantasPasswordPolicy.isValidPassword("abcdffaa"));
         assertTrue(Day11SantasPasswordPolicy.isValidPassword("ghjaabcc"));
         assertFalse(Day11SantasPasswordPolicy.isValidPassword("hijklmmn"));
@@ -41,7 +41,7 @@ class Day11SantasPasswordPolicyTest {
     }
 
     @Test
-    public void includesOneStraightOfThreeIncreasingLetters() {
+    void includesOneStraightOfThreeIncreasingLetters() {
         assertTrue(Day11SantasPasswordPolicy.includesOneStraightOfThreeIncreasingLetters("hijklmmn"));
         assertTrue(Day11SantasPasswordPolicy.includesOneStraightOfThreeIncreasingLetters("abc"));
         assertTrue(Day11SantasPasswordPolicy.includesOneStraightOfThreeIncreasingLetters("xyz"));
@@ -51,7 +51,7 @@ class Day11SantasPasswordPolicyTest {
     }
 
     @Test
-    public void notContainConfusingLetters() {
+    void notContainConfusingLetters() {
         assertTrue(Day11SantasPasswordPolicy.notContainConfusingLetters("abc"));
         assertTrue(Day11SantasPasswordPolicy.notContainConfusingLetters("xyz"));
         assertFalse(Day11SantasPasswordPolicy.notContainConfusingLetters("hijklmmn"));
@@ -61,7 +61,7 @@ class Day11SantasPasswordPolicyTest {
     }
 
     @Test
-    public void containTwoLetterPairs() {
+    void containTwoLetterPairs() {
         assertTrue(Day11SantasPasswordPolicy.containTwoLetterPairs("aabb"));
         assertTrue(Day11SantasPasswordPolicy.containTwoLetterPairs("abcddeff"));
         assertFalse(Day11SantasPasswordPolicy.containTwoLetterPairs("aazxy"));

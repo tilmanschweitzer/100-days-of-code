@@ -14,23 +14,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day05Test {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(378980, new Day05().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(26889114, new Day05().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void countStepsToExitWithStrangeJumpInstruction() {
+    void countStepsToExitWithStrangeJumpInstruction() {
         final List<AbstractJumpInstruction> instructions = Stream.of(0, 3, 0, 1, -3).map(StrangeJumpInstruction::new).collect(Collectors.toList());
         assertEquals(5, Day05.countStepsToExit(instructions));
     }
 
     @Test
-    public void countStepsToExitWithEventStrangerJumpInstruction() {
+    void countStepsToExitWithEventStrangerJumpInstruction() {
         final List<AbstractJumpInstruction> instructions = Stream.of(0, 3, 0, 1, -3).map(EventStrangerJumpInstruction::new).collect(Collectors.toList());
         assertEquals(10, Day05.countStepsToExit(instructions));
     }

@@ -9,17 +9,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day01NotQuiteLispTest {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(513, new Day01().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(287, new Day01().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void firstFirstDuplicateFrequency() {
+    void firstFirstDuplicateFrequency() {
         assertEquals(2, Day01.firstFirstDuplicateFrequency(List.of(1, -2, +3, 1)));
         assertEquals(0, Day01.firstFirstDuplicateFrequency(List.of(1, -1)));
         assertEquals(10, Day01.firstFirstDuplicateFrequency(List.of(3, 3, 4, -2, -4)));

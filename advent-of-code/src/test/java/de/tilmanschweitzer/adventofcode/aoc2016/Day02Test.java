@@ -9,17 +9,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Day02Test {
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals("52981", new Day02().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals("74CD2", new Day02().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void keyCodeForInstructions() {
+    void keyCodeForInstructions() {
         assertEquals("1", Day02.keyCodeForInstructions("1", '1', "U"));
         assertEquals("1", Day02.keyCodeForInstructions("123", '2', "L"));
         assertEquals("3", Day02.keyCodeForInstructions("123", '2', "R"));

@@ -26,31 +26,31 @@ class Day13PerfectDinnerHappinessTest {
             "David would gain 41 happiness units by sitting next to Carol.";
 
     @Test
-    public void getResultOfFirstPuzzle() {
+    void getResultOfFirstPuzzle() {
         assertEquals(664, new Day13PerfectDinnerHappiness().getResultOfFirstPuzzle());
     }
 
     @Test
-    public void getResultOfSecondPuzzle() {
+    void getResultOfSecondPuzzle() {
         assertEquals(640, new Day13PerfectDinnerHappiness().getResultOfSecondPuzzle());
     }
 
     @Test
-    public void parseSeatPreference() {
+    void parseSeatPreference() {
         assertEquals(new SeatPreference("Alice", "Bob", 54), SeatPreference.parse("Alice would gain 54 happiness units by sitting next to Bob."));
         assertEquals(new SeatPreference("Alice", "Carol", -79), SeatPreference.parse("Alice would lose 79 happiness units by sitting next to Carol."));
         assertEquals(new SeatPreference("Carol", "David", 55), SeatPreference.parse("Carol would gain 55 happiness units by sitting next to David."));
     }
 
     @Test
-    public void happinessForSeatCombination() {
+    void happinessForSeatCombination() {
         final List<SeatPreference> input = Arrays.stream(testInput.split("\n")).map(SeatPreference::parse).collect(Collectors.toUnmodifiableList());
         final Day13PerfectDinnerHappiness.SeatCombinationExplorer seatCombinationExplorer = new Day13PerfectDinnerHappiness.SeatCombinationExplorer(input);
         assertEquals(330, seatCombinationExplorer.happinessForSeatCombination(Ring.of("David", "Alice", "Bob", "Carol")));
     }
 
     @Test
-    public void searchHappiestCombination() {
+    void searchHappiestCombination() {
         final List<SeatPreference> input = Arrays.stream(testInput.split("\n")).map(SeatPreference::parse).collect(Collectors.toUnmodifiableList());
         final Ring<String> happiestCombination = new Day13PerfectDinnerHappiness.SeatCombinationExplorer(input).searchHappiestCombination();
         assertEquals(Ring.of("David", "Alice", "Bob", "Carol"), happiestCombination);

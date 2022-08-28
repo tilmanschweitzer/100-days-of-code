@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CreateRectCommandTest {
 
     @Test
-    public void parse() {
+    void parse() {
         assertEquals(new CreateRectCommand(7, 13), new CreateRectCommandParser().parse("rect 7x13"));
         assertEquals(new CreateRectCommand(17, 5), new CreateRectCommandParser().parse("rect 17x5"));
     }
 
     @Test
-    public void apply() {
+    void apply() {
         final Screen screen = Screen.of(7, 3);
         final String expectedString = "###....\n" +
                 "###....\n" +

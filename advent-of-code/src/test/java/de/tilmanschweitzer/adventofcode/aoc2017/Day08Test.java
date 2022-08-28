@@ -17,7 +17,7 @@ class Day08Test {
 
 
     @Test
-    public void parse() {
+    void parse() {
 
         String testInput = "b inc 5 if a > 1\n" +
                 "a inc 1 if b < 5\n" +
@@ -32,7 +32,7 @@ class Day08Test {
     }
 
     @Test
-    public void executeInstructions() {
+    void executeInstructions() {
         final String testInput = "b inc 5 if a > 1\n" +
                 "a inc 1 if b < 5\n" +
                 "c dec -10 if a >= 1\n" +
