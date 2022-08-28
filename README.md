@@ -205,9 +205,22 @@ Extend DeductiveSudokuSolver with a method to solve conjugate pairs.
 
 Extend DeductiveSudokuSolver with a method to find and rule out XY wings.
 
-## Day 28-31
+## Day 28-93
 
-Use advent of code 2020 as TDD practice.
+Use advent of code 2020 as TDD exercise.
+
+## Day 94
+
+Extract folders as custom repositories.
+
+    # sudoku-solver
+    git filter-branch -f --prune-empty --msg-filter 'sed "s/sudoku-solver: //g"' --subdirectory-filter sudoku-solver/java master
+    git remote set-url origin git@github.com:tilmanschweitzer/sudoku-solver.git
+
+New repository: [sudoku-solver](https://github.com/tilmanschweitzer/sudoku-solver)
+
+
+
 
 
 ## Idea Backlog
