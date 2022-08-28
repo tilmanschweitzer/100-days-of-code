@@ -15,15 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day08Test {
 
-
     @Test
     void parse() {
-
-        String testInput = "b inc 5 if a > 1\n" +
-                "a inc 1 if b < 5\n" +
-                "c dec -10 if a >= 1\n" +
-                "c inc -20 if c == 10";
-
         final Instruction expectedResult1 = new Instruction("b", new Operation(OperationType.INC, 5), new Condition("a", Condition.CompareOperation.GREATER_THEN, 1));
         assertEquals(expectedResult1, Instruction.parse("b inc 5 if a > 1"));
 

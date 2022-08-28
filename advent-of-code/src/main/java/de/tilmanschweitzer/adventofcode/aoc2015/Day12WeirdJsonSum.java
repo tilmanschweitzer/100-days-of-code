@@ -78,7 +78,7 @@ public class Day12WeirdJsonSum extends SingleLineAdventOfCodeDay<String, Integer
             if (!jsonNode.isObject()) {
                 return false;
             }
-            return iteratorToStream(jsonNode.fields()).map(Map.Entry::getValue).anyMatch((value) -> value.isTextual() && value.textValue().equals("red"));
+            return iteratorToStream(jsonNode.fields()).map(Map.Entry::getValue).anyMatch((value) -> value.isTextual() && Objects.equals(value.textValue(), "red"));
         }
 
         public static <T> boolean alwaysFalse(T object) {

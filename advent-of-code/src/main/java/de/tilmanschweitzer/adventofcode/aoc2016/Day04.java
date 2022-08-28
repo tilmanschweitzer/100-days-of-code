@@ -30,7 +30,7 @@ public class Day04 extends MultiLineAdventOfCodeDay<Day04.Room, Integer> {
 
     @Override
     public Integer getResultOfSecondPuzzle(final List<Room> rooms) {
-        return rooms.stream().filter(room -> room.getDecryptedName().equals("northpole object storage")).findFirst().get().getId();
+        return rooms.stream().filter(room -> Objects.equals(room.getDecryptedName(), "northpole object storage")).findFirst().get().getId();
     }
 
     @Override

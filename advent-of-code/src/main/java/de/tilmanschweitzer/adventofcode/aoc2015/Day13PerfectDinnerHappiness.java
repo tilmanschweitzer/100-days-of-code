@@ -147,7 +147,7 @@ public class Day13PerfectDinnerHappiness extends MultiLineAdventOfCodeDay<Day13P
             }
 
             final String person = matcher.group(1);
-            final int gainOrLooseFactor = matcher.group(2).equals("gain") ? 1 : -1;
+            final int gainOrLooseFactor = Objects.equals(matcher.group(2), "gain") ? 1 : -1;
             final int happinessChange = gainOrLooseFactor * Integer.parseInt(matcher.group(3));
             final String partner = matcher.group(4);
             return new SeatPreference(person, partner, happinessChange);

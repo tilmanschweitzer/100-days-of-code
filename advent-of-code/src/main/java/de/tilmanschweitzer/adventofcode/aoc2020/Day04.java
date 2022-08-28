@@ -102,19 +102,19 @@ public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>, L
         }
 
         public boolean isValid() {
-            if (fieldName.equals("byr")) {
+            if (Objects.equals(fieldName, "byr")) {
                 final int birthYear = Integer.parseInt(fieldValue);
                 return birthYear >= 1920 && birthYear <= 2002;
             }
-            if (fieldName.equals("iyr")) {
+            if (Objects.equals(fieldName, "iyr")) {
                 final int issueYear = Integer.parseInt(fieldValue);
                 return issueYear >= 2010 && issueYear <= 2020;
             }
-            if (fieldName.equals("eyr")) {
+            if (Objects.equals(fieldName, "eyr")) {
                 final int expirationYear = Integer.parseInt(fieldValue);
                 return expirationYear >= 2020 && expirationYear <= 2030;
             }
-            if (fieldName.equals("hgt")) {
+            if (Objects.equals(fieldName, "hgt")) {
                 final String height = fieldValue;
                 if (height.endsWith("cm")) {
                     int heightInCm = Integer.parseInt(height.replace("cm", ""));
@@ -126,20 +126,20 @@ public class Day04 extends MultiLineAdventOfCodeDay<List<Day04.PassportField>, L
                     return false;
                 }
             }
-            if (fieldName.equals("hcl")) {
+            if (Objects.equals(fieldName, "hcl")) {
                 final String hairColor = fieldValue;
                 return hairColor.matches("^#[\\da-f]{6}$");
             }
-            if (fieldName.equals("ecl")) {
+            if (Objects.equals(fieldName, "ecl")) {
                 final List<String> validEyeColors = List.of("amb", "blu", "brn", "gry", "grn", "hzl", "oth");
                 final String eyeColor = fieldValue;
                 return validEyeColors.contains(eyeColor);
             }
-            if (fieldName.equals("pid")) {
+            if (Objects.equals(fieldName, "pid")) {
                 final String passportId = fieldValue;
                 return passportId.length() == 9;
             }
-            if (fieldName.equals("cid")) {
+            if (Objects.equals(fieldName, "cid")) {
                 return true;
             }
             throw new RuntimeException("Unknown field name: " + fieldName);
